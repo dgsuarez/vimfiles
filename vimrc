@@ -52,36 +52,14 @@ Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'kana/vim-textobj-user'
 Plug 'lukaszb/vim-web-indent'
 Plug 'tpope/vim-rsi'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-rvm'
+Plug 'tpope/vim-sensible'
 
 call plug#end()            " required
 
-
-"allow backspacing over everything in insert mode
-set backspace=indent,eol,start
-
-"store lots of :cmdline history
-set history=1000
-
-set showcmd     "show incomplete cmds down the bottom
-set showmode    "show current mode down the bottom
-
-set incsearch   "find the next match as we type the search
-set hlsearch    "hilight searches by default
-
-set number      "add line numbers
-set showbreak=...
-set wrap linebreak nolist
-
-"add some line space for easy reading
-set linespace=4
-
-"disable visual bell
+set number
 set visualbell t_vb=
-
-"try to make possible to navigate within lines of wrapped lines
-nmap <Down> gj
-nmap <Up> gk
-set fo=l
 
 "statusline setup
 set statusline=%f       "tail of the filename
@@ -121,7 +99,6 @@ set foldnestmax=3       "deepest fold is 3 levels
 set nofoldenable        "dont fold by default
 
 set wildmode=list:longest   "make cmdline tab completion similar to bash
-set wildmenu                "enable ctrl-n and ctrl-p to scroll thru matches
 set wildignore=*.o,*.obj,*~ "stuff to ignore when tab completing
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 
