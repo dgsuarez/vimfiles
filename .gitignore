@@ -4,4 +4,4 @@ tags
 *.sw*
 .VimballRecord
 .netrwhist
-bundle/
+plugged/
