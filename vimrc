@@ -125,11 +125,6 @@ set wildmenu                "enable ctrl-n and ctrl-p to scroll thru matches
 set wildignore=*.o,*.obj,*~ "stuff to ignore when tab completing
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 
-"display tabs and trailing spaces
-"set list
-"set listchars=tab:\ \ ,extends:>,precedes:<
-" disabling list because it interferes with soft wrap
-
 "vertical/horizontal scroll off settings
 set scrolloff=3
 set sidescrolloff=7
@@ -149,50 +144,13 @@ set ttymouse=xterm2
 "hide buffers when not displayed
 set hidden
 
-
-if has("gui_running")
-    "tell the term has 256 colors
-    set t_Co=256
-
-    set guitablabel=%M%t
-    set lines=40
-    set columns=115
-    colorscheme pyte
-
-    if has("gui_gnome")
-        set term=gnome-256color
-        set guifont=Monospace\ Regular\ 10
-    endif
-
-    if has("gui_mac") || has("gui_macvim")
-        set guifont=Menlo:h14
-        " key binding for Command-T to behave properly
-        " uncomment to replace the Mac Command-T key to Command-T plugin
-        "macmenu &File.New\ Tab key=<nop>
-        "map <D-t> :CommandT<CR>
-        " make Mac's Option key behave as the Meta key
-        set invmmta
-        try
-          set transparency=5
-        catch
-        endtry
-    endif
-
-    if has("gui_win32") || has("gui_win32s")
-        set guifont=Consolas:h12
-        set enc=utf-8
-    endif
+if match($TERM, "256") != -1
+  set background=dark
+  colorscheme solarized
 else
-    "dont load csapprox if there is no gui support - silences an annoying warning
-    let g:CSApprox_loaded = 1
-    if match($TERM, "256") != -1
-      set background=dark
-      colorscheme solarized
-    else
-      colorscheme default
-    endif
-
+  colorscheme default
 endif
+
 
 let g:buffergator_suppress_keymaps = 1
 let g:nerdtree_tabs_open_on_gui_startup = 0
@@ -229,27 +187,15 @@ nnoremap <C-L> :nohls<CR><C-L>
 inoremap <C-L> <C-O>:nohls<CR>
 
 
-"map Q to something useful
-noremap Q gq
-
 "make Y consistent with C and D
 nnoremap Y y$
 
-"bindings for ragtag
 inoremap <M-o>       <Esc>o
 inoremap <C-j>       <Down>
 let g:ragtag_global_maps = 1
 
 "mark syntax errors with :signs
 let g:syntastic_enable_signs=1
-
-"key mapping for vimgrep result navigation
-map <A-o> :copen<CR>
-map <A-q> :cclose<CR>
-map <A-j> :cnext<CR>
-map <A-k> :cprevious<CR>
-
-"snipmate setup
 
 "visual search mappings
 function! s:VSetSearch()
@@ -322,31 +268,6 @@ map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 
-"key mapping for saving file
-nmap <C-s> :w<CR>
-
-"key mapping for tab navigation
-nmap <C-Tab> gt
-nmap <C-S-Tab> gT
-
-let ScreenShot = {'Icon':0, 'Credits':0, 'force_background':'#FFFFFF'}
-
-"Enabling Zencoding
-let g:user_zen_settings = {
-  \  'php' : {
-  \    'extends' : 'html',
-  \    'filters' : 'c',
-  \  },
-  \  'xml' : {
-  \    'extends' : 'html',
-  \  },
-  \  'haml' : {
-  \    'extends' : 'html',
-  \  },
-  \  'erb' : {
-  \    'extends' : 'html',
-  \  },
- \}
 
 au BufNewFile,BufRead *.prawn set filetype=ruby
 let g:AutoCloseExpandEnterOn = ""
