@@ -55,6 +55,7 @@ Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rvm'
 Plug 'tpope/vim-sensible'
+Plug 'dgsuarez/vim-rubocop'
 
 call plug#end()            " required
 
