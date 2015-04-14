@@ -61,7 +61,7 @@ call plug#end()            " required
 
 set number
 set visualbell t_vb=
-
+set hlsearch
 "statusline setup
 set statusline=%f       "tail of the filename
 
