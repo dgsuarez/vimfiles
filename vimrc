@@ -55,7 +55,8 @@ Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rvm'
 Plug 'tpope/vim-sensible'
-Plug 'dgsuarez/vim-rubocop'
+Plug 'ngmy/vim-rubocop'
+Plug 'dgsuarez/vim-ticard'
 
 call plug#end()            " required
 
