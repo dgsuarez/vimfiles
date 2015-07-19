@@ -136,7 +136,7 @@ let g:nerdtree_tabs_open_on_gui_startup = 0
 
 silent! nmap <silent> <Leader>b :BuffergatorToggle<CR>
 silent! nmap <silent> <Leader>p :NERDTreeTabsToggle<CR>
-nnoremap <silent> <C-f> :NERDTreeFind<CR>
+nnoremap <silent> <C-f> :NERDTreeTabsOpen<CR> :NERDTreeTabsFind<CR>
 
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
