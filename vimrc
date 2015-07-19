@@ -4,55 +4,64 @@ set nocompatible
 
 call plug#begin('~/.vim/plugged')
 
-" Plugins
-
+" Base plugins
+Plug 'tpope/vim-sensible'
 Plug 'burke/matcher'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
+Plug 'jistr/vim-nerdtree-tabs'
 Plug 'mileszs/ack.vim'
+Plug 'jeetsukumaran/vim-buffergator'
 Plug 'bkad/CamelCaseMotion'
 Plug 'kien/ctrlp.vim'
 Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-git'
 Plug 'sjl/gundo.vim'
-Plug 'nono/vim-handlebars'
-Plug 'tpope/vim-markdown'
 Plug 'edsono/vim-matchit'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
-Plug 'vim-scripts/paredit.vim'
 Plug 'tpope/vim-ragtag'
-Plug 'tpope/vim-rails'
-Plug 'cakebaker/scss-syntax.vim'
 Plug 'ciaranm/securemodelines'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'tpope/vim-surround'
 Plug 'scrooloose/syntastic'
-Plug 'dgsuarez/thermometer'
 Plug 'tpope/vim-projectionist'
 Plug 'Townk/vim-autoclose'
-Plug 'jeetsukumaran/vim-buffergator'
-Plug 'tpope/vim-bundler'
-Plug 'tpope/vim-classpath'
-Plug 'guns/vim-clojure-static'
 Plug 'altercation/vim-colors-solarized'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-fireplace'
-Plug 'jelera/vim-javascript-syntax'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'jistr/vim-nerdtree-tabs'
-Plug 'greyblake/vim-preview'
-Plug 'tpope/vim-rake'
-Plug 'vim-ruby/vim-ruby'
-Plug 'nelstrom/vim-textobj-rubyblock'
-Plug 'kana/vim-textobj-user'
-Plug 'lukaszb/vim-web-indent'
 Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-repeat'
+
+"SCM
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-git'
+Plug 'dgsuarez/thermometer'
+
+"Js, HTML...
+Plug 'lukaszb/vim-web-indent'
+Plug 'jelera/vim-javascript-syntax'
+Plug 'nono/vim-handlebars'
+Plug 'cakebaker/scss-syntax.vim'
+Plug 'tpope/vim-markdown'
+
+"Ruby
+Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rvm'
-Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-rake'
+Plug 'tpope/vim-bundler'
+Plug 'kana/vim-textobj-user'
+Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'ngmy/vim-rubocop'
+
+"Clojure
+Plug 'vim-scripts/paredit.vim', {'for': 'clojure'}
+Plug 'tpope/vim-classpath', {'for': 'clojure'}
+Plug 'guns/vim-clojure-static', {'for': 'clojure'}
+Plug 'tpope/vim-fireplace', {'for': 'clojure'}
+
+"Misc
+Plug 'greyblake/vim-preview'
 Plug 'dgsuarez/vim-ticard'
 
 call plug#end()            " required
