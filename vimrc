@@ -41,8 +41,8 @@ Plug 'lukaszb/vim-web-indent'
 Plug 'jelera/vim-javascript-syntax'
 Plug 'nono/vim-handlebars'
 Plug 'cakebaker/scss-syntax.vim'
-Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-ragtag'
+Plug 'tpope/vim-markdown'
 
 "Ruby
 Plug 'vim-ruby/vim-ruby'
@@ -229,7 +229,7 @@ au BufNewFile,BufRead *.prawn set filetype=ruby
 let g:AutoCloseExpandEnterOn = ""
 
 "options for markdown files
-au BufNewFile,BufRead *.md set tw=78 formatoptions=t1 spell
+au BufNewFile,BufRead *.md set tw=78 formatoptions=t1 filetype=markdown spell
 
 noremap Q gqap
 
