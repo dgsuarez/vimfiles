@@ -1,13 +1,13 @@
 Vimfiles
 ========
 
-My vimfiles
+My vimfiles, heavily leaning towards Ruby development.
 
 Installation
 ------------
 
 Simply `:PlugInstall` and you are good to go. You'll need basic build
-essentials stuff working
+essentials stuff working.
 
 Origins
 -------
