@@ -18,7 +18,6 @@ Plug 'tpope/vim-endwise'
 Plug 'sjl/gundo.vim'
 Plug 'edsono/vim-matchit'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
-Plug 'tpope/vim-ragtag'
 Plug 'ciaranm/securemodelines'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'tpope/vim-surround'
@@ -43,6 +42,7 @@ Plug 'jelera/vim-javascript-syntax'
 Plug 'nono/vim-handlebars'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'tpope/vim-markdown'
+Plug 'tpope/vim-ragtag'
 
 "Ruby
 Plug 'vim-ruby/vim-ruby'
