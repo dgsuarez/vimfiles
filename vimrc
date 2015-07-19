@@ -10,7 +10,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'kien/ctrlp.vim'
-Plug 'burke/matcher', { 'do': 'cd ~/.vim/bin/matcher && make' }
+Plug 'burke/matcher', { 'do': 'make' }
 Plug 'mileszs/ack.vim'
 Plug 'jeetsukumaran/vim-buffergator'
 Plug 'bkad/CamelCaseMotion'
@@ -180,7 +180,7 @@ endfunction
 
 let g:ctrlp_custom_ignore = '\v.*\/vendor\/.*'
 
-let g:path_to_matcher = "~/.vim/bin/matcher/matcher"
+let g:path_to_matcher = "~/.vim/plugged/matcher/matcher"
 
 if !empty(glob(g:path_to_matcher))
   let g:ctrlp_match_func = { 'match': 'GoodMatch' }
