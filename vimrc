@@ -51,7 +51,7 @@ Plug 'tpope/vim-rails'
 Plug 'tpope/vim-rake'
 Plug 'tpope/vim-bundler'
 Plug 'kana/vim-textobj-user'
-Plug 'nelstrom/vim-textobj-rubyblock'
+Plug 'tek/vim-textobj-ruby'
 Plug 'ngmy/vim-rubocop'
 
 "Clojure
