@@ -9,7 +9,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'burke/matcher'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
-Plug 'tpope/vim-abolish'
 Plug 'mileszs/ack.vim'
 Plug 'vim-scripts/camelcasemotion'
 Plug 'kien/ctrlp.vim'
