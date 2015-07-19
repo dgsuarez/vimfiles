@@ -31,6 +31,7 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-repeat'
 Plug 'wincent/terminus'
+Plug 'dietsche/vim-lastplace'
 
 "SCM
 Plug 'tpope/vim-fugitive'
@@ -160,18 +161,6 @@ let g:ragtag_global_maps = 1
 
 "mark syntax errors with :signs
 let g:syntastic_enable_signs=1
-
-"jump to last cursor position when opening a file
-"dont do it when writing a commit log entry
-autocmd BufReadPost * call SetCursorPosition()
-function! SetCursorPosition()
-    if &filetype !~ 'commit\c'
-        if line("'\"") > 0 && line("'\"") <= line("$")
-            exe "normal! g`\""
-            normal! zz
-        endif
-    end
-endfunction
 
 "CtrlP
 
