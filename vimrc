@@ -225,3 +225,5 @@ au BufNewFile,BufRead *.md set tw=78 formatoptions=t1 spell
 noremap Q gqap
 
 :imap jj <Esc>
+
+set pastetoggle=<F7>
