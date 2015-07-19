@@ -20,7 +20,7 @@ Plug 'sjl/gundo.vim'
 Plug 'nono/vim-handlebars'
 Plug 'tpope/vim-markdown'
 Plug 'vim-scripts/matchit.zip'
-Plug 'Shougo/neocomplcache'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
 Plug 'vim-scripts/paredit.vim'
 Plug 'tpope/vim-ragtag'
 Plug 'tpope/vim-rails'
@@ -139,19 +139,6 @@ let g:nerdtree_tabs_open_on_gui_startup = 0
 silent! nmap <silent> <Leader>b :BuffergatorToggle<CR>
 silent! nmap <silent> <Leader>p :NERDTreeTabsToggle<CR>
 nnoremap <silent> <C-f> :NERDTreeFind<CR>
-
-let g:neocomplcache_enable_at_startup = 1
-
-inoremap <expr><TAB> pumvisible() ? "\<C-n>" : <SID>check_back_space() ? "\<TAB>" : "\<C-x>\<C-u>"
-function! s:check_back_space()"{{{
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1] =~ '\s'
-endfunction"}}
-
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  return pumvisible() ? neocomplcache#close_popup() : "\<CR>"
-endfunction
 
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
