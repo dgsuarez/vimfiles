@@ -6,14 +6,14 @@ call plug#begin('~/.vim/plugged')
 
 " Base plugins
 Plug 'tpope/vim-sensible'
-Plug 'burke/matcher'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
+Plug 'kien/ctrlp.vim'
+Plug 'burke/matcher', { 'do': 'cd ~/.vim/bin/matcher && make' }
 Plug 'mileszs/ack.vim'
 Plug 'jeetsukumaran/vim-buffergator'
 Plug 'bkad/CamelCaseMotion'
-Plug 'kien/ctrlp.vim'
 Plug 'tpope/vim-endwise'
 Plug 'sjl/gundo.vim'
 Plug 'edsono/vim-matchit'
