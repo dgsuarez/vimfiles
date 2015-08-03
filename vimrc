@@ -17,11 +17,7 @@ Plug 'bkad/CamelCaseMotion'
 Plug 'tpope/vim-endwise'
 Plug 'sjl/gundo.vim'
 Plug 'edsono/vim-matchit'
-if v:version > 703
-  Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
-else
-  Plug 'Shougo/neocomplcache'
-endif
+Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
 Plug 'ciaranm/securemodelines'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'tpope/vim-surround'
@@ -155,24 +151,6 @@ autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
-
-"If vim 7.3, use neocomplcache
-if !v:version > 703
-  let g:neocomplcache_enable_at_startup = 1              
-
-  inoremap <expr><TAB> pumvisible() ? "\<C-n>" : <SID>check_back_space() ? "\<TAB>" : "\<C-x>\<C-u>"             
-  function! s:check_back_space()"{{{             
-    let col = col('.') - 1               
-    return !col || getline('.')[col - 1] =~ '\s'         
-  endfunction"}}         
-
-  inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>         
-  function! s:my_cr_function()           
-    return pumvisible() ? neocomplcache#close_popup() : "\<CR>"          
-  endfunction            
-
-endif
-
 
 "make Y consistent with C and D
 nnoremap Y y$
