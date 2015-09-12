@@ -62,6 +62,9 @@ Plug 'tpope/vim-classpath', {'for': 'clojure'}
 Plug 'guns/vim-clojure-static', {'for': 'clojure'}
 Plug 'tpope/vim-fireplace', {'for': 'clojure'}
 
+"Elixir
+Plug 'elixir-lang/vim-elixir'
+
 "Misc
 Plug 'greyblake/vim-preview'
 Plug 'dgsuarez/vim-ticard'
