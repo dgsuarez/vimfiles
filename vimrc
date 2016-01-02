@@ -32,6 +32,7 @@ Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-repeat'
 Plug 'wincent/terminus'
 Plug 'dietsche/vim-lastplace'
+Plug 'fxn/vim-monochrome'
 
 "SCM
 Plug 'tpope/vim-fugitive'
