@@ -30,7 +30,7 @@ Plug 'tpope/vim-eunuch'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-repeat'
-Plug 'wincent/terminus'
+Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'dietsche/vim-lastplace'
 Plug 'fxn/vim-monochrome'
 
