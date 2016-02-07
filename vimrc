@@ -49,13 +49,11 @@ Plug 'tpope/vim-markdown'
 
 "Ruby
 Plug 'vim-ruby/vim-ruby'
-Plug 'tpope/vim-rvm'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-rake'
 Plug 'tpope/vim-bundler'
 Plug 'kana/vim-textobj-user'
 Plug 'tek/vim-textobj-ruby'
-Plug 'ngmy/vim-rubocop'
 
 "Clojure
 Plug 'vim-scripts/paredit.vim', {'for': 'clojure'}
@@ -67,7 +65,6 @@ Plug 'tpope/vim-fireplace', {'for': 'clojure'}
 Plug 'elixir-lang/vim-elixir'
 
 "Misc
-Plug 'greyblake/vim-preview'
 Plug 'dgsuarez/vim-ticard'
 
 call plug#end()            " required
@@ -89,8 +86,6 @@ set statusline+=%*
 set statusline+=%{g:HgStatusLine()}
 set statusline+=%{fugitive#statusline()}
 
-"RVM
-set statusline+=%{exists('g:loaded_rvm')?rvm#statusline():''}
 
 set statusline+=%=      "left/right separator
 set statusline+=%c,     "cursor column
@@ -141,8 +136,6 @@ endif
 
 let g:buffergator_suppress_keymaps = 1
 let g:nerdtree_tabs_open_on_gui_startup = 0
-
- let g:PreviewBrowsers='google-chrome,firefox'
 
 silent! nmap <silent> <Leader>b :BuffergatorToggle<CR>
 silent! nmap <silent> <Leader>p :NERDTreeTabsToggle<CR>
