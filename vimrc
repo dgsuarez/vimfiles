@@ -54,6 +54,7 @@ Plug 'tpope/vim-rake'
 Plug 'tpope/vim-bundler'
 Plug 'kana/vim-textobj-user'
 Plug 'tek/vim-textobj-ruby'
+Plug 'ngmy/vim-rubocop'
 
 "Clojure
 Plug 'vim-scripts/paredit.vim', {'for': 'clojure'}
