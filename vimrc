@@ -40,8 +40,7 @@ Plug 'tpope/vim-git'
 Plug 'dgsuarez/thermometer'
 
 "Js, HTML...
-Plug 'lukaszb/vim-web-indent'
-Plug 'jelera/vim-javascript-syntax'
+Plug 'pangloss/vim-javascript'
 Plug 'nono/vim-handlebars'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'tpope/vim-ragtag'
