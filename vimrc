@@ -54,6 +54,7 @@ Plug 'tpope/vim-bundler'
 Plug 'kana/vim-textobj-user'
 Plug 'tek/vim-textobj-ruby'
 Plug 'ngmy/vim-rubocop'
+Plug 'janko-m/vim-test'
 
 "Clojure
 Plug 'vim-scripts/paredit.vim', {'for': 'clojure'}
@@ -230,6 +231,9 @@ inoremap <expr><C-e>  neocomplete#cancel_popup()
 
 "End Neocompl
 
+"vim-test
+let test#strategy = "dispatch"
+
 "key mapping for window navigation
 map <C-h> <C-w>h
 map <C-j> <C-w>j
@@ -248,3 +252,4 @@ noremap Q gqap
 :imap jj <Esc>
 
 set pastetoggle=<F7>
+
