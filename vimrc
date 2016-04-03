@@ -12,6 +12,8 @@ Plug 'jistr/vim-nerdtree-tabs'
 Plug 'kien/ctrlp.vim'
 Plug 'burke/matcher', { 'do': 'make' }
 Plug 'mileszs/ack.vim'
+Plug 'rking/ag.vim'
+Plug 'Chun-Yang/vim-action-ag'
 Plug 'jeetsukumaran/vim-buffergator'
 Plug 'bkad/CamelCaseMotion'
 Plug 'tpope/vim-endwise'
