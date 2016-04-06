@@ -255,3 +255,6 @@ noremap Q gqap
 
 set pastetoggle=<F7>
 
+set exrc
+
+set secure
