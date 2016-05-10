@@ -35,6 +35,7 @@ Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'dietsche/vim-lastplace'
 Plug 'fxn/vim-monochrome'
 Plug 'Shougo/neocomplete.vim'
+Plug 'ntpeters/vim-better-whitespace'
 
 "SCM
 Plug 'tpope/vim-fugitive'
@@ -235,6 +236,9 @@ inoremap <expr><C-e>  neocomplete#cancel_popup()
 
 "vim-test
 let test#strategy = "dispatch"
+
+" whitespace
+autocmd BufWritePre * StripWhitespace
 
 "key mapping for window navigation
 map <C-h> <C-w>h
