@@ -139,9 +139,12 @@ endif
 
 
 let g:buffergator_suppress_keymaps = 1
+nnoremap gb :bn<CR>
+nnoremap gB :bp<CR>
+
 let g:nerdtree_tabs_open_on_gui_startup = 0
 
-silent! nmap <silent> <Leader>b :BuffergatorToggle<CR>
+silent! nmap <silent> <Leader>u :BuffergatorToggle<CR>
 silent! nmap <silent> <Leader>p :NERDTreeTabsToggle<CR>
 nnoremap <silent> <C-f> :NERDTreeTabsOpen<CR> :NERDTreeTabsFind<CR>
 
@@ -199,7 +202,7 @@ let g:ctrlp_match_window_reversed = 0
 
 "map for ctrl-p
 map <leader>t :CtrlP<CR>
-map <leader>u :CtrlPBuffer<CR>
+map <leader>b :CtrlPBuffer<CR>
 
 "map for gundo
 map <Leader>g :GundoToggle<CR>
