@@ -9,7 +9,7 @@ Plug 'tpope/vim-sensible'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'burke/matcher', { 'do': 'make' }
 Plug 'mileszs/ack.vim'
 Plug 'rking/ag.vim'
@@ -199,6 +199,7 @@ let g:ctrlp_match_window_reversed = 0
 
 "map for ctrl-p
 map <leader>t :CtrlP<CR>
+map <leader>u :CtrlPBuffer<CR>
 
 "map for gundo
 map <Leader>g :GundoToggle<CR>
