@@ -17,7 +17,6 @@ Plug 'Chun-Yang/vim-action-ag'
 Plug 'jeetsukumaran/vim-buffergator'
 Plug 'bkad/CamelCaseMotion'
 Plug 'tpope/vim-endwise'
-Plug 'sjl/gundo.vim'
 Plug 'edsono/vim-matchit'
 Plug 'ciaranm/securemodelines'
 Plug 'AndrewRadev/splitjoin.vim'
@@ -36,6 +35,7 @@ Plug 'dietsche/vim-lastplace'
 Plug 'fxn/vim-monochrome'
 Plug 'Shougo/neocomplete.vim'
 Plug 'ntpeters/vim-better-whitespace'
+Plug 'tacahiroy/ctrlp-funky'
 
 "SCM
 Plug 'tpope/vim-fugitive'
@@ -203,9 +203,7 @@ let g:ctrlp_match_window_reversed = 0
 "map for ctrl-p
 map <leader>t :CtrlP<CR>
 map <leader>b :CtrlPBuffer<CR>
-
-"map for gundo
-map <Leader>g :GundoToggle<CR>
+map <leader>g :CtrlPFunky<CR>
 
 "Neocompl stuff
 
