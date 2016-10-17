@@ -14,7 +14,6 @@ Plug 'burke/matcher', { 'do': 'make' }
 Plug 'mileszs/ack.vim'
 Plug 'rking/ag.vim'
 Plug 'Chun-Yang/vim-action-ag'
-Plug 'jeetsukumaran/vim-buffergator'
 Plug 'bkad/CamelCaseMotion'
 Plug 'tpope/vim-endwise'
 Plug 'edsono/vim-matchit'
@@ -36,6 +35,7 @@ Plug 'fxn/vim-monochrome'
 Plug 'Shougo/neocomplete.vim'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'tacahiroy/ctrlp-funky'
+Plug 'bling/vim-bufferline'
 
 "SCM
 Plug 'tpope/vim-fugitive'
@@ -138,13 +138,12 @@ else
 endif
 
 
-let g:buffergator_suppress_keymaps = 1
+" Move between open buffers
 nnoremap gb :bn<CR>
 nnoremap gB :bp<CR>
 
 let g:nerdtree_tabs_open_on_gui_startup = 0
 
-silent! nmap <silent> <Leader>u :BuffergatorToggle<CR>
 silent! nmap <silent> <Leader>p :NERDTreeTabsToggle<CR>
 nnoremap <silent> <C-f> :NERDTreeTabsOpen<CR> :NERDTreeTabsFind<CR>
 
