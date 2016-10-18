@@ -35,7 +35,9 @@ Plug 'fxn/vim-monochrome'
 Plug 'Shougo/neocomplete.vim'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'tacahiroy/ctrlp-funky'
-Plug 'bling/vim-bufferline'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
 
 "SCM
 Plug 'tpope/vim-fugitive'
@@ -76,25 +78,39 @@ call plug#end()            " required
 set number
 set visualbell t_vb=
 set hlsearch
+
 "statusline setup
-set statusline=%f       "tail of the filename
-
-"Syntastic
-
-set statusline+=%#warningmsg#
-set statusline+=\%{SyntasticStatuslineFlag()}
-set statusline+=%*
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
 
 "SCM
 
-set statusline+=%{g:HgStatusLine()}
-set statusline+=%{fugitive#statusline()}
+function! HgAirline()
+  let status = g:HgStatusForFile()
+  let rev_info = g:HgRevInfo()
+  if status == -1 || rev_info == -1
+    return ""
+  endif
+  if status == ""
+    return rev_info
+  endif
+  return status . " " . rev_info
+endfunction
 
+function! ScmAirline()
+  let hg = HgAirline()
+  if hg == ""
+    return fugitive#statusline()
+  else
+    return hg
+  end
+endfunction
 
-set statusline+=%=      "left/right separator
-set statusline+=%c,     "cursor column
-set statusline+=%l/%L   "cursor line/total lines
-set statusline+=\ %P    "percent through file
+let g:airline_section_a = ''
+let g:airline_section_b='%{ScmAirline()}'
+
 set laststatus=2
 
 "turn off needless toolbar on gvim/mvim
@@ -138,6 +154,8 @@ else
 endif
 
 
+let g:airline#extensions#tabline#enabled = 1
+
 " Move between open buffers
 nnoremap gb :bn<CR>
 nnoremap gB :bp<CR>
@@ -164,6 +182,12 @@ let g:ragtag_global_maps = 1
 let g:syntastic_enable_signs=1
 
 "CtrlP
+
+  let g:ctrlp_prompt_mappings = {
+    \ 'AcceptSelection("t")': ['<c-T>'],
+    \ 'AcceptSelection("e")': ['<cr>', '<2-LeftMouse>', '<c-t>'],
+    \ }
+
 
 let g:ctrlp_custom_ignore = '\v.*\/vendor\/.*'
 
