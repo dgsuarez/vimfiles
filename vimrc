@@ -183,10 +183,10 @@ let g:syntastic_enable_signs=1
 
 "CtrlP
 
-  let g:ctrlp_prompt_mappings = {
-    \ 'AcceptSelection("t")': ['<c-T>'],
-    \ 'AcceptSelection("e")': ['<cr>', '<2-LeftMouse>', '<c-t>'],
-    \ }
+let g:ctrlp_prompt_mappings = {
+      \ 'AcceptSelection("t")': ['<c-T>'],
+      \ 'AcceptSelection("e")': ['<cr>', '<2-LeftMouse>', '<c-t>'],
+      \ }
 
 
 let g:ctrlp_custom_ignore = '\v.*\/vendor\/.*'
@@ -271,6 +271,7 @@ map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 
+command Q bd
 
 au BufNewFile,BufRead *.prawn set filetype=ruby
 let g:AutoCloseExpandEnterOn = ""
