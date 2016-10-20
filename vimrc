@@ -157,8 +157,8 @@ endif
 let g:airline#extensions#tabline#enabled = 1
 
 " Move between open buffers
-nnoremap gb :bn<CR>
-nnoremap gB :bp<CR>
+nnoremap gr :bn<CR>
+nnoremap gR :bp<CR>
 
 let g:nerdtree_tabs_open_on_gui_startup = 0
 
