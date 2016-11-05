@@ -85,20 +85,8 @@ let g:airline_right_alt_sep = ''
 
 "SCM
 
-function! HgAirline()
-  let status = g:HgStatusForFile()
-  let rev_info = g:HgRevInfo()
-  if status == -1 || rev_info == -1
-    return ""
-  endif
-  if status == ""
-    return rev_info
-  endif
-  return status . " " . rev_info
-endfunction
-
 function! ScmAirline()
-  let hg = HgAirline()
+  let hg = g:HgStatusLine()
   if hg == ""
     return fugitive#statusline()
   else
