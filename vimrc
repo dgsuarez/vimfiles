@@ -8,12 +8,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-sensible'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
-Plug 'jistr/vim-nerdtree-tabs'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'burke/matcher', { 'do': 'make' }
 Plug 'mileszs/ack.vim'
-Plug 'rking/ag.vim'
-Plug 'Chun-Yang/vim-action-ag'
 Plug 'bkad/CamelCaseMotion'
 Plug 'tpope/vim-endwise'
 Plug 'edsono/vim-matchit'
@@ -34,9 +29,12 @@ Plug 'dietsche/vim-lastplace'
 Plug 'fxn/vim-monochrome'
 Plug 'Shougo/neocomplete.vim'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'tacahiroy/ctrlp-funky'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+Plug 'junegunn/fzf.vim'
+Plug 'rking/ag.vim'
+Plug 'Chun-Yang/vim-action-ag'
 
 
 "SCM
@@ -181,52 +179,11 @@ let g:ragtag_global_maps = 1
 "mark syntax errors with :signs
 let g:syntastic_enable_signs=1
 
-"CtrlP
 
-  let g:ctrlp_prompt_mappings = {
-    \ 'AcceptSelection("t")': ['<c-T>'],
-    \ 'AcceptSelection("e")': ['<cr>', '<2-LeftMouse>', '<c-t>'],
-    \ }
-
-
-let g:ctrlp_custom_ignore = '\v.*\/vendor\/.*'
-
-let g:path_to_matcher = "~/.vim/plugged/matcher/matcher"
-
-if !empty(glob(g:path_to_matcher))
-  let g:ctrlp_match_func = { 'match': 'GoodMatch' }
-endif
-
-function! GoodMatch(items, str, limit, mmode, ispath, crfile, regex)
-
-  " Create a cache file if not yet exists
-  let cachefile = ctrlp#utils#cachedir().'/matcher.cache'
-  if !( filereadable(cachefile) && a:items == readfile(cachefile) )
-    call writefile(a:items, cachefile)
-  endif
-  if !filereadable(cachefile)
-    return []
-  endif
-
-  " a:mmode is currently ignored. In the future, we should probably do
-  " something about that. the matcher behaves like "full-line".
-  let cmd = g:path_to_matcher.' --limit '.a:limit.' --manifest '.cachefile.' '
-  if !( exists('g:ctrlp_dotfiles') && g:ctrlp_dotfiles )
-    let cmd = cmd.'--no-dotfiles '
-  endif
-  let cmd = cmd.a:str
-
-  return split(system(cmd), "\n")
-
-endfunction
-
-let g:ctrlp_match_window_bottom=0
-let g:ctrlp_match_window_reversed = 0
-
-"map for ctrl-p
-map <leader>t :CtrlP<CR>
-map <leader>b :CtrlPBuffer<CR>
-map <leader>g :CtrlPFunky<CR>
+"map for FZF
+map <leader>t :Files<CR>
+map <leader>b :Buffers<CR>
+map <leader>g :Tags<CR>
 
 "Neocompl stuff
 
