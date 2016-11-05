@@ -155,8 +155,8 @@ endif
 let g:airline#extensions#tabline#enabled = 1
 
 " Move between open buffers
-nnoremap gb :bn<CR>
-nnoremap gB :bp<CR>
+nnoremap gr :bn<CR>
+nnoremap gR :bp<CR>
 
 let g:nerdtree_tabs_open_on_gui_startup = 0
 
@@ -228,6 +228,7 @@ map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 
+command Q bd
 
 au BufNewFile,BufRead *.prawn set filetype=ruby
 let g:AutoCloseExpandEnterOn = ""
