@@ -15,7 +15,6 @@ Plug 'tmhedberg/matchit'
 Plug 'ciaranm/securemodelines'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'tpope/vim-surround'
-Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-projectionist'
 Plug 'Raimondi/delimitMate'
 Plug 'altercation/vim-colors-solarized'
@@ -35,6 +34,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'rking/ag.vim'
 Plug 'Chun-Yang/vim-action-ag'
+Plug 'w0rp/ale'
 
 
 "SCM
@@ -57,7 +57,6 @@ Plug 'tpope/vim-rake'
 Plug 'tpope/vim-bundler'
 Plug 'kana/vim-textobj-user'
 Plug 'tek/vim-textobj-ruby'
-Plug 'ngmy/vim-rubocop'
 Plug 'janko-m/vim-test'
 
 "Clojure
@@ -165,9 +164,6 @@ nnoremap Y y$
 
 let g:ragtag_global_maps = 1
 
-"mark syntax errors with :signs
-let g:syntastic_enable_signs=1
-
 
 "map for FZF
 map <leader>t :Files<CR>
@@ -224,8 +220,15 @@ endfunction
 "vim-test
 let test#strategy = "dispatch"
 
-" whitespace
+"whitespace
 autocmd BufWritePre * StripWhitespace
+
+"ale
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_fixers = {
+\   'ruby': ['rubocop'],
+\}
+
 
 "key mapping for window navigation
 map <C-h> <C-w>h
