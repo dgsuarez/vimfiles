@@ -68,6 +68,9 @@ Plug 'tpope/vim-fireplace', {'for': 'clojure'}
 "Elixir
 Plug 'elixir-lang/vim-elixir'
 
+"SQL
+Plug 'vim-scripts/dbext.vim'
+
 "Misc
 Plug 'dgsuarez/vim-ticard'
 
