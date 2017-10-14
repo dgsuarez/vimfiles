@@ -35,7 +35,8 @@ Plug 'junegunn/fzf.vim'
 Plug 'rking/ag.vim'
 Plug 'Chun-Yang/vim-action-ag'
 Plug 'w0rp/ale'
-
+Plug 'mbbill/undotree'
+Plug 'maxbrunsfeld/vim-yankstack'
 
 "SCM
 Plug 'tpope/vim-fugitive'
@@ -48,7 +49,7 @@ Plug 'nono/vim-handlebars'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'tpope/vim-ragtag'
 Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown'
+Plug 'gabrielelana/vim-markdown'
 
 "Ruby
 Plug 'vim-ruby/vim-ruby'
@@ -153,6 +154,7 @@ let g:nerdtree_tabs_open_on_gui_startup = 0
 
 silent! nmap <silent> <Leader>p :NERDTreeToggle<CR>
 nnoremap <silent> <C-f> :NERDTreeFind<CR>
+silent! nmap <silent> <Leader>u :UndotreeToggle<CR>
 
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
@@ -239,20 +241,12 @@ map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 
-command Q bd
-
 au BufNewFile,BufRead *.prawn set filetype=ruby
 let g:AutoCloseExpandEnterOn = ""
 
-"options for markdown files
-au BufNewFile,BufRead *.md set tw=78 formatoptions=t1 filetype=markdown spell
-
 noremap Q gqap
 
-:imap jj <Esc>
-
 set pastetoggle=<F7>
-set clipboard=unnamedplus
 nnoremap <F5> :checktime<cr>
 
 set exrc
