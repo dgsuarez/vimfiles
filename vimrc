@@ -252,6 +252,8 @@ noremap Q gqap
 :imap jj <Esc>
 
 set pastetoggle=<F7>
+set clipboard=unnamedplus
+nnoremap <F5> :checktime<cr>
 
 set exrc
 
