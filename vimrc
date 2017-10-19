@@ -36,7 +36,6 @@ Plug 'rking/ag.vim'
 Plug 'Chun-Yang/vim-action-ag'
 Plug 'w0rp/ale'
 Plug 'mbbill/undotree'
-Plug 'maxbrunsfeld/vim-yankstack'
 
 "SCM
 Plug 'tpope/vim-fugitive'
