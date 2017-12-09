@@ -59,16 +59,9 @@ Plug 'kana/vim-textobj-user'
 Plug 'tek/vim-textobj-ruby'
 Plug 'janko-m/vim-test'
 
-"Clojure
-Plug 'vim-scripts/paredit.vim', {'for': 'clojure'}
-Plug 'tpope/vim-classpath', {'for': 'clojure'}
-Plug 'guns/vim-clojure-static', {'for': 'clojure'}
-Plug 'tpope/vim-fireplace', {'for': 'clojure'}
-
-"Elixir
+"Other langs
+Plug 'rhysd/vim-crystal'
 Plug 'elixir-lang/vim-elixir'
-
-"SQL
 Plug 'vim-scripts/dbext.vim'
 
 "Misc
