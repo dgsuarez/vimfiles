@@ -224,6 +224,7 @@ autocmd BufWritePre * StripWhitespace
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_fixers = {
 \   'ruby': ['rubocop'],
+\   'javascript': ['eslint'],
 \}
 
 
