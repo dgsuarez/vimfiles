@@ -58,6 +58,7 @@ Plug 'tpope/vim-bundler'
 Plug 'kana/vim-textobj-user'
 Plug 'tek/vim-textobj-ruby'
 Plug 'janko-m/vim-test'
+Plug 'dgsuarez/reruby.vim'
 
 "Other langs
 Plug 'rhysd/vim-crystal'
