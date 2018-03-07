@@ -48,7 +48,8 @@ Plug 'nono/vim-handlebars'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'tpope/vim-ragtag'
 Plug 'godlygeek/tabular'
-Plug 'gabrielelana/vim-markdown'
+Plug 'vim-pandoc/vim-pandoc'
+Plug 'vim-pandoc/vim-pandoc-syntax'
 
 "Ruby
 Plug 'vim-ruby/vim-ruby'
@@ -239,6 +240,9 @@ au BufNewFile,BufRead *.prawn set filetype=ruby
 let g:AutoCloseExpandEnterOn = ""
 
 noremap Q gqap
+
+let g:pandoc#syntax#conceal#use = 0
+let g:pandoc#formatting#mode = 'ha'
 
 set pastetoggle=<F7>
 nnoremap <F5> :checktime<cr>
