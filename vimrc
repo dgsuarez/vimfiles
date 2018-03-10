@@ -69,7 +69,6 @@ Plug 'dgsuarez/reruby.vim'
 "Other langs
 Plug 'rhysd/vim-crystal'
 Plug 'elixir-lang/vim-elixir'
-Plug 'vim-scripts/dbext.vim'
 Plug 'tpope/vim-db'
 
 "Misc
