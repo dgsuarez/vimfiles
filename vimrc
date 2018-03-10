@@ -80,6 +80,8 @@ call plug#end()            " required
 set number
 set visualbell t_vb=
 set hlsearch
+let mapleader = "ñ"
+
 
 if exists('&inccommand')
   set inccommand=split
