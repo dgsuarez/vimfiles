@@ -8,7 +8,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-sensible'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
-Plug 'mileszs/ack.vim'
 Plug 'bkad/CamelCaseMotion'
 Plug 'tpope/vim-endwise'
 Plug 'tmhedberg/matchit'
@@ -26,16 +25,22 @@ Plug 'tpope/vim-repeat'
 Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'dietsche/vim-lastplace'
 Plug 'fxn/vim-monochrome'
-Plug 'Shougo/neocomplete.vim'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
-Plug 'rking/ag.vim'
-Plug 'Chun-Yang/vim-action-ag'
+Plug 'mhinz/vim-grepper'
 Plug 'w0rp/ale'
 Plug 'mbbill/undotree'
+
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
 
 "SCM
 Plug 'tpope/vim-fugitive'
@@ -65,6 +70,7 @@ Plug 'dgsuarez/reruby.vim'
 Plug 'rhysd/vim-crystal'
 Plug 'elixir-lang/vim-elixir'
 Plug 'vim-scripts/dbext.vim'
+Plug 'tpope/vim-db'
 
 "Misc
 Plug 'dgsuarez/vim-ticard'
@@ -169,55 +175,35 @@ map <leader>t :Files<CR>
 map <leader>b :Buffers<CR>
 map <leader>g :Tags<CR>
 
-"Neocompl stuff
+"Deoplete stuff: Tab complete & multiple cursors
+let g:deoplete#enable_at_startup = 1
 
-" Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ deoplete#mappings#manual_complete()
+function! s:check_back_space() abort "{{{
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction"}}}
 
-" Plugin key-mappings.
-inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
-
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-    return neocomplete#close_popup() . "\<CR>"
-endfunction
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y>  neocomplete#close_popup()
-inoremap <expr><C-e>  neocomplete#cancel_popup()
-
-"End Neocompl
-
-" Neocompl + multiple cursors
-
-" Called once right before you start selecting multiple cursors
 function! Multiple_cursors_before()
-  if exists(':NeoCompleteLock')==2
-    exe 'NeoCompleteLock'
-  endif
+    let b:deoplete_disable_auto_complete = 1
 endfunction
 
-" Called once only when the multiple selection is canceled (default <Esc>)
 function! Multiple_cursors_after()
-  if exists(':NeoCompleteUnlock')==2
-    exe 'NeoCompleteUnlock'
-  endif
+    let b:deoplete_disable_auto_complete = 0
 endfunction
 
 "vim-test
-let test#strategy = "dispatch"
+if has('nvim')
+  let test#strategy = "neovim"
+else
+  let test#strategy = "dispatch"
+end
+
+"Old school Ag
+command! -nargs=+ -complete=file Ag Grepper -noprompt -tool ag -query <args>
 
 "whitespace
 autocmd BufWritePre * StripWhitespace
