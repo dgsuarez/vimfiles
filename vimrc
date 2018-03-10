@@ -81,6 +81,10 @@ set number
 set visualbell t_vb=
 set hlsearch
 
+if exists('&inccommand')
+  set inccommand=split
+endif
+
 "statusline setup
 let g:airline_left_sep = ''
 let g:airline_left_alt_sep = ''
