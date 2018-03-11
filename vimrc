@@ -201,11 +201,7 @@ function! Multiple_cursors_after()
 endfunction
 
 "vim-test
-if has('nvim')
-  let test#strategy = "neovim"
-else
-  let test#strategy = "dispatch"
-end
+let test#strategy = "dispatch"
 
 "Old school Ag
 command! -nargs=+ -complete=file Ag Grepper -noprompt -tool ag -query <args>
