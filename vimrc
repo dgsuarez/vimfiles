@@ -55,6 +55,7 @@ Plug 'tpope/vim-ragtag'
 Plug 'godlygeek/tabular'
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
+Plug 'ap/vim-css-color'
 
 "Ruby
 Plug 'vim-ruby/vim-ruby'
