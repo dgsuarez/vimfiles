@@ -70,7 +70,7 @@ Plug 'dgsuarez/reruby.vim'
 "Other langs
 Plug 'rhysd/vim-crystal'
 Plug 'elixir-lang/vim-elixir'
-Plug 'tpope/vim-db'
+Plug 'tpope/vim-dadbod'
 
 "Misc
 Plug 'dgsuarez/vim-ticard'
