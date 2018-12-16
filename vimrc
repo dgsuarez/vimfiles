@@ -48,6 +48,8 @@ Plug 'tpope/vim-ragtag'
 Plug 'godlygeek/tabular'
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
+Plug 'digitaltoad/vim-pug'
+Plug 'kchmck/vim-coffee-script'
 
 "Ruby
 Plug 'vim-ruby/vim-ruby'
@@ -58,6 +60,7 @@ Plug 'kana/vim-textobj-user'
 Plug 'tek/vim-textobj-ruby'
 Plug 'janko-m/vim-test'
 Plug 'dgsuarez/reruby.vim'
+Plug 'slim-template/vim-slim'
 
 "Other langs
 Plug 'rhysd/vim-crystal'
@@ -111,7 +114,7 @@ set expandtab
 set autoindent
 
 "folding settings
-set foldmethod=indent   "fold based on indent
+set foldmethod=syntax   "fold based on syntax
 set foldnestmax=3       "deepest fold is 3 levels
 set nofoldenable        "dont fold by default
 
@@ -204,6 +207,7 @@ inoremap <expr> <Tab> Tab_Or_Complete()
 
 "vim-test
 let test#strategy = "dispatch"
+let test#ruby#use_spring_binstub = 1
 
 "Old school Ag
 command! -nargs=+ -complete=file Ag Grepper -noprompt -tool ag -query <args>
@@ -212,6 +216,7 @@ command! -nargs=+ -complete=file Ag Grepper -noprompt -tool ag -query <args>
 autocmd BufWritePre * StripWhitespace
 
 "ale
+let g:ale_ruby_rubocop_executable = 'bundle'
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_fixers = {
 \   'ruby': ['rubocop'],
