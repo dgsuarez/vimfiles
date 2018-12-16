@@ -39,6 +39,7 @@ Plug 'maralla/completor.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
 Plug 'dgsuarez/thermometer'
+Plug 'whiteinge/diffconflicts'
 
 "Js, HTML...
 Plug 'pangloss/vim-javascript'
