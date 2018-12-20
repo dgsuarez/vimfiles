@@ -33,7 +33,13 @@ Plug 'junegunn/fzf.vim'
 Plug 'mhinz/vim-grepper'
 Plug 'w0rp/ale'
 Plug 'mbbill/undotree'
-Plug 'maralla/completor.vim'
+
+Plug 'ncm2/ncm2'
+Plug 'roxma/nvim-yarp'
+Plug 'ncm2/ncm2-path'
+Plug 'ncm2/ncm2-tmux'
+Plug 'ncm2/ncm2-bufword'
+Plug 'fgrsnau/ncm2-otherbuf'
 
 "SCM
 Plug 'tpope/vim-fugitive'
@@ -158,6 +164,8 @@ silent! nmap <silent> <Leader>p :NERDTreeToggle<CR>
 nnoremap <silent> <C-f> :NERDTreeFind<CR>
 silent! nmap <silent> <Leader>u :UndotreeToggle<CR>
 
+"Completion
+
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
@@ -165,6 +173,14 @@ autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+
+"ncm2
+autocmd BufEnter * call ncm2#enable_for_buffer()
+set completeopt=noinsert,menuone,noselect
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+
 
 "make Y consistent with C and D
 nnoremap Y y$
@@ -176,35 +192,6 @@ let g:ragtag_global_maps = 1
 map <leader>t :Files<CR>
 map <leader>b :Buffers<CR>
 map <leader>g :Tags<CR>
-
-" Use TAB to complete when typing words, else inserts TABs as usual.  Uses
-" dictionary, source files, and completor to find matching words to complete.
-
-" Note: usual completion is on <C-n> but more trouble to press all the time.
-" Never type the same word twice and maybe learn a new spellings!
-" Use the Linux dictionary when spelling is in doubt.
-function! Tab_Or_Complete() abort
-  " If completor is already open the `tab` cycles through suggested completions.
-  if pumvisible()
-    return "\<C-N>"
-  " If completor is not open and we are in the middle of typing a word then
-  " `tab` opens completor menu.
-  elseif col('.')>1 && strpart( getline('.'), col('.')-2, 3 ) =~ '^\w'
-    return "\<C-R>=completor#do('complete')\<CR>"
-  else
-    " If we aren't typing a word and we press `tab` simply do the normal `tab`
-    " action.
-    return "\<Tab>"
-  endif
-endfunction
-
-" Use `tab` key to select completions.  Default is arrow keys.
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-" Use tab to trigger auto completion.  Default suggests completions as you type.
-let g:completor_auto_trigger = 0
-inoremap <expr> <Tab> Tab_Or_Complete()
 
 "vim-test
 let test#strategy = "dispatch"
