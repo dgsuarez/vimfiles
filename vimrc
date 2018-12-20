@@ -238,6 +238,7 @@ noremap Q gqap
 
 let g:pandoc#syntax#conceal#use = 0
 let g:pandoc#formatting#mode = 'ha'
+let g:pandoc#modules#disabled = ["chdir"]
 
 set pastetoggle=<F7>
 nnoremap <F5> :checktime<cr>
