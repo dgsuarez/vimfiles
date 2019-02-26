@@ -229,6 +229,12 @@ let g:pandoc#syntax#conceal#use = 0
 let g:pandoc#formatting#mode = 'ha'
 let g:pandoc#modules#disabled = ["chdir"]
 
+function Codeshot() range
+  echo system('pygmentize -O full,style=trac,font_size=32,line_numbers=False -f png -l '. &filetype .' | convert png:- -trim png:- | xclip -selection clipboard -t image/png', join(getline(a:firstline, a:lastline), "\n"))
+endfunction
+
+com -range=% -nargs=0 Codeshot :<line1>,<line2>call Codeshot()
+
 set pastetoggle=<F7>
 nnoremap <F5> :checktime<cr>
 
