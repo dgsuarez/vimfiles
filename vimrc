@@ -41,6 +41,8 @@ Plug 'ncm2/ncm2-tmux'
 Plug 'ncm2/ncm2-bufword'
 Plug 'fgrsnau/ncm2-otherbuf'
 
+Plug 'sheerun/vim-polyglot'
+
 "SCM
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
