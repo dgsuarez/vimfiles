@@ -166,6 +166,10 @@ silent! nmap <silent> <Leader>p :NERDTreeToggle<CR>
 nnoremap <silent> <C-f> :NERDTreeFind<CR>
 silent! nmap <silent> <Leader>u :UndotreeToggle<CR>
 
+" Add space after comment symbol
+let NERDSpaceDelims=1
+
+
 "Completion
 
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
