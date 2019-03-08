@@ -225,6 +225,7 @@ map <C-k> <C-w>k
 map <C-l> <C-w>l
 
 au BufNewFile,BufRead *.prawn set filetype=ruby
+au BufNewFile,BufRead Dockerfile.* set filetype=dockerfile
 let g:AutoCloseExpandEnterOn = ""
 
 noremap Q gqap
