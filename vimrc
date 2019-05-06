@@ -39,7 +39,7 @@ Plug 'roxma/nvim-yarp'
 Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-tmux'
 Plug 'ncm2/ncm2-bufword'
-Plug 'fgrsnau/ncm2-otherbuf'
+Plug 'fgrsnau/ncm2-otherbuf', { 'branch': 'ncm2' }
 
 Plug 'sheerun/vim-polyglot'
 
