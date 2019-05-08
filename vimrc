@@ -33,13 +33,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'mhinz/vim-grepper'
 Plug 'w0rp/ale'
 Plug 'mbbill/undotree'
-
-Plug 'ncm2/ncm2'
-Plug 'roxma/nvim-yarp'
-Plug 'ncm2/ncm2-path'
-Plug 'ncm2/ncm2-tmux'
-Plug 'ncm2/ncm2-bufword'
-Plug 'fgrsnau/ncm2-otherbuf', { 'branch': 'ncm2' }
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --ts-completer' }
 
 Plug 'sheerun/vim-polyglot'
 
@@ -170,25 +164,6 @@ silent! nmap <silent> <Leader>u :UndotreeToggle<CR>
 " Add space after comment symbol
 let NERDSpaceDelims=1
 
-
-"Completion
-
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
-
-"ncm2
-autocmd BufEnter * call ncm2#enable_for_buffer()
-set completeopt=noinsert,menuone,noselect
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-
-
 "make Y consistent with C and D
 nnoremap Y y$
 
@@ -198,7 +173,11 @@ let g:ragtag_global_maps = 1
 "map for FZF
 map <leader>t :Files<CR>
 map <leader>b :Buffers<CR>
-map <leader>g :Tags<CR>
+
+"maps for YCM GoTo
+let g:ycm_key_detailed_diagnostics=''
+map <leader>g :YcmCompleter GoTo<CR>
+map <leader>d :YcmCompleter GetDoc<CR>
 
 "vim-test
 let test#strategy = "dispatch"
