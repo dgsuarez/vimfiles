@@ -34,6 +34,7 @@ Plug 'mhinz/vim-grepper'
 Plug 'w0rp/ale'
 Plug 'mbbill/undotree'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --ts-completer' }
+Plug 'yssl/QFEnter'
 
 Plug 'sheerun/vim-polyglot'
 
@@ -185,6 +186,12 @@ let test#ruby#use_spring_binstub = 1
 
 "Old school Ag
 command! -nargs=+ -complete=file Ag Grepper -noprompt -tool ag -query <args>
+
+"QFEnter
+let g:qfenter_keymap = {}
+let g:qfenter_keymap.vopen = ['<C-v>']
+let g:qfenter_keymap.hopen = ['<C-CR>', '<C-s>', '<C-x>']
+let g:qfenter_keymap.topen = ['<C-t>']
 
 "whitespace
 autocmd BufWritePre * StripWhitespace
