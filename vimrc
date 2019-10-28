@@ -74,6 +74,7 @@ Plug 'tpope/vim-dadbod'
 "Misc
 Plug 'dgsuarez/vim-ticard'
 Plug 'dgsuarez/vim-codeshot'
+Plug 'simplenote-vim/simplenote.vim'
 
 call plug#end()            " required
 
