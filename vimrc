@@ -225,6 +225,9 @@ let g:pandoc#modules#disabled = ["chdir"]
 set pastetoggle=<F7>
 nnoremap <F5> :checktime<cr>
 
+let g:SimplenoteUsername = $SIMPLE_NOTE_USERNAME
+let g:SimplenotePassword = $SIMPLE_NOTE_PASSWORD
+
 set exrc
 
 set secure
