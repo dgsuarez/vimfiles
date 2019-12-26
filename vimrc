@@ -124,6 +124,10 @@ set foldmethod=syntax   "fold based on syntax
 set foldnestmax=3       "deepest fold is 3 levels
 set nofoldenable        "dont fold by default
 
+" For big files syntax folding is slow, disable it for known problematic ones
+autocmd BufRead,BufNewFile */config/routes.rb setlocal foldmethod=manual
+autocmd BufRead,BufNewFile */schema.rb setlocal foldmethod=manual
+
 set wildmode=list:longest   "make cmdline tab completion similar to bash
 set wildignore=*.o,*.obj,*~ "stuff to ignore when tab completing
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
