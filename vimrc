@@ -234,6 +234,26 @@ let g:SimplenoteFiletype = 'markdown'
 let g:SimplenoteUsername = $SIMPLE_NOTE_USERNAME
 let g:SimplenotePassword = $SIMPLE_NOTE_PASSWORD
 
+let g:notesDir = '~/notes/'
+
+function! Note(...)
+  let note = a:0 ? a:1 : 'scratch'
+  let emptyWindow = winnr('$') && line('$') == 1 && getline(1) == ''
+  let openCommand = emptyWindow ? 'edit' : 'vsplit'
+
+  execute openCommand . ' ' . g:notesDir' . note . '.md'
+endfunction
+
+function! NoteComplete(...)
+  return system("ls " . g:notesDir . " | sed 's/\.md$//'")
+endfunction
+
+command! -nargs=? -complete=custom,NoteComplete M call Note(<f-args>)
+command! -nargs=0 Mlist Grepper -noprompt -tool ag -query . ~/notes -l
+command! -nargs=1 Mgrep Grepper -noprompt -tool ag -query <args> ~/notes
+map <leader>m :M<CR>
+
+
 set exrc
 
 set secure
