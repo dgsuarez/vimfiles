@@ -240,7 +240,7 @@ function! Note(...)
   let emptyWindow = winnr('$') && line('$') == 1 && getline(1) == ''
   let openCommand = emptyWindow ? 'edit' : 'vsplit'
 
-  execute openCommand . ' ' . g:notesDir' . note . '.md'
+  execute openCommand . ' ' . g:notesDir . note . '.md'
 endfunction
 
 function! NoteComplete(...)
