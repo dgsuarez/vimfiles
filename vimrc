@@ -37,7 +37,6 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.py --ts-completer' }
 Plug 'yssl/QFEnter'
 
 Plug 'sheerun/vim-polyglot'
-Plug 'mtth/scratch.vim'
 
 "SCM
 Plug 'tpope/vim-fugitive'
