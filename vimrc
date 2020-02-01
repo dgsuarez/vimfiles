@@ -243,15 +243,27 @@ function! Note(...)
   execute openCommand . ' ' . g:notesDir . note . '.md'
 endfunction
 
+function! NoteListCommand()
+  return "ls -t " . g:notesDir . " | sed 's/\.md$//'"
+endfunction
+
 function! NoteComplete(...)
-  return system("ls " . g:notesDir . " | sed 's/\.md$//'")
+  return system(NoteListCommand())
+endfunction
+
+function! COpenNoteList()
+  let list = map(systemlist(NoteListCommand()), {_, p -> { 'text': p, 'filename': fnamemodify(g:notesDir . p . '.md', ':p:.')}})
+  call setqflist(list)
+  copen
 endfunction
 
 command! -nargs=? -complete=custom,NoteComplete M call Note(<f-args>)
-command! -nargs=0 Mlist Grepper -noprompt -tool ag -query . ~/notes -l
-command! -nargs=1 Mgrep Grepper -noprompt -tool ag -query <args> ~/notes
-map <leader>m :M<CR>
+command! -nargs=0 Ml call COpenNoteList()
+command! -nargs=1 Mg Grepper -noprompt -tool ag -query <args> ~/notes
+command! -nargs=0 Mz call execute('Files ' . g:notesDir)
 
+map <leader>m :M<CR>
+map <leader>z :Mz<CR>
 
 set exrc
 
