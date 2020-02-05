@@ -180,6 +180,9 @@ let g:ragtag_global_maps = 1
 map <leader>t :Files<CR>
 map <leader>b :Buffers<CR>
 
+" Poor man's usage finder with Ag
+command! -nargs=* Refs Ag <cword> -w <args>
+
 "YCM conf
 let g:ycm_key_detailed_diagnostics=''
 augroup ycm_commands
@@ -188,6 +191,8 @@ augroup ycm_commands
   autocmd FileType javascript,typescript,javascriptreact,typescriptreact command! -nargs=0 Refs YcmCompleter GoToReferences
   autocmd FileType javascript,typescript,javascriptreact,typescriptreact command! -nargs=* Rename YcmCompleter RefactorRename <args>
 augroup END
+
+map <leader>r :Refs<CR>
 
 
 "vim-test
