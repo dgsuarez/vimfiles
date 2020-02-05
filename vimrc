@@ -124,10 +124,6 @@ set foldmethod=syntax   "fold based on syntax
 set foldnestmax=3       "deepest fold is 3 levels
 set nofoldenable        "dont fold by default
 
-" For big files syntax folding is slow, disable it for known problematic ones
-autocmd BufRead,BufNewFile */config/routes.rb setlocal foldmethod=manual
-autocmd BufRead,BufNewFile */schema.rb setlocal foldmethod=manual
-
 set wildmode=list:longest   "make cmdline tab completion similar to bash
 set wildignore=*.o,*.obj,*~ "stuff to ignore when tab completing
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
@@ -180,18 +176,27 @@ let g:ragtag_global_maps = 1
 map <leader>t :Files<CR>
 map <leader>b :Buffers<CR>
 
-" Poor man's usage finder with Ag
-command! -nargs=* Refs Ag <cword> -w <args>
-
 "YCM conf
 let g:ycm_key_detailed_diagnostics=''
-augroup ycm_commands
+
+augroup js_autocommands
   autocmd!
   autocmd FileType javascript,typescript,javascriptreact,typescriptreact nmap <buffer> <C-]> :YcmCompleter GoTo<CR>
   autocmd FileType javascript,typescript,javascriptreact,typescriptreact command! -nargs=0 Refs YcmCompleter GoToReferences
-  autocmd FileType javascript,typescript,javascriptreact,typescriptreact command! -nargs=* Rename YcmCompleter RefactorRename <args>
+  autocmd FileType javascript,typescript,javascriptreact,typescriptreact command! -nargs=* Rnm YcmCompleter RefactorRename <args>
 augroup END
 
+augroup ruby_autocommands
+  autocmd!
+  " For big files syntax folding is slow, disable it for known problematic ones
+  autocmd BufRead,BufNewFile */config/routes.rb setlocal foldmethod=manual
+  autocmd BufRead,BufNewFile */schema.rb setlocal foldmethod=manual
+  " Shorter reruby rename
+  autocmd FileType ruby command! -nargs=* Rnm Reruby rename_const <args>
+augroup END
+
+" Poor man's usage finder with Ag
+command! -nargs=* Refs Ag <cword> -w <args>
 map <leader>r :Refs<CR>
 
 
