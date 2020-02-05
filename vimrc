@@ -33,7 +33,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'mhinz/vim-grepper'
 Plug 'w0rp/ale'
 Plug 'mbbill/undotree'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --ts-completer' }
+Plug 'ycm-core/YouCompleteMe', { 'do': 'python3 install.py --ts-completer' }
 Plug 'yssl/QFEnter'
 
 Plug 'sheerun/vim-polyglot'
