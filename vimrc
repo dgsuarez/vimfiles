@@ -180,10 +180,15 @@ let g:ragtag_global_maps = 1
 map <leader>t :Files<CR>
 map <leader>b :Buffers<CR>
 
-"maps for YCM GoTo
+"YCM conf
 let g:ycm_key_detailed_diagnostics=''
-map <leader>g :YcmCompleter GoTo<CR>
-map <leader>d :YcmCompleter GetDoc<CR>
+augroup ycm_commands
+  autocmd!
+  autocmd FileType javascript,typescript,javascriptreact,typescriptreact nmap <buffer> <C-]> :YcmCompleter GoTo<CR>
+  autocmd FileType javascript,typescript,javascriptreact,typescriptreact command! -nargs=0 Refs YcmCompleter GoToReferences
+  autocmd FileType javascript,typescript,javascriptreact,typescriptreact command! -nargs=* Rename YcmCompleter RefactorRename <args>
+augroup END
+
 
 "vim-test
 let test#strategy = "dispatch"
