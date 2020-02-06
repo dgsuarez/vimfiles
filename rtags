@@ -1,0 +1,10 @@
+#! /bin/bash
+# Adapter for ripper-tags that works with vim-gutentags
+if [[ $@ =~ "ctags_recursive.options" ]]; then
+  opts="$@ -R --exclude=vendor"
+else
+  opts="$@"
+fi
+
+ripper-tags --ignore-unsupported-options $opts
+

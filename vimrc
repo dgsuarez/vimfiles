@@ -35,6 +35,7 @@ Plug 'w0rp/ale'
 Plug 'mbbill/undotree'
 Plug 'ycm-core/YouCompleteMe', { 'do': 'python3 install.py --ts-completer' }
 Plug 'yssl/QFEnter'
+Plug 'ludovicchabant/vim-gutentags'
 
 Plug 'sheerun/vim-polyglot'
 
@@ -171,6 +172,8 @@ nnoremap Y y$
 
 let g:ragtag_global_maps = 1
 
+let g:gutentags_define_advanced_commands = 1
+let g:gutentags_ctags_executable_ruby = '~/.vim/rtags'
 
 "map for FZF
 map <leader>t :Files<CR>
