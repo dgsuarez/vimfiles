@@ -43,7 +43,6 @@ Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
 Plug 'dgsuarez/thermometer'
-Plug 'whiteinge/diffconflicts'
 
 "Js, HTML...
 Plug 'tpope/vim-ragtag'
@@ -66,7 +65,6 @@ Plug 'tpope/vim-dadbod'
 "Misc
 Plug 'dgsuarez/vim-ticard'
 Plug 'dgsuarez/vim-codeshot'
-Plug 'simplenote-vim/simplenote.vim'
 
 call plug#end()            " required
 
@@ -249,10 +247,6 @@ let g:pandoc#modules#disabled = ["chdir"]
 
 set pastetoggle=<F7>
 nnoremap <F5> :checktime<cr>
-
-let g:SimplenoteFiletype = 'markdown'
-let g:SimplenoteUsername = $SIMPLE_NOTE_USERNAME
-let g:SimplenotePassword = $SIMPLE_NOTE_PASSWORD
 
 let g:notesDir = '~/notes/'
 
