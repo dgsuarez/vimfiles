@@ -46,15 +46,9 @@ Plug 'dgsuarez/thermometer'
 Plug 'whiteinge/diffconflicts'
 
 "Js, HTML...
-Plug 'pangloss/vim-javascript'
-Plug 'nono/vim-handlebars'
-Plug 'cakebaker/scss-syntax.vim'
 Plug 'tpope/vim-ragtag'
-Plug 'godlygeek/tabular'
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
-Plug 'digitaltoad/vim-pug'
-Plug 'kchmck/vim-coffee-script'
 
 "Ruby
 Plug 'vim-ruby/vim-ruby'
@@ -65,11 +59,8 @@ Plug 'kana/vim-textobj-user'
 Plug 'tek/vim-textobj-ruby'
 Plug 'janko-m/vim-test'
 Plug 'dgsuarez/reruby.vim'
-Plug 'slim-template/vim-slim'
 
 "Other langs
-Plug 'rhysd/vim-crystal'
-Plug 'elixir-lang/vim-elixir'
 Plug 'tpope/vim-dadbod'
 
 "Misc
