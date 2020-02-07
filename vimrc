@@ -182,6 +182,15 @@ map <leader>b :Buffers<CR>
 "YCM conf
 let g:ycm_key_detailed_diagnostics=''
 
+function! Multiple_cursors_before()
+  let s:old_ycm_whitelist = g:ycm_filetype_whitelist
+  let g:ycm_filetype_whitelist = {}
+endfunction
+
+function! Multiple_cursors_after()
+  let g:ycm_filetype_whitelist = s:old_ycm_whitelist
+endfunction
+
 augroup js_autocommands
   autocmd!
   autocmd FileType javascript,typescript,javascriptreact,typescriptreact nmap <buffer> <C-]> :YcmCompleter GoTo<CR>
