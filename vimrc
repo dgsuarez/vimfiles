@@ -228,13 +228,6 @@ let g:ale_fixers = {
 \   'typescriptreact': ['prettier'],
 \}
 
-
-"key mapping for window navigation
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
-
 au BufNewFile,BufRead *.prawn set filetype=ruby
 au BufNewFile,BufRead Dockerfile.* set filetype=dockerfile
 let g:AutoCloseExpandEnterOn = ""
