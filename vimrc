@@ -155,6 +155,7 @@ silent! nmap <silent> <Leader>u :UndotreeToggle<CR>
 
 " Add space after comment symbol
 let NERDSpaceDelims=1
+map <leader>a <plug>NERDCommenterToggle
 
 "make Y consistent with C and D
 nnoremap Y y$
