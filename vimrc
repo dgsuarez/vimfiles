@@ -196,6 +196,12 @@ augroup ruby_autocommands
   autocmd FileType ruby command! -nargs=* Rnm Reruby rename_const <args>
 augroup END
 
+augroup other_autocommands
+  autocmd!
+  autocmd BufWritePre * StripWhitespace
+  autocmd BufNewFile,BufRead Dockerfile.* set filetype=dockerfile
+augroup END
+
 " Poor man's usage finder with Ag
 command! -nargs=* Refs Ag <cword> -w <args>
 map <leader>r :Refs<CR>
@@ -214,8 +220,6 @@ let g:qfenter_keymap.vopen = ['<C-v>']
 let g:qfenter_keymap.hopen = ['<C-CR>', '<C-s>', '<C-x>']
 let g:qfenter_keymap.topen = ['<C-t>']
 
-"whitespace
-autocmd BufWritePre * StripWhitespace
 
 "ale
 let g:ale_ruby_rubocop_executable = 'bundle'
@@ -228,8 +232,6 @@ let g:ale_fixers = {
 \   'typescriptreact': ['prettier'],
 \}
 
-au BufNewFile,BufRead *.prawn set filetype=ruby
-au BufNewFile,BufRead Dockerfile.* set filetype=dockerfile
 let g:AutoCloseExpandEnterOn = ""
 
 noremap Q gqap
