@@ -175,10 +175,12 @@ let g:ycm_key_detailed_diagnostics=''
 function! Multiple_cursors_before()
   let s:old_ycm_whitelist = g:ycm_filetype_whitelist
   let g:ycm_filetype_whitelist = {}
+  ALEDisable
 endfunction
 
 function! Multiple_cursors_after()
   let g:ycm_filetype_whitelist = s:old_ycm_whitelist
+  ALEEnable
 endfunction
 
 augroup js_autocommands
