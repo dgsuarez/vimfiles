@@ -42,6 +42,7 @@ Plug 'sheerun/vim-polyglot'
 "SCM
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
+Plug 'tpope/vim-rhubarb'
 Plug 'dgsuarez/thermometer'
 
 "Js, HTML...
