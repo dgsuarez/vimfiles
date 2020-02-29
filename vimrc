@@ -66,6 +66,7 @@ Plug 'tpope/vim-dadbod'
 "Misc
 Plug 'dgsuarez/vim-ticard'
 Plug 'dgsuarez/vim-codeshot'
+Plug 'dgsuarez/vim-mootes'
 
 call plug#end()            " required
 
@@ -247,35 +248,6 @@ let g:pandoc#modules#disabled = ["chdir"]
 
 set pastetoggle=<F7>
 nnoremap <F5> :checktime<cr>
-
-let g:notesDir = '~/notes/'
-
-function! Note(...)
-  let note = a:0 ? a:1 : 'scratch'
-  let emptyWindow = winnr('$') && line('$') == 1 && getline(1) == ''
-  let openCommand = emptyWindow ? 'edit' : 'vsplit'
-
-  execute openCommand . ' ' . g:notesDir . note . '.md'
-endfunction
-
-function! NoteListCommand()
-  return "ls -t " . g:notesDir . " | sed 's/\.md$//'"
-endfunction
-
-function! NoteComplete(...)
-  return system(NoteListCommand())
-endfunction
-
-function! COpenNoteList()
-  let list = map(systemlist(NoteListCommand()), {_, p -> { 'text': p, 'filename': fnamemodify(g:notesDir . p . '.md', ':p:.')}})
-  call setqflist(list)
-  copen
-endfunction
-
-command! -nargs=? -complete=custom,NoteComplete M call Note(<f-args>)
-command! -nargs=0 Ml call COpenNoteList()
-command! -nargs=1 Mg Grepper -noprompt -tool ag -query <args> ~/notes
-command! -nargs=0 Mz call execute('Files ' . g:notesDir)
 
 map <leader>m :M<CR>
 map <leader>z :Mz<CR>
