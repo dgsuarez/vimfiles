@@ -253,6 +253,49 @@ nnoremap <F5> :checktime<cr>
 map <leader>m :M<CR>
 map <leader>z :Mz<CR>
 
+
+function! g:BetterGoToTag(tag, referenceFile)
+  let tagIndex=1
+  let bestScore = 0
+  let bestTagIndex = tagIndex
+
+  for entry in taglist('^' . a:tag . '$')
+    let score = g:ScoreCandidate(entry['filename'], a:referenceFile)
+    if score > bestScore
+      let bestTagIndex = tagIndex
+      let bestScore = score
+    endif
+    let tagIndex += 1
+  endfor
+
+  execute bestTagIndex . 'tag ' . a:tag
+endfunction
+
+function! g:ScoreCandidate(candidateFile, referenceFile)
+  if(a:candidateFile == a:referenceFile)
+    return 1000
+  endif
+
+  let referenceFileParts = g:GetFileParts(a:referenceFile)
+  let candidateFileParts = g:GetFileParts(a:candidateFile)
+
+  let score=0
+
+  for part in candidateFileParts
+    if index(referenceFileParts, part) > 0
+      let score +=1
+    endif
+  endfor
+
+  return score
+endfunction
+
+function! g:GetFileParts(file)
+  return reverse(split(fnamemodify(a:file, ':r'), '/'))
+endfunction
+
+nnoremap <silent> <C-]> :call g:BetterGoToTag(expand('<cword>'), expand('%'))<CR>
+
 set exrc
 
 set secure
