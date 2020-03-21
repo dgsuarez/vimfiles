@@ -36,6 +36,7 @@ Plug 'mbbill/undotree'
 Plug 'ycm-core/YouCompleteMe', { 'do': 'python3 install.py --ts-completer' }
 Plug 'yssl/QFEnter'
 Plug 'ludovicchabant/vim-gutentags'
+Plug 'Konfekt/FastFold'
 
 Plug 'sheerun/vim-polyglot'
 
