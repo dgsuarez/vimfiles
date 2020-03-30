@@ -163,6 +163,8 @@ map <leader>a <plug>NERDCommenterToggle
 "make Y consistent with C and D
 nnoremap Y y$
 
+let g:matchup_matchparen_deferred = 1
+
 let g:ragtag_global_maps = 1
 
 let g:gutentags_define_advanced_commands = 1
