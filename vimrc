@@ -267,12 +267,12 @@ map <leader>z :Mz<CR>
 function! g:ToggleCheckbox(operateOn)
   let listStart = '^\(\s*[-\*]\)\s*'
 
-  let noCheckbox = '\([^\[]\)'
+  let noCheckbox = ' \ze[^\[\s]'
   let uncheckedCheckbox = '\[\]'
   let checkedCheckbox = '\[[^\s]\]'
 
   try
-    execute a:operateOn . 's/' . listStart . ' ' . noCheckbox . '/\1 [] \2/'
+    execute a:operateOn . 's/' . listStart . noCheckbox . '/\1 [] /'
     return
   catch
   endtry
@@ -282,7 +282,7 @@ function! g:ToggleCheckbox(operateOn)
   catch
   endtry
   try
-    execute a:operateOn . 's/' . listStart . ' ' . checkedCheckbox . '/\1 []/'
+    execute a:operateOn . 's/' . listStart . checkedCheckbox . '/\1 []/'
     return
   catch
   endtry
@@ -293,7 +293,7 @@ function! g:ClearCheckbox(operateOn)
   let checkbox = '\[.*\]'
 
   try
-    execute a:operateOn . 's/' . listStart . ' ' . checkbox  . '/\1/'
+    execute a:operateOn . 's/' . listStart . checkbox  . '/\1/'
   catch
   endtry
 endfunction
