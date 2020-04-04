@@ -78,6 +78,7 @@ if exists('&inccommand')
   set inccommand=split
 endif
 nnoremap R :%s/<C-R><C-W>//g<LEFT><LEFT>
+vnoremap R "sy <bar> :%s/<C-R>s//g<LEFT><LEFT>
 
 "statusline setup
 let g:airline_left_sep = ''
