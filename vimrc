@@ -265,43 +265,33 @@ map <leader>m :M<CR>
 map <leader>z :Mz<CR>
 
 function! g:ToggleCheckbox(operateOn)
-  let listStart = '^\(\s*[-\*]\)\s*'
-
   let noCheckbox = ' \ze[^\[\s]'
   let uncheckedCheckbox = '\[\]'
   let checkedCheckbox = '\[[^\s]\]'
 
-  try
-    execute a:operateOn . 's/' . listStart . noCheckbox . '/\1 [] /'
-    return
-  catch
-  endtry
-  try
-    execute a:operateOn . 's/' . listStart . uncheckedCheckbox . '/\1 [x]/'
-    return
-  catch
-  endtry
-  try
-    execute a:operateOn . 's/' . listStart . checkedCheckbox . '/\1 []/'
-    return
-  catch
-  endtry
+  if g:TryReplaceCheckbox(a:operateOn, noCheckbox, ' [] ') | return
+  elseif g:TryReplaceCheckbox(a:operateOn, uncheckedCheckbox, ' [x]') | return
+  elseif g:TryReplaceCheckbox(a:operateOn, checkedCheckbox, ' []') | return
+  endif
 endfunction
 
 function! g:FullToggleCheckbox(operateOn)
-  let listStart = '^\(\s*[-\*]\)\s*'
   let checkbox = '\[.*\]'
   let noCheckbox = ' \ze[^\[\s]'
 
+  if g:TryReplaceCheckbox(a:operateOn, noCheckbox, ' [] ') | return
+  elseif g:TryReplaceCheckbox(a:operateOn, checkbox, '') | return
+  endif
+endfunction
+
+function! g:TryReplaceCheckbox(operateOn, search, replace)
+  let listStart = '^\(\s*[-\*]\)\s*'
+
   try
-    execute a:operateOn . 's/' . listStart . checkbox  . '/\1/'
-    return
+    execute a:operateOn . 's/' . listStart . a:search . '/\1' . a:replace . '/'
+    return 1
   catch
-  endtry
-  try
-    execute a:operateOn . 's/' . listStart . noCheckbox  . '/\1 [] /'
-    return
-  catch
+    return 0
   endtry
 endfunction
 
