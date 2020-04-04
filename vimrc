@@ -44,7 +44,6 @@ Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
 Plug 'tpope/vim-rhubarb'
-Plug 'dgsuarez/thermometer'
 
 "Js, HTML...
 Plug 'tpope/vim-ragtag'
@@ -84,20 +83,9 @@ let g:airline_left_sep = ''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep = ''
 let g:airline_right_alt_sep = ''
-
-"SCM
-
-function! ScmAirline()
-  let hg = g:HgStatusLine()
-  if hg == ""
-    return fugitive#statusline()
-  else
-    return hg
-  end
-endfunction
-
 let g:airline_section_a = ''
-let g:airline_section_b='%{ScmAirline()}'
+let g:airline_section_b='%{fugitive#statusline()}'
+let g:airline#extensions#tabline#enabled = 1
 
 set laststatus=2
 
@@ -140,11 +128,8 @@ if match($TERM, "256") != -1
   set background=dark
   colorscheme solarized
 else
-  colorscheme default
+  colorscheme monochrome
 endif
-
-
-let g:airline#extensions#tabline#enabled = 1
 
 " Move between open buffers
 nnoremap gr :bn<CR>
@@ -226,8 +211,6 @@ augroup END
 command! -nargs=* Refs Ag <cword> -w <args>
 map <leader>r :Refs<CR>
 
-
-
 "vim-test
 let test#strategy = "dispatch"
 let test#ruby#use_spring_binstub = 1
@@ -240,7 +223,6 @@ let g:qfenter_keymap = {}
 let g:qfenter_keymap.vopen = ['<C-v>']
 let g:qfenter_keymap.hopen = ['<C-CR>', '<C-s>', '<C-x>']
 let g:qfenter_keymap.topen = ['<C-t>']
-
 
 "ale
 let g:ale_ruby_rubocop_executable = 'bundle'
