@@ -48,8 +48,6 @@ Plug 'dgsuarez/thermometer'
 
 "Js, HTML...
 Plug 'tpope/vim-ragtag'
-Plug 'vim-pandoc/vim-pandoc'
-Plug 'vim-pandoc/vim-pandoc-syntax'
 
 "Ruby
 Plug 'vim-ruby/vim-ruby'
@@ -116,6 +114,8 @@ set autoindent
 set foldmethod=syntax   "fold based on syntax
 set foldnestmax=3       "deepest fold is 3 levels
 set nofoldenable        "dont fold by default
+let g:markdown_folding = 1
+nnoremap zz za
 
 set wildmode=list:longest   "make cmdline tab completion similar to bash
 set wildignore=*.o,*.obj,*~ "stuff to ignore when tab completing
@@ -204,6 +204,15 @@ augroup ruby_autocommands
   autocmd FileType ruby command! -nargs=* Rnm Reruby rename_const <args>
 augroup END
 
+augroup markdown_autocommands
+  autocmd!
+  autocmd FileType markdown setlocal spell
+  autocmd FileType markdown let b:ale_fixers = ['prettier', 'remove_trailing_lines', 'trim_whitespace']
+  autocmd FileType markdown let b:ale_javascript_prettier_options = '--prose-wrap always'
+  autocmd FileType markdown let g:ale_fix_on_save = 1
+  autocmd FileType markdown nnoremap <silent> <Space> :call g:ToggleCheckbox()<CR>
+augroup END
+
 augroup other_autocommands
   autocmd!
   autocmd BufWritePre * StripWhitespace
@@ -213,6 +222,7 @@ augroup END
 " Poor man's usage finder with Ag
 command! -nargs=* Refs Ag <cword> -w <args>
 map <leader>r :Refs<CR>
+
 
 
 "vim-test
@@ -245,16 +255,35 @@ let g:AutoCloseExpandEnterOn = ""
 
 noremap Q gqap
 
-let g:pandoc#syntax#conceal#use = 0
-let g:pandoc#formatting#mode = 'ha'
-let g:pandoc#modules#disabled = ["chdir"]
-
 set pastetoggle=<F7>
 nnoremap <F5> :checktime<cr>
 
 map <leader>m :M<CR>
 map <leader>z :Mz<CR>
 
+function! g:ToggleCheckbox()
+  let listStart = '^\s*\([-\*]\)\s*'
+
+  let checkboxStart = '\([^\[]\)'
+  let uncheckedCheckbox = '\[\]'
+  let checkedCheckbox = '\[[^\s]\]'
+
+  try
+    execute '.s/' . listStart . uncheckedCheckbox . '/\1 [x]/'
+    return
+  catch
+  endtry
+  try
+    execute '.s/' . listStart . ' ' . checkedCheckbox . '/\1 []/'
+    return
+  catch
+  endtry
+  try
+    execute '.s/' . listStart . ' ' . checkboxStart . '/\1 [] \2/'
+    return
+  catch
+  endtry
+endfunction
 
 function! g:BetterGoToTag(tag, referenceFile)
   let tagIndex=1
