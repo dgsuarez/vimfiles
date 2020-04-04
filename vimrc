@@ -73,7 +73,7 @@ set visualbell t_vb=
 let mapleader = "ñ"
 
 set hlsearch
-nnoremap <BS> :nohlsearch<CR>
+nnoremap <silent> <BS> :nohlsearch<CR>
 if exists('&inccommand')
   set inccommand=split
 endif
