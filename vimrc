@@ -210,7 +210,10 @@ augroup markdown_autocommands
   autocmd FileType markdown let b:ale_fixers = ['prettier', 'remove_trailing_lines', 'trim_whitespace']
   autocmd FileType markdown let b:ale_javascript_prettier_options = '--prose-wrap always'
   autocmd FileType markdown let g:ale_fix_on_save = 1
-  autocmd FileType markdown nnoremap <silent> <Space> :call g:ToggleCheckbox()<CR>
+  autocmd FileType markdown nnoremap <silent> <Space> :silent call g:ToggleCheckbox('.')<CR>
+  autocmd FileType markdown vnoremap <silent> <Space> :<C-U>silent call g:ToggleCheckbox("'<,'>")<CR>
+  autocmd FileType markdown nnoremap <silent> <C-Space> :silent call g:ClearCheckbox('.')<CR>
+  autocmd FileType markdown vnoremap <silent> <C-Space> :<C-U>silent call g:ClearCheckbox("'<,'>")<CR>
 augroup END
 
 augroup other_autocommands
@@ -261,26 +264,36 @@ nnoremap <F5> :checktime<cr>
 map <leader>m :M<CR>
 map <leader>z :Mz<CR>
 
-function! g:ToggleCheckbox()
-  let listStart = '^\s*\([-\*]\)\s*'
+function! g:ToggleCheckbox(operateOn)
+  let listStart = '^\(\s*[-\*]\)\s*'
 
-  let checkboxStart = '\([^\[]\)'
+  let noCheckbox = '\([^\[]\)'
   let uncheckedCheckbox = '\[\]'
   let checkedCheckbox = '\[[^\s]\]'
 
   try
-    execute '.s/' . listStart . uncheckedCheckbox . '/\1 [x]/'
+    execute a:operateOn . 's/' . listStart . ' ' . noCheckbox . '/\1 [] \2/'
     return
   catch
   endtry
   try
-    execute '.s/' . listStart . ' ' . checkedCheckbox . '/\1 []/'
+    execute a:operateOn . 's/' . listStart . uncheckedCheckbox . '/\1 [x]/'
     return
   catch
   endtry
   try
-    execute '.s/' . listStart . ' ' . checkboxStart . '/\1 [] \2/'
+    execute a:operateOn . 's/' . listStart . ' ' . checkedCheckbox . '/\1 []/'
     return
+  catch
+  endtry
+endfunction
+
+function! g:ClearCheckbox(operateOn)
+  let listStart = '^\(\s*[-\*]\)\s*'
+  let checkbox = '\[.*\]'
+
+  try
+    execute a:operateOn . 's/' . listStart . ' ' . checkbox  . '/\1/'
   catch
   endtry
 endfunction
