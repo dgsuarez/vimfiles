@@ -148,6 +148,12 @@ map <leader>a <plug>NERDCommenterToggle
 "make Y consistent with C and D
 nnoremap Y y$
 
+if has('persistent_undo')
+  set undolevels=5000
+  set undodir=$HOME/.vim_undo
+  set undofile
+endif
+
 let g:matchup_matchparen_deferred = 1
 
 let g:ragtag_global_maps = 1
