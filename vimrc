@@ -77,8 +77,8 @@ nnoremap <silent> <BS> :nohlsearch<CR>
 if exists('&inccommand')
   set inccommand=split
 endif
-nnoremap R :%s/<C-R><C-W>//g<LEFT><LEFT>
-vnoremap R "sy <bar> :%s/<C-R>s//g<LEFT><LEFT>
+nnoremap R :%s/\V<C-R><C-W>//g<LEFT><LEFT>
+vnoremap R "sy <bar> :%s/\V<C-R>s//g<LEFT><LEFT>
 
 "statusline setup
 let g:airline_left_sep = ''
@@ -326,6 +326,7 @@ function! g:GetFileParts(file)
 endfunction
 
 nnoremap <silent> <C-]> :call g:BetterGoToTag(expand('<cword>'), expand('%'))<CR>
+vnoremap <silent> <C-]> "sy <bar> :call g:BetterGoToTag('<C-R>s', expand('%'))<CR>
 
 set exrc
 
