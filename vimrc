@@ -140,13 +140,13 @@ nnoremap gR :bp<CR>
 
 let g:nerdtree_tabs_open_on_gui_startup = 0
 
-silent! nmap <silent> <Leader>p :NERDTreeToggle<CR>
+nnoremap <silent> <Leader>p :NERDTreeToggle<CR>
 nnoremap <silent> <C-f> :NERDTreeFind<CR>
-silent! nmap <silent> <Leader>u :UndotreeToggle<CR>
+nnoremap <silent> <Leader>u :UndotreeToggle<CR>
 
 " Add space after comment symbol
 let NERDSpaceDelims=1
-map <leader>a <plug>NERDCommenterToggle
+nmap <leader>a <plug>NERDCommenterToggle
 
 "make Y consistent with C and D
 nnoremap Y y$
@@ -203,7 +203,7 @@ augroup markdown_autocommands
   autocmd FileType markdown setlocal spell
   autocmd FileType markdown let b:ale_fixers = ['prettier', 'remove_trailing_lines', 'trim_whitespace']
   autocmd FileType markdown let b:ale_javascript_prettier_options = '--prose-wrap always'
-  autocmd FileType markdown let g:ale_fix_on_save = 1
+  autocmd FileType markdown let b:ale_fix_on_save = 1
 augroup END
 
 augroup other_autocommands
@@ -244,12 +244,6 @@ let g:ale_fixers = {
 let g:AutoCloseExpandEnterOn = ""
 
 noremap Q gqap
-
-set pastetoggle=<F7>
-nnoremap <F5> :checktime<cr>
-
-map <leader>m :M<CR>
-map <leader>z :Mz<CR>
 
 function! g:BetterGoToTag(tag, referenceFile)
   let tagIndex=1
