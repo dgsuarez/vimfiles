@@ -146,7 +146,7 @@ nnoremap <silent> <Leader>u :UndotreeToggle<CR>
 
 " Add space after comment symbol
 let NERDSpaceDelims=1
-nmap <leader>a <plug>NERDCommenterToggle
+map <leader>a <plug>NERDCommenterToggle
 
 "make Y consistent with C and D
 nnoremap Y y$
@@ -213,8 +213,7 @@ augroup other_autocommands
 augroup END
 
 " Poor man's usage finder with Ag
-command! -nargs=* Refs Ag <cword> -w <args>
-map <leader>r :Refs<CR>
+nnoremap <leader>r :execute 'Ag -w ' . expand('<cword>')<CR>
 
 "vim-test
 let test#strategy = "dispatch"
