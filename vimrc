@@ -65,6 +65,7 @@ Plug 'tpope/vim-dadbod'
 Plug 'dgsuarez/vim-ticard'
 Plug 'dgsuarez/vim-codeshot'
 Plug 'dgsuarez/vim-mootes'
+Plug 'dgsuarez/vim-checka-wah-wah'
 
 call plug#end()            " required
 
@@ -203,10 +204,6 @@ augroup markdown_autocommands
   autocmd FileType markdown let b:ale_fixers = ['prettier', 'remove_trailing_lines', 'trim_whitespace']
   autocmd FileType markdown let b:ale_javascript_prettier_options = '--prose-wrap always'
   autocmd FileType markdown let g:ale_fix_on_save = 1
-  autocmd FileType markdown nnoremap <silent> <Space> :silent call g:ToggleCheckbox('.')<CR>
-  autocmd FileType markdown vnoremap <silent> <Space> :<C-U>silent call g:ToggleCheckbox("'<,'>")<CR>
-  autocmd FileType markdown nnoremap <silent> <C-Space> :silent call g:FullToggleCheckbox('.')<CR>
-  autocmd FileType markdown vnoremap <silent> <C-Space> :<C-U>silent call g:FullToggleCheckbox("'<,'>")<CR>
 augroup END
 
 augroup other_autocommands
@@ -253,37 +250,6 @@ nnoremap <F5> :checktime<cr>
 
 map <leader>m :M<CR>
 map <leader>z :Mz<CR>
-
-function! g:ToggleCheckbox(operateOn)
-  let noCheckbox = ' \ze[^\[\s]'
-  let uncheckedCheckbox = '\[\]'
-  let checkedCheckbox = '\[[^\s]\]'
-
-  if g:TryReplaceCheckbox(a:operateOn, noCheckbox, ' [] ') | return
-  elseif g:TryReplaceCheckbox(a:operateOn, uncheckedCheckbox, ' [x]') | return
-  elseif g:TryReplaceCheckbox(a:operateOn, checkedCheckbox, ' []') | return
-  endif
-endfunction
-
-function! g:FullToggleCheckbox(operateOn)
-  let checkbox = '\[.*\]'
-  let noCheckbox = ' \ze[^\[\s]'
-
-  if g:TryReplaceCheckbox(a:operateOn, noCheckbox, ' [] ') | return
-  elseif g:TryReplaceCheckbox(a:operateOn, checkbox, '') | return
-  endif
-endfunction
-
-function! g:TryReplaceCheckbox(operateOn, search, replace)
-  let listStart = '^\(\s*[-\*]\)\s*'
-
-  try
-    execute a:operateOn . 's/' . listStart . a:search . '/\1' . a:replace . '/'
-    return 1
-  catch
-    return 0
-  endtry
-endfunction
 
 function! g:BetterGoToTag(tag, referenceFile)
   let tagIndex=1
