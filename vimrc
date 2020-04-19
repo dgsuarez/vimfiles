@@ -78,8 +78,15 @@ nnoremap <silent> <BS> :nohlsearch<CR>
 if exists('&inccommand')
   set inccommand=split
 endif
+
+" Quick local search & replace
 nnoremap R :%s/\V<C-R><C-W>//g<LEFT><LEFT>
 vnoremap R "sy <bar> :%s/\V<C-R>s//g<LEFT><LEFT>
+
+" Poor man's usage finder with Ag
+command! -nargs=* Refs Ag <cword> -w <args>
+nnoremap <leader>r :Refs<CR>
+vnoremap <leader>r "sy <bar> :Ag -w '<C-R>s'<CR>
 
 "statusline setup
 let g:airline_left_sep = ''
@@ -211,9 +218,6 @@ augroup other_autocommands
   autocmd BufWritePre * StripWhitespace
   autocmd BufNewFile,BufRead Dockerfile.* set filetype=dockerfile
 augroup END
-
-" Poor man's usage finder with Ag
-nnoremap <leader>r :execute 'Ag -w ' . expand('<cword>')<CR>
 
 "vim-test
 let test#strategy = "dispatch"
