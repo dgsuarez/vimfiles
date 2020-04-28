@@ -174,6 +174,8 @@ let g:gutentags_ctags_executable_ruby = '~/.vim/rtags'
 "map for FZF
 map <leader>t :Files<CR>
 map <leader>b :Buffers<CR>
+map <leader>z :Mz<CR>
+
 
 "YCM conf
 let g:ycm_key_detailed_diagnostics=''
