@@ -38,6 +38,11 @@ Plug 'yssl/QFEnter'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'Konfekt/FastFold'
 
+" Issue with latest polyglot, js not highlighted in tsx/jsx
+" Check back if it can be removed
+let g:polyglot_disabled = ['jsx']
+Plug 'maxmellon/vim-jsx-pretty'
+
 Plug 'sheerun/vim-polyglot'
 
 "SCM
