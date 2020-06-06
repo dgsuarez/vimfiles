@@ -254,7 +254,38 @@ let g:ale_fixers = {
 
 let g:AutoCloseExpandEnterOn = ""
 
-noremap Q gqap
+nnoremap <silent> Q gqip
+vnoremap <silent> Q gq
+
+function! s:WithProseFormat(operation)
+  let oldComments=&comments
+
+  set comments=fb:*,fb:-,fb:+,n:>
+
+  silent execute a:operation
+
+  let &comments=oldComments
+endfunction
+
+function! s:MarkdownCopy(operateOn)
+  let winSave = winsaveview()
+  let oldTw=&tw
+  set tw=9999
+  call s:WithProseFormat(a:operateOn . 'g/^/normal gqip')
+  silent execute a:operateOn . 'y +'
+  silent normal u
+  let &tw=oldTw
+  call winrestview(winSave)
+endfunction
+
+augroup markdown_copy_autocommands
+  autocmd!
+  autocmd FileType markdown nnoremap <silent> Q :silent call <SID>WithProseFormat('.g/^/normal gqip')<CR>
+  autocmd FileType markdown vnoremap <silent> Q :<C-U>silent call <SID>WithProseFormat("'<,'>g/^/normal gqip")<CR>
+  autocmd FileType markdown nnoremap <silent> <leader>c :silent call <SID>MarkdownCopy('%')<CR>
+  autocmd FileType markdown vnoremap <silent> <leader>c :<C-U>silent call <SID>MarkdownCopy("'<,'>")<CR>
+augroup END
+
 
 function! g:BetterGoToTag(tag, referenceFile)
   let tagIndex=1
