@@ -282,8 +282,8 @@ augroup markdown_copy_autocommands
   autocmd!
   autocmd FileType markdown nnoremap <silent> Q :silent call <SID>WithProseFormat('.g/^/normal gqip')<CR>
   autocmd FileType markdown vnoremap <silent> Q :<C-U>silent call <SID>WithProseFormat("'<,'>g/^/normal gqip")<CR>
-  autocmd FileType markdown nnoremap <silent> <leader>c :silent call <SID>MarkdownCopy('%')<CR>
-  autocmd FileType markdown vnoremap <silent> <leader>c :<C-U>silent call <SID>MarkdownCopy("'<,'>")<CR>
+  autocmd FileType markdown nnoremap <silent> <leader>cy :silent call <SID>MarkdownCopy('%')<CR>
+  autocmd FileType markdown vnoremap <silent> <leader>cy :<C-U>silent call <SID>MarkdownCopy("'<,'>")<CR>
 augroup END
 
 
