@@ -215,10 +215,12 @@ augroup END
 
 augroup markdown_autocommands
   autocmd!
+  " Don't wrap text on gh PR body
+  autocmd BufRead,BufNewFile /tmp/*.md setlocal tw=9999
+
+  autocmd FileType markdown setlocal comments=fb:*,fb:-,fb:+,n:>,fb:\|
+  autocmd FileType markdown setlocal indentexpr=
   autocmd FileType markdown setlocal spell
-  autocmd FileType markdown let b:ale_fixers = ['prettier', 'remove_trailing_lines', 'trim_whitespace']
-  autocmd FileType markdown let b:ale_javascript_prettier_options = '--prose-wrap always'
-  autocmd FileType markdown let b:ale_fix_on_save = 1
 augroup END
 
 augroup other_autocommands
@@ -257,21 +259,11 @@ let g:AutoCloseExpandEnterOn = ""
 nnoremap <silent> Q gqip
 vnoremap <silent> Q gq
 
-function! s:WithProseFormat(operation)
-  let oldComments=&comments
-
-  set comments=fb:*,fb:-,fb:+,n:>
-
-  silent execute a:operation
-
-  let &comments=oldComments
-endfunction
-
 function! s:MarkdownCopy(operateOn)
   let winSave = winsaveview()
   let oldTw=&tw
   set tw=9999
-  call s:WithProseFormat(a:operateOn . 'g/^/normal gqip')
+  silent execute a:operateOn . 'g/^/normal gqip'
   silent execute a:operateOn . 'y +'
   silent normal u
   let &tw=oldTw
@@ -280,8 +272,6 @@ endfunction
 
 augroup markdown_copy_autocommands
   autocmd!
-  autocmd FileType markdown nnoremap <silent> Q :silent call <SID>WithProseFormat('.g/^/normal gqip')<CR>
-  autocmd FileType markdown vnoremap <silent> Q :<C-U>silent call <SID>WithProseFormat("'<,'>g/^/normal gqip")<CR>
   autocmd FileType markdown nnoremap <silent> <leader>cy :silent call <SID>MarkdownCopy('%')<CR>
   autocmd FileType markdown vnoremap <silent> <leader>cy :<C-U>silent call <SID>MarkdownCopy("'<,'>")<CR>
 augroup END
