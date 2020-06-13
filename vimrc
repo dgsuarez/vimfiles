@@ -226,16 +226,6 @@ augroup ruby_autocommands
   autocmd BufRead,BufNewFile */schema.rb setlocal foldmethod=manual
 augroup END
 
-augroup markdown_autocommands
-  autocmd!
-  " Don't wrap text on gh PR body
-  autocmd BufRead,BufNewFile /tmp/*.md setlocal tw=9999
-
-  autocmd FileType markdown setlocal comments=fb:*,fb:-,fb:+,n:>,fb:\|
-  autocmd FileType markdown setlocal indentexpr=
-  autocmd FileType markdown setlocal spell
-augroup END
-
 augroup other_autocommands
   autocmd!
   autocmd BufWritePre * StripWhitespace
@@ -276,15 +266,49 @@ function! s:MarkdownCopy(operateOn)
   let winSave = winsaveview()
   let oldTw=&tw
   set tw=9999
-  silent execute a:operateOn . 'g/^/normal gqip'
+  silent execute a:operateOn . 'call <SID>ReformatMarkdown()'
   silent execute a:operateOn . 'y +'
   silent normal u
   let &tw=oldTw
   call winrestview(winSave)
 endfunction
 
-augroup markdown_copy_autocommands
+function! s:ReformatMarkdownParagraph()
+  let isCurrentFence = getline('.') =~ '^ *```'
+
+  if isCurrentFence
+    let b:inFencedCodeBlock = !b:inFencedCodeBlock
+  elseif !b:inFencedCodeBlock
+    " execute 'normal i' . b:inFencedCodeBlock
+    normal gqip
+  endif
+endfunction
+
+function! s:ReformatMarkdown() range
+  let winSave = winsaveview()
+  let b:inFencedCodeBlock = 0
+
+  call cursor(a:firstline, 1)
+  call g:ReformatMarkdownParagraph()
+  while line('.') < a:lastline && line('.') < line('$')
+    normal j
+    call <SID>ReformatMarkdownParagraph()
+  endwhile
+
+  unlet b:inFencedCodeBlock
+  call winrestview(winSave)
+endfunction
+
+augroup markdown_autocommands
   autocmd!
+  " Don't wrap text on gh PR body
+  autocmd BufRead,BufNewFile /tmp/*.md setlocal tw=9999
+
+  autocmd FileType markdown setlocal comments=fb:*,fb:-,fb:+,n:>,fb:\|,s:```,e:```
+  autocmd FileType markdown setlocal indentexpr=
+  autocmd FileType markdown setlocal spell
+  autocmd FileType markdown nnoremap <silent> Q :.call <SID>ReformatMarkdown()<CR>
+  autocmd FileType markdown vnoremap <silent> Q :'<'>call <SID>ReformatMarkdown()<CR>
   autocmd FileType markdown nnoremap <silent> <leader>cy :silent call <SID>MarkdownCopy('%')<CR>
   autocmd FileType markdown vnoremap <silent> <leader>cy :<C-U>silent call <SID>MarkdownCopy("'<,'>")<CR>
 augroup END
