@@ -88,10 +88,16 @@ endif
 nnoremap R :%s/\V<C-R><C-W>//g<LEFT><LEFT>
 vnoremap R "sy <bar> :%s/\V<C-R>s//g<LEFT><LEFT>
 
-" Poor man's usage finder with Ag
-command! -nargs=* Refs Ag <cword> -w <args>
-nnoremap <leader>r :Refs<CR>
+nnoremap <leader>r :call <SID>Refs(expand('<cword>'))<CR>
 vnoremap <leader>r "sy <bar> :Ag -w '<C-R>s'<CR>
+
+function! s:Refs(word)
+  if exists('b:ycm_completer')
+    YcmCompleter GoToReferences
+  else
+    execute 'Ag -w ' . a:word
+  endif
+endfunction
 
 "statusline setup
 let g:airline_left_sep = ''
@@ -196,11 +202,20 @@ function! Multiple_cursors_after()
   ALEEnable
 endfunction
 
+function! s:Rename(args)
+  if exists('b:ycm_completer')
+    execute 'YcmCompleter RefactorRename ' . a:args
+  else
+    execute 'Reruby rename_const ' . a:args
+  endif
+endfunction
+
+command! -nargs=* Rnm :call <SID>Rename(expand('<args>'))
+
 augroup js_autocommands
   autocmd!
+  autocmd FileType javascript,typescript,javascriptreact,typescriptreact let b:ycm_completer=1
   autocmd FileType javascript,typescript,javascriptreact,typescriptreact nmap <buffer> <C-]> :YcmCompleter GoTo<CR>
-  autocmd FileType javascript,typescript,javascriptreact,typescriptreact command! -nargs=0 Refs YcmCompleter GoToReferences
-  autocmd FileType javascript,typescript,javascriptreact,typescriptreact command! -nargs=* Rnm YcmCompleter RefactorRename <args>
   autocmd FileType javascript,typescript,javascriptreact,typescriptreact nmap <buffer> <leader>i :YcmCompleter GetType<CR>
 augroup END
 
@@ -209,8 +224,6 @@ augroup ruby_autocommands
   " For big files syntax folding is slow, disable it for known problematic ones
   autocmd BufRead,BufNewFile */config/routes.rb setlocal foldmethod=manual
   autocmd BufRead,BufNewFile */schema.rb setlocal foldmethod=manual
-  " Shorter reruby rename
-  autocmd FileType ruby command! -nargs=* Rnm Reruby rename_const <args>
 augroup END
 
 augroup markdown_autocommands
