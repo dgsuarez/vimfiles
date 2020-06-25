@@ -289,7 +289,7 @@ function! s:ReformatMarkdown() range
   let b:inFencedCodeBlock = 0
 
   call cursor(a:firstline, 1)
-  call g:ReformatMarkdownParagraph()
+  call s:ReformatMarkdownParagraph()
   while line('.') < a:lastline && line('.') < line('$')
     normal j
     call <SID>ReformatMarkdownParagraph()
