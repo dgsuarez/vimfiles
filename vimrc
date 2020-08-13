@@ -36,7 +36,6 @@ Plug 'mbbill/undotree'
 Plug 'ycm-core/YouCompleteMe', { 'do': 'python3 install.py --ts-completer' }
 Plug 'yssl/QFEnter'
 Plug 'ludovicchabant/vim-gutentags'
-Plug 'Konfekt/FastFold'
 
 " Issue with latest polyglot, js not highlighted in tsx/jsx
 " Check back if it can be removed
