@@ -313,6 +313,7 @@ augroup markdown_autocommands
   autocmd FileType markdown vnoremap <silent> <leader>cy :<C-U>silent call <SID>MarkdownCopy("'<,'>")<CR>
 augroup END
 
+command! Mt Mg '[-\*] *\[ *\]'
 
 function! g:BetterGoToTag(tag, referenceFile)
   let tagIndex=1
