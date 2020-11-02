@@ -38,11 +38,6 @@ Plug 'ycm-core/YouCompleteMe', { 'do': 'python3 install.py --ts-completer', 'com
 Plug 'yssl/QFEnter'
 Plug 'ludovicchabant/vim-gutentags'
 
-" Issue with latest polyglot, js not highlighted in tsx/jsx
-" Check back if it can be removed
-let g:polyglot_disabled = ['jsx']
-Plug 'maxmellon/vim-jsx-pretty'
-
 Plug 'sheerun/vim-polyglot'
 
 "SCM
