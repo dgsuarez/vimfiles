@@ -182,6 +182,8 @@ map <leader>t :Files<CR>
 map <leader>b :Buffers<CR>
 map <leader>z :Mz<CR>
 
+map <leader>d :Mt<CR>
+
 
 "YCM conf
 let g:ycm_key_detailed_diagnostics=''
