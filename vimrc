@@ -301,6 +301,9 @@ augroup markdown_autocommands
   " Don't wrap text on gh PR body
   autocmd BufRead,BufNewFile /tmp/*.md setlocal tw=9999
 
+  " Spanish spelling by filename
+  autocmd BufRead,BufNewFile *es.md setlocal spelllang=es
+
   autocmd FileType markdown setlocal comments=fb:*,fb:-,fb:+,n:>,fb:\|,s:```,e:```
   autocmd FileType markdown setlocal indentexpr=
   autocmd FileType markdown setlocal spell
