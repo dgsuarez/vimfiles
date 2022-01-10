@@ -140,7 +140,7 @@ syntax on
 "hide buffers when not displayed
 set hidden
 
-if match($TERM, "256") != -1
+if &t_Co >= 256
   set background=dark
   colorscheme solarized
 else
