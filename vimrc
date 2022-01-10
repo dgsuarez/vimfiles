@@ -231,7 +231,6 @@ augroup END
 
 "vim-test
 let test#strategy = "dispatch"
-let test#ruby#use_spring_binstub = 1
 
 "Old school Ag
 command! -nargs=+ -complete=file Ag Grepper -noprompt -tool ag -query <args>
