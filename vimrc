@@ -33,8 +33,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'mhinz/vim-grepper'
 Plug 'w0rp/ale'
 Plug 'mbbill/undotree'
-" Need to do a system update
-Plug 'ycm-core/YouCompleteMe', { 'do': 'python3 install.py --ts-completer', 'commit': 'd98f896ada495c3687007313374b2f945a2f2fb4' }
+Plug 'ycm-core/YouCompleteMe', { 'do': 'python3 install.py --ts-completer' }
 Plug 'yssl/QFEnter'
 Plug 'ludovicchabant/vim-gutentags'
 
