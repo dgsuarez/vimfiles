@@ -183,8 +183,10 @@ map <leader>z :Mz<CR>
 
 map <leader>d :Mt<CR>
 
+" Disable weird autocomplete for SQL
+let g:omni_sql_no_default_maps = 1
 
-"YCM conf
+" YCM conf
 let g:ycm_key_detailed_diagnostics=''
 
 function! Multiple_cursors_before()
@@ -300,7 +302,7 @@ augroup markdown_autocommands
   autocmd BufRead,BufNewFile /tmp/*.md setlocal tw=9999
 
   " Spanish spelling by filename
-  autocmd BufRead,BufNewFile *es.md setlocal spelllang=es
+  autocmd BufRead,BufNewFile *.es.md setlocal spelllang=es
 
   autocmd FileType markdown setlocal comments=fb:*,fb:-,fb:+,n:>,fb:\|,s:```,e:```
   autocmd FileType markdown setlocal indentexpr=
