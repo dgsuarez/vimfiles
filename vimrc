@@ -232,6 +232,7 @@ augroup END
 
 "vim-test
 let test#strategy = "dispatch"
+let test#ruby#rspec#options = "--no-color"
 
 "Old school Ag
 command! -nargs=+ -complete=file Ag Grepper -noprompt -tool ag -query --hidden --ignore .git <args>
