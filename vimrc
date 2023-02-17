@@ -173,8 +173,12 @@ let g:matchup_matchparen_deferred = 1
 
 let g:ragtag_global_maps = 1
 
-let g:gutentags_define_advanced_commands = 1
-let g:gutentags_ctags_executable_ruby = '~/.vim/rtags'
+let g:gutentags_ctags_executable_ruby = 'ripper-tags'
+let g:gutentags_file_list_command = {
+      \ 'markers': {
+      \ '.git': 'bash -c "git ls-files; git ls-files --others --exclude-standard"',
+      \ },
+      \ }
 
 "map for FZF
 map <leader>t :Files<CR>
