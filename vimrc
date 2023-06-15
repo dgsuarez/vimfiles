@@ -33,9 +33,9 @@ Plug 'junegunn/fzf.vim'
 Plug 'mhinz/vim-grepper'
 Plug 'w0rp/ale'
 Plug 'mbbill/undotree'
-Plug 'ycm-core/YouCompleteMe', { 'do': 'python3 install.py --ts-completer' }
 Plug 'yssl/QFEnter'
 Plug 'ludovicchabant/vim-gutentags'
+Plug 'lifepillar/vim-mucomplete'
 
 Plug 'sheerun/vim-polyglot'
 
@@ -86,11 +86,7 @@ nnoremap <leader>r :call <SID>Refs(expand('<cword>'))<CR>
 vnoremap <leader>r "sy <bar> :Ag -w '<C-R>s'<CR>
 
 function! s:Refs(word)
-  if exists('b:ycm_completer')
-    YcmCompleter GoToReferences
-  else
-    execute 'Ag -w ' . a:word
-  endif
+  execute 'Ag -w ' . a:word
 endfunction
 
 "statusline setup
@@ -169,6 +165,17 @@ if has('persistent_undo')
   set undofile
 endif
 
+" Completion
+set completeopt+=menuone
+set completeopt+=noselect
+set shortmess+=c
+let g:mucomplete#enable_auto_at_startup = 1
+let g:mucomplete#completion_delay = 1
+set omnifunc=syntaxcomplete#Complete
+" Disable weird autocomplete for SQL
+let g:omni_sql_no_default_maps = 1
+
+
 let g:matchup_matchparen_deferred = 1
 
 let g:ragtag_global_maps = 1
@@ -187,36 +194,15 @@ map <leader>z :Mz<CR>
 
 map <leader>d :Mt<CR>
 
-" Disable weird autocomplete for SQL
-let g:omni_sql_no_default_maps = 1
-
-" YCM conf
-let g:ycm_key_detailed_diagnostics=''
-
-function! Multiple_cursors_before()
-  let s:old_ycm_whitelist = g:ycm_filetype_whitelist
-  let g:ycm_filetype_whitelist = {}
-  ALEDisable
-endfunction
-
-function! Multiple_cursors_after()
-  let g:ycm_filetype_whitelist = s:old_ycm_whitelist
-  ALEEnable
-endfunction
 
 function! s:Rename(args)
-  if exists('b:ycm_completer')
-    execute 'YcmCompleter RefactorRename ' . a:args
-  else
-    execute 'Reruby rename_const ' . a:args
-  endif
+  execute 'Reruby rename_const ' . a:args
 endfunction
 
 command! -nargs=* Rnm :call <SID>Rename(expand('<args>'))
 
 augroup js_autocommands
   autocmd!
-  autocmd FileType javascript,typescript,javascriptreact,typescriptreact let b:ycm_completer=1
   autocmd FileType javascript,typescript,javascriptreact,typescriptreact nmap <buffer> <C-]> :YcmCompleter GoTo<CR>
   autocmd FileType javascript,typescript,javascriptreact,typescriptreact nmap <buffer> <leader>i :YcmCompleter GetType<CR>
 augroup END
