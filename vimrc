@@ -201,12 +201,6 @@ endfunction
 
 command! -nargs=* Rnm :call <SID>Rename(expand('<args>'))
 
-augroup js_autocommands
-  autocmd!
-  autocmd FileType javascript,typescript,javascriptreact,typescriptreact nmap <buffer> <C-]> :YcmCompleter GoTo<CR>
-  autocmd FileType javascript,typescript,javascriptreact,typescriptreact nmap <buffer> <leader>i :YcmCompleter GetType<CR>
-augroup END
-
 augroup ruby_autocommands
   autocmd!
   " For big files syntax folding is slow, disable it for known problematic ones
