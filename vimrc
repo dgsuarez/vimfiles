@@ -71,6 +71,7 @@ call plug#end()            " required
 set number
 set visualbell t_vb=
 let mapleader = "ñ"
+let $LANG='en_US.UTF-8'
 
 set hlsearch
 nnoremap <silent> <BS> :nohlsearch<CR>
