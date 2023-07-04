@@ -17,6 +17,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-projectionist'
 Plug 'jiangmiao/auto-pairs'
 Plug 'altercation/vim-colors-solarized'
+Plug 'morhetz/gruvbox'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-eunuch'
 Plug 'terryma/vim-multiple-cursors'
@@ -138,7 +139,8 @@ set hidden
 
 if &t_Co >= 256
   set background=dark
-  colorscheme solarized
+  " colorscheme solarized
+  colorscheme gruvbox
 else
   colorscheme monochrome
 endif
