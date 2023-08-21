@@ -272,6 +272,9 @@ endfunction
 function! s:ReformatMarkdown() range
   let winSave = winsaveview()
   let b:inFencedCodeBlock = 0
+  let comments_snapshot = &comments
+  setlocal comments=fb:*,fb:-,fb:+,n:>,fb:\|,s:```,e:```
+  redir END
 
   call cursor(a:firstline, 1)
   call s:ReformatMarkdownParagraph()
@@ -282,6 +285,7 @@ function! s:ReformatMarkdown() range
 
   unlet b:inFencedCodeBlock
   call winrestview(winSave)
+  let &l:comments = comments_snapshot
 endfunction
 
 augroup markdown_autocommands
@@ -292,9 +296,11 @@ augroup markdown_autocommands
   " Spanish spelling by filename
   autocmd BufRead,BufNewFile *.es.md setlocal spelllang=es
 
-  autocmd FileType markdown setlocal comments=fb:*,fb:-,fb:+,n:>,fb:\|,s:```,e:```
   autocmd FileType markdown setlocal indentexpr=
   autocmd FileType markdown setlocal spell
+  autocmd FileType markdown setlocal tabstop=2
+  autocmd FileType markdown setlocal softtabstop=2
+  autocmd FileType markdown setlocal shiftwidth=2
   autocmd FileType markdown nnoremap <silent> Q :.call <SID>ReformatMarkdown()<CR>
   autocmd FileType markdown vnoremap <silent> Q :'<'>call <SID>ReformatMarkdown()<CR>
   autocmd FileType markdown nnoremap <silent> <leader>cy :silent call <SID>MarkdownCopy('%')<CR>
