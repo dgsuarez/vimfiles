@@ -292,6 +292,7 @@ augroup markdown_autocommands
   autocmd!
   " Don't wrap text on gh PR body
   autocmd BufRead,BufNewFile /tmp/*.md setlocal tw=9999
+  autocmd BufRead,BufNewFile /private/var/folders*.md setlocal tw=9999
 
   " Spanish spelling by filename
   autocmd BufRead,BufNewFile *.es.md setlocal spelllang=es
