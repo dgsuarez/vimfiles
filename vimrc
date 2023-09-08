@@ -38,6 +38,10 @@ Plug 'yssl/QFEnter'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'lifepillar/vim-mucomplete'
 
+if has('nvim')
+  Plug 'nvim/nvim-lspconfig'
+endif
+
 Plug 'sheerun/vim-polyglot'
 
 "SCM
@@ -178,6 +182,9 @@ set omnifunc=syntaxcomplete#Complete
 " Disable weird autocomplete for SQL
 let g:omni_sql_no_default_maps = 1
 
+if has('nvim')
+  lua require('lsp')
+endif
 
 let g:matchup_matchparen_deferred = 1
 
@@ -350,8 +357,9 @@ function! g:GetFileParts(file)
   return reverse(split(fnamemodify(a:file, ':r'), '/'))
 endfunction
 
-nnoremap <silent> <C-]> :call g:BetterGoToTag(expand('<cword>'), expand('%'))<CR>
-vnoremap <silent> <C-]> "sy <bar> :call g:BetterGoToTag('<C-R>s', expand('%'))<CR>
+" Disable while testing LSP
+" nnoremap <silent> <C-]> :call g:BetterGoToTag(expand('<cword>'), expand('%'))<CR>
+" vnoremap <silent> <C-]> "sy <bar> :call g:BetterGoToTag('<C-R>s', expand('%'))<CR>
 
 set exrc
 
