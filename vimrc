@@ -39,7 +39,7 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'lifepillar/vim-mucomplete'
 
 if has('nvim')
-  Plug 'nvim/nvim-lspconfig'
+  Plug 'neovim/nvim-lspconfig'
 endif
 
 Plug 'sheerun/vim-polyglot'
