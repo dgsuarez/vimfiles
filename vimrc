@@ -181,6 +181,8 @@ let g:mucomplete#completion_delay = 1
 set omnifunc=syntaxcomplete#Complete
 " Disable weird autocomplete for SQL
 let g:omni_sql_no_default_maps = 1
+let g:rubycomplete_buffer_loading = 1
+let g:rubycomplete_classes_in_global = 1
 
 if has('nvim')
   lua require('lsp')
