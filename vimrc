@@ -25,7 +25,7 @@ Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-repeat'
 Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'dietsche/vim-lastplace'
-Plug 'fxn/vim-monochrome'
+Plug 'fxn/vim-monochrome', { 'branch': 'main' }
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
