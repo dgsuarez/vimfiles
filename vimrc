@@ -36,10 +36,16 @@ Plug 'w0rp/ale'
 Plug 'mbbill/undotree'
 Plug 'yssl/QFEnter'
 Plug 'ludovicchabant/vim-gutentags'
-Plug 'lifepillar/vim-mucomplete'
 
 if has('nvim')
   Plug 'neovim/nvim-lspconfig'
+
+  Plug 'hrsh7th/cmp-nvim-lsp'
+  Plug 'hrsh7th/cmp-buffer'
+  Plug 'hrsh7th/cmp-path'
+  Plug 'hrsh7th/cmp-cmdline'
+  Plug 'hrsh7th/nvim-cmp'
+  Plug 'hrsh7th/cmp-omni'
 endif
 
 Plug 'sheerun/vim-polyglot'
@@ -177,8 +183,6 @@ endif
 set completeopt+=menuone
 set completeopt+=noselect
 set shortmess+=c
-let g:mucomplete#enable_auto_at_startup = 1
-let g:mucomplete#completion_delay = 1
 set omnifunc=syntaxcomplete#Complete
 " Disable weird autocomplete for SQL
 let g:omni_sql_no_default_maps = 1
@@ -187,6 +191,7 @@ let g:rubycomplete_classes_in_global = 1
 
 if has('nvim')
   lua require('lsp')
+  lua require('cmp_conf')
 endif
 
 let g:matchup_matchparen_deferred = 1

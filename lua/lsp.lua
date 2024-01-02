@@ -1,13 +1,17 @@
 # Ruby LSP
 lspconfig = require("lspconfig")
 
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
 lspconfig.ruby_ls.setup({
+  capabilities = capabilities,
   on_attach = function(client, buffer)
     setup_diagnostics(client, buffer)
   end,
 })
 
 lspconfig.helm_ls.setup {
+  capabilities = capabilities,
   settings = {
     ['helm-ls'] = {
       yamlls = {
@@ -17,7 +21,9 @@ lspconfig.helm_ls.setup {
   }
 }
 
-lspconfig.yamlls.setup({})
+lspconfig.yamlls.setup({
+  capabilities = capabilities
+})
 
 -- Global mappings.
 
