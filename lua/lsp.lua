@@ -7,6 +7,18 @@ lspconfig.ruby_ls.setup({
   end,
 })
 
+lspconfig.helm_ls.setup {
+  settings = {
+    ['helm-ls'] = {
+      yamlls = {
+        path = "yaml-language-server",
+      }
+    }
+  }
+}
+
+lspconfig.yamlls.setup({})
+
 -- Global mappings.
 
 -- Use LspAttach autocommand to only map the following keys
