@@ -43,6 +43,7 @@ if has('nvim')
 endif
 
 Plug 'sheerun/vim-polyglot'
+Plug 'yasuhiroki/github-actions-yaml.vim'
 
 "SCM
 Plug 'tpope/vim-fugitive'
