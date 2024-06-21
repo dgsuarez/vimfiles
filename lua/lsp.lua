@@ -3,7 +3,7 @@ lspconfig = require("lspconfig")
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-lspconfig.ruby_ls.setup({
+lspconfig.ruby_lsp.setup({
   capabilities = capabilities,
   on_attach = function(client, buffer)
     setup_diagnostics(client, buffer)
