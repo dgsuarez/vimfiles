@@ -52,3 +52,7 @@ cmp.setup({
     }
   })
 })
+
+cmp.setup.filetype('gitcommit', {
+  sources = { }
+})
