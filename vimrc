@@ -46,6 +46,8 @@ if has('nvim')
   Plug 'hrsh7th/cmp-cmdline'
   Plug 'hrsh7th/nvim-cmp'
   Plug 'hrsh7th/cmp-omni'
+
+  Plug 'zbirenbaum/copilot.lua'
 endif
 
 Plug 'sheerun/vim-polyglot'
@@ -58,6 +60,7 @@ Plug 'tpope/vim-rhubarb'
 
 "Js, HTML...
 Plug 'tpope/vim-ragtag'
+
 
 "Ruby
 Plug 'vim-ruby/vim-ruby'
@@ -192,6 +195,7 @@ let g:rubycomplete_classes_in_global = 1
 if has('nvim')
   lua require('lsp')
   lua require('cmp_conf')
+  lua require('copilot_conf')
 endif
 
 let g:matchup_matchparen_deferred = 1
