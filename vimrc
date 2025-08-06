@@ -163,6 +163,12 @@ endif
 nnoremap gr :bn<CR>
 nnoremap gR :bp<CR>
 
+" Soft wrap in quickfix
+augroup quickfix
+    autocmd!
+    autocmd FileType qf setlocal wrap
+augroup END
+
 let g:nerdtree_tabs_open_on_gui_startup = 0
 
 nnoremap <silent> <Leader>p :NERDTreeToggle<CR>
