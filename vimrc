@@ -36,6 +36,7 @@ Plug 'w0rp/ale'
 Plug 'mbbill/undotree'
 Plug 'yssl/QFEnter'
 Plug 'ludovicchabant/vim-gutentags'
+Plug 'jpalardy/vim-slime'
 
 if has('nvim')
   Plug 'neovim/nvim-lspconfig'
@@ -267,6 +268,11 @@ let g:ale_fixers = {
 \   'javascriptreact': ['prettier'],
 \   'typescriptreact': ['prettier'],
 \}
+
+" slime
+let g:slime_target = "tmux"
+let g:slime_default_config = {"socket_name": "default", "target_pane": "{last}"}
+let g:slime_dont_ask_default = 1
 
 let g:AutoCloseExpandEnterOn = ""
 
