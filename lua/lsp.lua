@@ -3,6 +3,10 @@ lspconfig = require("lspconfig")
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
+lspconfig.solargraph.setup({
+  root_dir = function() return nil end,
+})
+
 lspconfig.ruby_lsp.setup({
   capabilities = capabilities,
   init_options = {
