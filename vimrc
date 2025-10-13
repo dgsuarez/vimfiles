@@ -32,7 +32,6 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'mhinz/vim-grepper'
-Plug 'w0rp/ale'
 Plug 'mbbill/undotree'
 Plug 'yssl/QFEnter'
 Plug 'ludovicchabant/vim-gutentags'
@@ -256,18 +255,6 @@ let g:qfenter_keymap = {}
 let g:qfenter_keymap.vopen = ['<C-v>']
 let g:qfenter_keymap.hopen = ['<C-CR>', '<C-s>', '<C-x>']
 let g:qfenter_keymap.topen = ['<C-t>']
-
-"ale
-let g:ale_ruby_rubocop_executable = 'bundle'
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_insert_leave = 0
-let g:ale_fixers = {
-\   'ruby': ['rubocop'],
-\   'javascript': ['prettier'],
-\   'typescript': ['prettier'],
-\   'javascriptreact': ['prettier'],
-\   'typescriptreact': ['prettier'],
-\}
 
 " slime
 let g:slime_target = "tmux"

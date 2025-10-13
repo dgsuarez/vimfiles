@@ -1,21 +1,26 @@
-# Ruby LSP
-lspconfig = require("lspconfig")
-
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-lspconfig.solargraph.setup({
-  root_dir = function() return nil end,
+vim.diagnostic.config({
+  float = {
+    source = "always", -- Or "if_many"
+    border = "rounded",
+  },
+  signs = true,
+  underline = true,
+  virtual_text = true,
+  update_in_insert = false,
 })
 
-lspconfig.ruby_lsp.setup({
+vim.lsp.enable('ruby_lsp')
+vim.lsp.config('ruby_lsp', {
   capabilities = capabilities,
   init_options = {
-    formatter = 'standard',
-    linters = { 'standard' },
+    formatter = 'rubocop',
   }
 })
 
-lspconfig.helm_ls.setup {
+vim.lsp.enable('helm_ls')
+vim.lsp.config('helm_ls', {
   capabilities = capabilities,
   settings = {
     ['helm-ls'] = {
@@ -24,13 +29,15 @@ lspconfig.helm_ls.setup {
       }
     }
   }
-}
+})
 
-lspconfig.yamlls.setup({
+vim.lsp.enable('yamlls')
+vim.lsp.config('yamlls', {
   capabilities = capabilities
 })
 
-lspconfig.ts_ls.setup({
+vim.lsp.enable('ts_ls')
+vim.lsp.config('ts_ls', {
   capabilities = capabilities
 })
 
