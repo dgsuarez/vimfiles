@@ -1,16 +1,5 @@
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-vim.diagnostic.config({
-  float = {
-    source = "always", -- Or "if_many"
-    border = "rounded",
-  },
-  signs = true,
-  underline = true,
-  virtual_text = true,
-  update_in_insert = false,
-})
-
 vim.lsp.enable('ruby_lsp')
 vim.lsp.config('ruby_lsp', {
   capabilities = capabilities,

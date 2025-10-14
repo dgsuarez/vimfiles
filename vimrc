@@ -200,6 +200,7 @@ let g:rubycomplete_classes_in_global = 1
 let g:omni_sql_default_compl_type = 'syntax'
 
 if has('nvim')
+  lua require('diagnostic')
   lua require('lsp')
   lua require('cmp_conf')
   lua require('copilot_conf')
