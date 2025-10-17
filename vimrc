@@ -1,4 +1,4 @@
-"Use Vim settings, rather then Vi settings (much better!).
+"Use Vim settings, rather then Vi settings (much better!)."
 "This must be first, because it changes other options as a side effect.
 set nocompatible
 
@@ -224,7 +224,16 @@ function! InsertPathSink(arg)
 
   let list = type(a:arg) == type([]) ? a:arg : split(a:arg, "\n")
   let paths = join(list, ' ')
-  execute 'normal! i' . paths
+
+  if empty(paths)
+    return
+  endif
+
+  if getline('.')[col('.')-1] =~ '\a'
+    normal! e
+  endif
+
+  execute 'normal! a ' . paths
 endfunction
 
 command! FzfInsertPath call fzf#vim#files('', {'sink': function('InsertPathSink'), 'options': '--multi', 'window': { 'width': 0.8, 'height': 0.6 }})
@@ -342,7 +351,7 @@ augroup markdown_autocommands
   autocmd FileType markdown vnoremap <silent> <leader>cy :<C-U>silent call <SID>MarkdownCopy("'<,'>")<CR>
 augroup END
 
-command! Mt Mg '[-\*] *\[ *\]'
+command! Mt Mg '[-\*] *\[' *\*]'
 
 function! g:BetterGoToTag(tag, referenceFile)
   let tagIndex=1
