@@ -255,6 +255,7 @@ augroup other_autocommands
   autocmd!
   autocmd BufWritePre * StripWhitespace
   autocmd BufNewFile,BufRead Dockerfile.* set filetype=dockerfile
+  autocmd BufNewFile,BufRead */gemini-edit-*/buffer.txt set filetype=markdown
 augroup END
 
 "vim-test
