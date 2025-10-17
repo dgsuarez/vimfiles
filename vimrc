@@ -217,10 +217,23 @@ let g:gutentags_file_list_command = {
       \ },
       \ }
 
+function! InsertPathSink(arg)
+  if empty(a:arg)
+    return
+  endif
+
+  let list = type(a:arg) == type([]) ? a:arg : split(a:arg, "\n")
+  let paths = join(list, ' ')
+  execute 'normal! i' . paths
+endfunction
+
+command! FzfInsertPath call fzf#vim#files('', {'sink': function('InsertPathSink'), 'options': '--multi', 'window': { 'width': 0.8, 'height': 0.6 }})
+
 "map for FZF
 map <leader>t :Files<CR>
 map <leader>b :Buffers<CR>
 map <leader>z :Mz<CR>
+map <leader>m :FzfInsertPath<CR>
 
 map <leader>d :Mt<CR>
 
