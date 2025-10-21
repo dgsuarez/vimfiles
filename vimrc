@@ -229,11 +229,20 @@ function! InsertPathSink(arg)
     return
   endif
 
-  if getline('.')[col('.')-1] =~ '\a'
-    normal! e
-  endif
+  let line = line('.')
+  let col = col('.')
 
-  execute 'normal! a ' . paths
+  if getline(line)[col-1] == '@'
+    let old_line = getline(line)
+    let new_line = strpart(old_line, 0, col) . paths . strpart(old_line, col)
+    call setline(line, new_line)
+    call cursor(line, col + len(paths))
+  else
+    if getline('.')[col('.')-1] =~ '\a'
+      normal! e
+    endif
+    execute 'normal! a ' . paths
+  endif
 endfunction
 
 command! FzfInsertPath call fzf#vim#files('', {'sink': function('InsertPathSink'), 'options': '--multi', 'window': { 'width': 0.8, 'height': 0.6 }})
@@ -265,6 +274,7 @@ augroup other_autocommands
   autocmd BufWritePre * StripWhitespace
   autocmd BufNewFile,BufRead Dockerfile.* set filetype=dockerfile
   autocmd BufNewFile,BufRead */gemini-edit-*/buffer.txt set filetype=markdown
+  autocmd BufNewFile,BufRead */gemini-edit-*/buffer.txt inoremap <buffer> @ @<C-o>:FzfInsertPath<CR>
 augroup END
 
 "vim-test
