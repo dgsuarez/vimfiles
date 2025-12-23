@@ -47,7 +47,8 @@ if has('nvim')
   Plug 'hrsh7th/nvim-cmp'
   Plug 'hrsh7th/cmp-omni'
 
-  Plug 'zbirenbaum/copilot.lua'
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'milanglacier/minuet-ai.nvim'
 endif
 
 Plug 'sheerun/vim-polyglot'
@@ -203,7 +204,7 @@ if has('nvim')
   lua require('diagnostic')
   lua require('lsp')
   lua require('cmp_conf')
-  lua require('copilot_conf')
+  lua require('ai_conf')
 endif
 
 let g:matchup_matchparen_deferred = 1
