@@ -274,6 +274,7 @@ augroup other_autocommands
   autocmd BufNewFile,BufRead */gemini-edit-*/buffer.txt set filetype=markdown
   autocmd BufNewFile,BufRead */gemini-edit-*/buffer.txt inoremap <buffer> @ @<C-o>:FzfInsertPath<CR>
   autocmd BufNewFile,BufRead myprompts/*.md inoremap <buffer> @ @<C-o>:FzfInsertPath<CR>
+  autocmd BufNewFile,BufRead claude-prompt-*.md inoremap <buffer> @ @<C-o>:FzfInsertPath<CR>
 augroup END
 
 "vim-test
