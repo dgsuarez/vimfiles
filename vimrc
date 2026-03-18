@@ -5,30 +5,27 @@ set nocompatible
 call plug#begin('~/.vim/plugged')
 
 " Base plugins
-Plug 'tpope/vim-sensible'
-Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-commentary'
+Plug 'nvim-tree/nvim-web-devicons'
+Plug 'nvim-tree/nvim-tree.lua'
 Plug 'bkad/CamelCaseMotion'
 Plug 'tpope/vim-endwise'
 Plug 'andymass/vim-matchup'
-Plug 'ciaranm/securemodelines'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-projectionist'
-Plug 'jiangmiao/auto-pairs'
-Plug 'altercation/vim-colors-solarized'
+Plug 'windwp/nvim-autopairs'
+Plug 'lifepillar/vim-solarized8'
 Plug 'morhetz/gruvbox'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-eunuch'
-Plug 'terryma/vim-multiple-cursors'
+Plug 'mg979/vim-visual-multi'
 Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-repeat'
-Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'dietsche/vim-lastplace'
 Plug 'fxn/vim-monochrome', { 'branch': 'main' }
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'nvim-lualine/lualine.nvim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'mhinz/vim-grepper'
@@ -103,14 +100,7 @@ function! s:Refs(word)
   execute 'Ag -w ' . a:word
 endfunction
 
-"statusline setup
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-let g:airline_section_a = ''
-let g:airline_section_b='%{fugitive#statusline()}'
-let g:airline#extensions#tabline#enabled = 1
+"statusline setup (configured in lua/lualine_conf.lua)
 
 set laststatus=2
 
@@ -151,7 +141,7 @@ set hidden
 
 if &t_Co >= 256
   set background=dark
-  " colorscheme solarized
+  " colorscheme solarized8
   colorscheme gruvbox
 else
   colorscheme monochrome
@@ -167,15 +157,13 @@ augroup quickfix
     autocmd FileType qf setlocal wrap
 augroup END
 
-let g:nerdtree_tabs_open_on_gui_startup = 0
-
-nnoremap <silent> <Leader>p :NERDTreeToggle<CR>
-nnoremap <silent> <C-f> :NERDTreeFind<CR>
+nnoremap <silent> <Leader>p :NvimTreeToggle<CR>
+nnoremap <silent> <C-f> :NvimTreeFindFile<CR>
 nnoremap <silent> <Leader>u :UndotreeToggle<CR>
 
-" Add space after comment symbol
-let NERDSpaceDelims=1
-map <leader>a <plug>NERDCommenterToggle
+" Comment toggle
+nmap <leader>cc gcc
+xmap <leader>cc gc
 
 "make Y consistent with C and D
 nnoremap Y y$
@@ -201,6 +189,9 @@ if has('nvim')
   lua require('diagnostic')
   lua require('lsp')
   lua require('cmp_conf')
+  lua require('nvim_tree')
+  lua require('autopairs')
+  lua require('lualine_conf')
 endif
 
 let g:matchup_matchparen_deferred = 1
@@ -295,7 +286,8 @@ let g:slime_target = "tmux"
 let g:slime_default_config = {"socket_name": "default", "target_pane": "{last}"}
 let g:slime_dont_ask_default = 1
 
-let g:AutoCloseExpandEnterOn = ""
+set backspace=indent,eol,start
+set nomodelineexpr
 
 nnoremap <silent> Q gqip
 vnoremap <silent> Q gq
