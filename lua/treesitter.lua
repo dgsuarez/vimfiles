@@ -26,30 +26,28 @@ end
 -- Custom "ir"/"ar" textobject: selects the nearest enclosing scope
 -- (method, class, block, if, while, for, case, lambda, etc.)
 -- Works across all languages by walking up the treesitter tree.
+-- Nodes that count as scopes even when cursor is on their first/last line.
+-- The fallback (any named multi-line node strictly containing the cursor) handles the rest.
 local scope_nodes = {
   -- Ruby
   method = true, singleton_method = true, class = true, module = true,
   singleton_class = true, do_block = true, block = true,
-  ['if'] = true, unless = true, ['while'] = true, until_ = true,
+  ['if'] = true, unless = true, ['while'] = true,
   ['for'] = true, case = true, begin = true, lambda = true,
   -- JS/TS
   function_declaration = true, function_expression = true,
   arrow_function = true, method_definition = true,
-  class_declaration = true, class_body = true,
-  if_statement = true, while_statement = true, for_statement = true,
+  class_declaration = true, if_statement = true,
+  while_statement = true, for_statement = true,
   for_in_statement = true, switch_statement = true, try_statement = true,
   -- Python
   function_definition = true, class_definition = true,
-  if_statement_py = true, while_statement_py = true,
-  for_statement_py = true, try_statement_py = true,
   with_statement = true,
   -- Go
-  func_literal = true, function_declaration_go = true,
-  method_declaration = true, if_statement_go = true,
-  for_statement_go = true, select_statement = true,
-  -- Lua
-  function_call = false, -- too broad
-  -- Generic fallback: any named node spanning multiple lines
+  func_literal = true, method_declaration = true,
+  select_statement = true,
+  -- Exclude overly broad nodes
+  function_call = false,
 }
 
 local function find_scope(inner)
