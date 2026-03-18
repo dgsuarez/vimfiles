@@ -122,6 +122,14 @@ augroup quickfix
     autocmd FileType qf setlocal wrap
 augroup END
 
+" Navigation (ç = next, ´ = previous)
+nnoremap <silent> çb :bn<CR>
+nnoremap <silent> ´b :bp<CR>
+nnoremap <silent> çq :cnext<CR>
+nnoremap <silent> ´q :cprev<CR>
+nnoremap <silent> çd <cmd>lua vim.diagnostic.goto_next()<CR>
+nnoremap <silent> ´d <cmd>lua vim.diagnostic.goto_prev()<CR>
+
 nnoremap <silent> <Leader>p :NvimTreeToggle<CR>
 nnoremap <silent> <C-f> :NvimTreeFindFile<CR>
 nnoremap <silent> <Leader>u :UndotreeToggle<CR>
