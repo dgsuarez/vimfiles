@@ -102,7 +102,6 @@ set foldmethod=expr     "fold based on treesitter
 set foldexpr=v:lua.vim.treesitter.foldexpr()
 set foldnestmax=3       "deepest fold is 3 levels
 set nofoldenable        "dont fold by default
-let g:markdown_folding = 1
 nnoremap zz za
 
 set wildmode=list:longest   "make cmdline tab completion similar to bash
@@ -116,10 +115,6 @@ set sidescroll=1
 
 set background=dark
 colorscheme gruvbox
-
-" Move between open buffers
-nnoremap gr :bn<CR>
-nnoremap gR :bp<CR>
 
 " Soft wrap in quickfix
 augroup quickfix
@@ -148,12 +143,7 @@ endif
 set completeopt+=menuone
 set completeopt+=noselect
 set shortmess+=c
-set omnifunc=syntaxcomplete#Complete
-" Disable weird autocomplete for SQL
-let g:omni_sql_no_default_maps = 1
-let g:rubycomplete_buffer_loading = 1
-let g:rubycomplete_classes_in_global = 1
-let g:omni_sql_default_compl_type = 'syntax'
+let g:loaded_sql_completion = 1
 
 if has('nvim')
   lua require('diagnostic')
@@ -258,7 +248,6 @@ let g:slime_target = "tmux"
 let g:slime_default_config = {"socket_name": "default", "target_pane": "{last}"}
 let g:slime_dont_ask_default = 1
 
-set backspace=indent,eol,start
 set nomodelineexpr
 
 nnoremap <silent> Q gqip

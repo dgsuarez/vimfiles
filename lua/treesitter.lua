@@ -92,12 +92,12 @@ vim.keymap.set('n', '<leader>S', function()
   swap.swap_previous('@parameter.inner', 'textobjects')
 end, { silent = true })
 
--- Move between functions/classes
+-- Move between functions/classes (ç = next, ´ = previous)
 local move_maps = {
-  [']m'] = { '@function.outer', 'next_start' },
-  ['[m'] = { '@function.outer', 'previous_start' },
-  [']c'] = { '@class.outer', 'next_start' },
-  ['[c'] = { '@class.outer', 'previous_start' },
+  ['çm'] = { '@function.outer', 'next_start' },
+  ['´m'] = { '@function.outer', 'previous_start' },
+  ['çc'] = { '@class.outer', 'next_start' },
+  ['´c'] = { '@class.outer', 'previous_start' },
 }
 
 for key, opts in pairs(move_maps) do
