@@ -1,7 +1,3 @@
-"Use Vim settings, rather then Vi settings (much better!)."
-"This must be first, because it changes other options as a side effect.
-set nocompatible
-
 call plug#begin('~/.vim/plugged')
 
 " Base plugins
@@ -15,7 +11,6 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-projectionist'
 Plug 'windwp/nvim-autopairs'
-Plug 'lifepillar/vim-solarized8'
 Plug 'morhetz/gruvbox'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-eunuch'
@@ -23,7 +18,6 @@ Plug 'mg979/vim-visual-multi'
 Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-repeat'
 Plug 'dietsche/vim-lastplace'
-Plug 'fxn/vim-monochrome', { 'branch': 'main' }
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
@@ -83,11 +77,8 @@ set visualbell t_vb=
 let mapleader = "ñ"
 let $LANG='en_US.UTF-8'
 
-set hlsearch
 nnoremap <silent> <BS> :nohlsearch<CR>
-if exists('&inccommand')
-  set inccommand=split
-endif
+set inccommand=split
 
 " Quick local search & replace
 nnoremap R :%s/\V<C-R><C-W>//g<LEFT><LEFT>
@@ -100,18 +91,10 @@ function! s:Refs(word)
   execute 'Ag -w ' . a:word
 endfunction
 
-"statusline setup (configured in lua/lualine_conf.lua)
-
-set laststatus=2
-
-"turn off needless toolbar on gvim/mvim
-set guioptions-=T
-
 "indent settings
 set shiftwidth=2
 set softtabstop=2
 set expandtab
-set autoindent
 
 "folding settings
 set foldmethod=syntax   "fold based on syntax
@@ -129,23 +112,8 @@ set scrolloff=3
 set sidescrolloff=7
 set sidescroll=1
 
-"load ftplugins and indent files
-filetype plugin on
-filetype indent on
-
-"turn on syntax highlighting
-syntax on
-
-"hide buffers when not displayed
-set hidden
-
-if &t_Co >= 256
-  set background=dark
-  " colorscheme solarized8
-  colorscheme gruvbox
-else
-  colorscheme monochrome
-endif
+set background=dark
+colorscheme gruvbox
 
 " Move between open buffers
 nnoremap gr :bn<CR>
@@ -355,49 +323,6 @@ augroup END
 
 command! Mt Mg '[-\*] *\[' *\*]'
 
-function! g:BetterGoToTag(tag, referenceFile)
-  let tagIndex=1
-  let bestScore = 0
-  let bestTagIndex = tagIndex
-
-  for entry in taglist('^' . a:tag . '$')
-    let score = g:ScoreCandidate(entry['filename'], a:referenceFile)
-    if score > bestScore
-      let bestTagIndex = tagIndex
-      let bestScore = score
-    endif
-    let tagIndex += 1
-  endfor
-
-  execute bestTagIndex . 'tag ' . a:tag
-endfunction
-
-function! g:ScoreCandidate(candidateFile, referenceFile)
-  if(a:candidateFile == a:referenceFile)
-    return 1000
-  endif
-
-  let referenceFileParts = g:GetFileParts(a:referenceFile)
-  let candidateFileParts = g:GetFileParts(a:candidateFile)
-
-  let score=0
-
-  for part in candidateFileParts
-    if index(referenceFileParts, part) > 0
-      let score +=1
-    endif
-  endfor
-
-  return score
-endfunction
-
-function! g:GetFileParts(file)
-  return reverse(split(fnamemodify(a:file, ':r'), '/'))
-endfunction
-
-" Disable while testing LSP
-" nnoremap <silent> <C-]> :call g:BetterGoToTag(expand('<cword>'), expand('%'))<CR>
-" vnoremap <silent> <C-]> "sy <bar> :call g:BetterGoToTag('<C-R>s', expand('%'))<CR>
 
 set exrc
 
