@@ -40,6 +40,8 @@ if has('nvim')
 endif
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+Plug 'folke/trouble.nvim'
 Plug 'yasuhiroki/github-actions-yaml.vim'
 Plug 'towolf/vim-helm'
 
@@ -57,8 +59,6 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-rake'
 Plug 'tpope/vim-bundler'
-Plug 'kana/vim-textobj-user'
-Plug 'tek/vim-textobj-ruby'
 Plug 'janko-m/vim-test'
 Plug 'dgsuarez/reruby.vim'
 
@@ -163,6 +163,7 @@ if has('nvim')
   lua require('autopairs')
   lua require('lualine_conf')
   lua require('treesitter')
+  lua require('trouble_conf')
 endif
 
 let g:matchup_matchparen_deferred = 1
