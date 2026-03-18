@@ -39,8 +39,9 @@ if has('nvim')
   Plug 'hrsh7th/cmp-omni'
 endif
 
-Plug 'sheerun/vim-polyglot'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'yasuhiroki/github-actions-yaml.vim'
+Plug 'towolf/vim-helm'
 
 "SCM
 Plug 'tpope/vim-fugitive'
@@ -97,7 +98,8 @@ set softtabstop=2
 set expandtab
 
 "folding settings
-set foldmethod=syntax   "fold based on syntax
+set foldmethod=expr     "fold based on treesitter
+set foldexpr=v:lua.vim.treesitter.foldexpr()
 set foldnestmax=3       "deepest fold is 3 levels
 set nofoldenable        "dont fold by default
 let g:markdown_folding = 1
@@ -160,6 +162,7 @@ if has('nvim')
   lua require('nvim_tree')
   lua require('autopairs')
   lua require('lualine_conf')
+  lua require('treesitter')
 endif
 
 let g:matchup_matchparen_deferred = 1
