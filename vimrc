@@ -155,6 +155,12 @@ set shortmess+=c
 let g:loaded_sql_completion = 1
 
 if has('nvim')
+  " Start a named server socket so nvim-remote-edit can send files here
+  if exists('$TMUX')
+    let s:session = trim(system('tmux display-message -p "#S"'))
+    call serverstart('/tmp/nvim-' . s:session . '.sock')
+  endif
+
   lua require('diagnostic')
   lua require('lsp')
   lua require('cmp_conf')
@@ -199,16 +205,17 @@ function! InsertPathSink(arg)
     let old_line = getline(line)
     let new_line = strpart(old_line, 0, col) . paths . strpart(old_line, col)
     call setline(line, new_line)
-    call cursor(line, col + len(paths))
+    call cursor(line, col + len(paths) + 1)
   else
     if getline('.')[col('.')-1] =~ '\a'
       normal! e
     endif
     execute 'normal! a ' . paths . ' '
   endif
-  startinsert!
+  call feedkeys('a', 'n')
 endfunction
 
+command! W w | bd
 command! FzfInsertPath call fzf#vim#files('', {'sink': function('InsertPathSink'), 'options': '--multi', 'window': { 'width': 0.8, 'height': 0.6 }})
 
 "map for FZF
