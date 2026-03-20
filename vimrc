@@ -42,6 +42,7 @@ endif
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'folke/trouble.nvim'
+Plug 'gaoDean/autolist.nvim'
 Plug 'yasuhiroki/github-actions-yaml.vim'
 Plug 'towolf/vim-helm'
 
@@ -162,6 +163,10 @@ if has('nvim')
   lua require('lualine_conf')
   lua require('treesitter')
   lua require('trouble_conf')
+  lua require('autolist').setup({})
+  autocmd FileType markdown,text inoremap <buffer> <CR> <CR><cmd>AutolistNewBullet<cr>
+  autocmd FileType markdown,text nnoremap <buffer> o o<cmd>AutolistNewBullet<cr>
+  autocmd FileType markdown,text nnoremap <buffer> O O<cmd>AutolistNewBulletBefore<cr>
 endif
 
 let g:matchup_matchparen_deferred = 1
