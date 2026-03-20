@@ -1,3 +1,16 @@
+local languages = {
+  'bash', 'css', 'dockerfile', 'elixir', 'go', 'html', 'javascript',
+  'json', 'lua', 'markdown', 'markdown_inline', 'python', 'ruby',
+  'sql', 'typescript', 'vim', 'vimdoc', 'yaml',
+}
+
+require('nvim-treesitter').install(languages)
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = languages,
+  callback = function() vim.treesitter.start() end,
+})
+
 local select = require('nvim-treesitter-textobjects.select')
 local swap = require('nvim-treesitter-textobjects.swap')
 local move = require('nvim-treesitter-textobjects.move')
@@ -46,6 +59,8 @@ local scope_nodes = {
   -- Go
   func_literal = true, method_declaration = true,
   select_statement = true,
+  -- Elixir
+  call = true, anonymous_function = true, do_block = true,
   -- Exclude overly broad nodes
   function_call = false,
 }
