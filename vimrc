@@ -158,7 +158,7 @@ if has('nvim')
   " Start a named server socket so nvim-remote-edit can send files here
   if exists('$TMUX')
     let s:session = trim(system('tmux display-message -p "#S"'))
-    call serverstart('/tmp/nvim-' . s:session . '.sock')
+    silent! call serverstart('/tmp/nvim-' . s:session . '.sock')
   endif
 
   lua require('diagnostic')
