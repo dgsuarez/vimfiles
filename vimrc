@@ -216,13 +216,39 @@ function! InsertPathSink(arg)
 endfunction
 
 command! W w | bd
-command! FzfInsertPath call fzf#vim#files('', {'sink': function('InsertPathSink'), 'options': '--multi', 'window': { 'width': 0.8, 'height': 0.6 }})
+
+function! UnifiedFzf(mode, Sink)
+  let filecmd = $FZF_DEFAULT_COMMAND
+  let bufs = filter(range(1, bufnr('$')), 'buflisted(v:val) && !empty(bufname(v:val))')
+  let bufcmd = "printf '%s\\n' " . join(map(bufs, 'shellescape(fnamemodify(bufname(v:val), ":~:."))'), ' ')
+
+  if a:mode ==# 'buffers'
+    let source = bufcmd
+    let prompt = 'Buf> '
+  else
+    let source = filecmd
+    let prompt = 'Files> '
+  endif
+
+  let toggle = 'ctrl-s:transform:if [[ $FZF_PROMPT == "Files> " ]]; then'
+    \ . ' echo "reload(' . bufcmd . ')+change-prompt(Buf> )";'
+    \ . ' else echo "reload(' . filecmd . ')+change-prompt(Files> )"; fi'
+
+  let spec = fzf#vim#with_preview({
+    \ 'source': source,
+    \ 'sink': a:Sink,
+    \ 'options': ['--multi', '--prompt', prompt,
+    \   '--header', 'ctrl-s: toggle files/buffers',
+    \   '--bind', toggle],
+    \ })
+  call fzf#run(fzf#wrap(spec))
+endfunction
 
 "map for FZF
-map <leader>t :Files<CR>
-map <leader>b :Buffers<CR>
+map <leader>t :call UnifiedFzf('files', 'edit')<CR>
+map <leader>b :call UnifiedFzf('buffers', 'edit')<CR>
 map <leader>z :Mz<CR>
-map <leader>m :FzfInsertPath<CR>
+map <leader>m :call UnifiedFzf('files', function('InsertPathSink'))<CR>
 
 map <leader>d :Mt<CR>
 
@@ -245,9 +271,9 @@ augroup other_autocommands
   autocmd BufWritePre * StripWhitespace
   autocmd BufNewFile,BufRead Dockerfile.* set filetype=dockerfile
   autocmd BufNewFile,BufRead */gemini-edit-*/buffer.txt set filetype=markdown
-  autocmd BufNewFile,BufRead */gemini-edit-*/buffer.txt inoremap <buffer> @ @<C-o>:FzfInsertPath<CR>
-  autocmd BufNewFile,BufRead myprompts/*.md inoremap <buffer> @ @<C-o>:FzfInsertPath<CR>
-  autocmd BufNewFile,BufRead claude-prompt-*.md inoremap <buffer> @ @<C-o>:FzfInsertPath<CR>
+  autocmd BufNewFile,BufRead */gemini-edit-*/buffer.txt inoremap <buffer> @ @<C-o>:call UnifiedFzf('files', function('InsertPathSink'))<CR>
+  autocmd BufNewFile,BufRead myprompts/*.md inoremap <buffer> @ @<C-o>:call UnifiedFzf('files', function('InsertPathSink'))<CR>
+  autocmd BufNewFile,BufRead claude-prompt-*.md inoremap <buffer> @ @<C-o>:call UnifiedFzf('files', function('InsertPathSink'))<CR>
 augroup END
 
 "vim-test
