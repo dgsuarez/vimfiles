@@ -215,7 +215,7 @@ function! InsertPathSink(arg)
   call feedkeys('a', 'n')
 endfunction
 
-command! W w | bd
+command! X w | bd
 
 function! UnifiedFzf(mode, Sink)
   let filecmd = $FZF_DEFAULT_COMMAND
