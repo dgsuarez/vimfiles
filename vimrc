@@ -217,7 +217,7 @@ endfunction
 
 command! X w | bd
 
-function! UnifiedFzf(mode, Sink)
+function! UnifiedFzf(mode, ...)
   let filecmd = $FZF_DEFAULT_COMMAND
   let bufs = filter(range(1, bufnr('$')), 'buflisted(v:val) && !empty(bufname(v:val))')
   let bufcmd = "printf '%s\\n' " . join(map(bufs, 'shellescape(fnamemodify(bufname(v:val), ":~:."))'), ' ')
@@ -234,19 +234,23 @@ function! UnifiedFzf(mode, Sink)
     \ . ' echo "reload(' . bufcmd . ')+change-prompt(Buf> )";'
     \ . ' else echo "reload(' . filecmd . ')+change-prompt(Files> )"; fi'
 
-  let spec = fzf#vim#with_preview({
+  let spec = {
     \ 'source': source,
-    \ 'sink': a:Sink,
     \ 'options': ['--multi', '--prompt', prompt,
     \   '--header', 'ctrl-s: toggle files/buffers',
     \   '--bind', toggle],
-    \ })
-  call fzf#run(fzf#wrap(spec))
+    \ }
+
+  if a:0 > 0
+    let spec.sink = a:1
+  endif
+
+  call fzf#run(fzf#wrap(fzf#vim#with_preview(spec)))
 endfunction
 
 "map for FZF
-map <leader>t :call UnifiedFzf('files', 'edit')<CR>
-map <leader>b :call UnifiedFzf('buffers', 'edit')<CR>
+map <leader>t :call UnifiedFzf('files')<CR>
+map <leader>b :call UnifiedFzf('buffers')<CR>
 map <leader>z :Mz<CR>
 map <leader>m :call UnifiedFzf('files', function('InsertPathSink'))<CR>
 
