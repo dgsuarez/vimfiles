@@ -219,8 +219,12 @@ command! X w | bd
 
 function! UnifiedFzf(mode, ...)
   let filecmd = $FZF_DEFAULT_COMMAND
-  let bufs = filter(range(1, bufnr('$')), 'buflisted(v:val) && !empty(bufname(v:val))')
-  let bufcmd = "printf '%s\\n' " . join(map(bufs, 'shellescape(fnamemodify(bufname(v:val), ":~:."))'), ' ')
+  let bufs = getbufinfo({'buflisted': 1})
+  let cur = bufnr('%')
+  call filter(bufs, {_, b -> !empty(b.name) && b.bufnr != cur})
+  call sort(bufs, {a, b -> b.lastused - a.lastused})
+  let curbuf = empty(bufname(cur)) ? [] : [shellescape(fnamemodify(bufname(cur), ':~:.'))]
+  let bufcmd = "printf '%s\\n' " . join(map(bufs, {_, b -> shellescape(fnamemodify(b.name, ':~:.'))}) + curbuf, ' ')
 
   if a:mode ==# 'buffers'
     let source = bufcmd
