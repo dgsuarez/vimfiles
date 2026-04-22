@@ -4,7 +4,10 @@ vim.lsp.enable('ruby_lsp')
 vim.lsp.config('ruby_lsp', {
   capabilities = capabilities,
   init_options = {
-    formatter = 'rubocop',
+    formatter = 'rubocop_internal',
+    indexing = {
+      excludedPatterns = { '.claude/worktrees/**/*' },
+    },
   }
 })
 
