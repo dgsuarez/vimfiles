@@ -30,7 +30,23 @@ vim.lsp.config('yamlls', {
 
 vim.lsp.enable('ts_ls')
 vim.lsp.config('ts_ls', {
-  capabilities = capabilities
+  capabilities = capabilities,
+  settings = {
+    typescript = {
+      tsserver = {
+        watchOptions = {
+          excludeDirectories = { '.claude/worktrees' },
+        },
+      },
+    },
+    javascript = {
+      tsserver = {
+        watchOptions = {
+          excludeDirectories = { '.claude/worktrees' },
+        },
+      },
+    },
+  },
 })
 
 -- Global mappings.
