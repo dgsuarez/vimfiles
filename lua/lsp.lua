@@ -8,6 +8,11 @@ vim.lsp.config('ruby_lsp', {
     indexing = {
       excludedPatterns = { '.claude/worktrees/**/*' },
     },
+    addonSettings = {
+      ["Ruby LSP Rails"] = {
+        enablePendingMigrationsPrompt = false,
+      },
+    },
   }
 })
 
