@@ -302,6 +302,44 @@ let g:slime_target = "tmux"
 let g:slime_default_config = {"socket_name": "default", "target_pane": "{last}"}
 let g:slime_dont_ask_default = 1
 
+" In fugitive diff buffers, override the default slime mapping (<C-c><C-c>)
+" so visual sends are wrapped with `path` + ```diff fence.
+" Covers :Git diff, :Git diff --cached, and inline-expanded hunks in :G.
+function! s:FugitiveDiffPath(start_line) abort
+  for lnum in range(a:start_line, 1, -1)
+    let line = getline(lnum)
+    " :Git diff -- unified diff header
+    let m = matchlist(line, '^diff --git a/\S\+ b/\(\S\+\)$')
+    if !empty(m)
+      return m[1]
+    endif
+    " :G status -- file marker line: "M f.txt", "D b.txt", "? new.txt", "R old -> new.txt"
+    let m = matchlist(line, '^[MADRCU?!]\{1,2\} \(.*\)$')
+    if !empty(m)
+      let path = m[1]
+      let arrow = stridx(path, ' -> ')
+      return arrow >= 0 ? path[arrow + 4 :] : path
+    endif
+  endfor
+  return ''
+endfunction
+
+function! s:SlimeSendFugitiveDiff() range
+  let lines = getline(a:firstline, a:lastline)
+  let path  = s:FugitiveDiffPath(a:firstline)
+  if empty(path)
+    call slime#send(join(lines, "\n") . "\n")
+    return
+  endif
+  let body = '`' . path . "`\n```diff\n" . join(lines, "\n") . "\n```\n"
+  call slime#send(body)
+endfunction
+
+augroup FugitiveSlimeDiff
+  autocmd!
+  autocmd FileType git,fugitive xnoremap <silent> <buffer> <C-c><C-c> :call <SID>SlimeSendFugitiveDiff()<CR>
+augroup END
+
 set nomodelineexpr
 
 nnoremap <silent> Q gqip
