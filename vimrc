@@ -408,6 +408,8 @@ augroup markdown_autocommands
   autocmd FileType markdown vnoremap <silent> <leader>cy :<C-U>silent call <SID>MarkdownCopy("'<,'>")<CR>
 augroup END
 
+command! MdPreview execute 'silent !mdpreview ' . shellescape(expand('%:p')) | redraw!
+
 command! Mt Mg '[-\*] *\[' *\*]'
 
 
