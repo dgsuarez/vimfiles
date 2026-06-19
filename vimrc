@@ -43,6 +43,8 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'folke/trouble.nvim'
 Plug 'gaoDean/autolist.nvim'
+Plug 'MeanderingProgrammer/render-markdown.nvim'
+Plug '3rd/image.nvim'
 Plug 'yasuhiroki/github-actions-yaml.vim'
 Plug 'towolf/vim-helm'
 
@@ -170,6 +172,7 @@ if has('nvim')
   lua require('treesitter')
   lua require('trouble_conf')
   lua require('autolist').setup({})
+  lua require('markdown_conf')
   autocmd FileType markdown,text inoremap <buffer> <CR> <CR><cmd>AutolistNewBullet<cr>
   autocmd FileType markdown,text nnoremap <buffer> o o<cmd>AutolistNewBullet<cr>
   autocmd FileType markdown,text nnoremap <buffer> O O<cmd>AutolistNewBulletBefore<cr>
@@ -402,6 +405,7 @@ augroup markdown_autocommands
   autocmd FileType markdown setlocal tabstop=2
   autocmd FileType markdown setlocal softtabstop=2
   autocmd FileType markdown setlocal shiftwidth=2
+  autocmd FileType markdown nnoremap <buffer> <silent> <leader>v <cmd>lua require('markdown_conf').toggle()<CR>
   autocmd FileType markdown nnoremap <silent> Q :.call <SID>ReformatMarkdown()<CR>
   autocmd FileType markdown vnoremap <silent> Q :'<'>call <SID>ReformatMarkdown()<CR>
   autocmd FileType markdown nnoremap <silent> <leader>cy :silent call <SID>MarkdownCopy('%')<CR>
