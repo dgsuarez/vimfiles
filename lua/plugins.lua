@@ -3,7 +3,6 @@ local opened_on_dir = vim.fn.argc(-1) > 0 and vim.fn.isdirectory(vim.fn.argv(0))
 
 return {
   -- Base plugins
-  'tpope/vim-commentary',
   'nvim-tree/nvim-web-devicons',
   {
     'nvim-tree/nvim-tree.lua',
@@ -65,7 +64,6 @@ return {
 
   -- SCM
   'tpope/vim-fugitive',
-  'tpope/vim-git',
   'tpope/vim-rhubarb',
 
   -- Js, HTML...
