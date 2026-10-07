@@ -163,6 +163,11 @@ endif
 " :X is reserved for encryption in Vim
 command! X w | bd
 
+" vim-ruby probes has('ruby') on every Ruby buffer, which is slow; the host isn't installed anyway
+let g:loaded_ruby_provider = 0
+" vim-rails turns this on, making vim-ruby shell out to ruby to build 'path' for stdlib gf
+let g:ruby_exec = 0
+
 " Plugin globals, read when the plugins load
 let g:matchup_matchparen_deferred = 1
 
@@ -189,6 +194,10 @@ let g:qfenter_keymap.topen = ['<C-t>']
 let g:slime_target = "tmux"
 let g:slime_default_config = {"socket_name": "default", "target_pane": "{last}"}
 let g:slime_dont_ask_default = 1
+
+" nvim-tree replaces netrw, and netrw must be off before any plugin loads
+let g:loaded_netrw = 1
+let g:loaded_netrwPlugin = 1
 
 lua require('config.lazy')
 
@@ -226,13 +235,8 @@ endif
 lua require('diagnostic')
 lua require('lsp')
 lua require('cmp_conf')
-lua require('nvim_tree')
-lua require('autopairs')
 lua require('lualine_conf')
 lua require('treesitter')
-lua require('trouble_conf')
-lua require('autolist').setup({})
-lua require('markdown_conf')
 
 function! InsertPathSink(arg)
   if empty(a:arg)

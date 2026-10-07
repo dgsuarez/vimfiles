@@ -1,15 +1,23 @@
+-- Opening nvim on a directory needs nvim-tree loaded at startup to hijack it
+local opened_on_dir = vim.fn.argc(-1) > 0 and vim.fn.isdirectory(vim.fn.argv(0)) == 1
+
 return {
   -- Base plugins
   'tpope/vim-commentary',
   'nvim-tree/nvim-web-devicons',
-  'nvim-tree/nvim-tree.lua',
+  {
+    'nvim-tree/nvim-tree.lua',
+    lazy = not opened_on_dir,
+    cmd = { 'NvimTreeToggle', 'NvimTreeFindFile', 'NvimTreeOpen', 'NvimTreeFocus' },
+    config = function() require('nvim_tree') end,
+  },
   'bkad/CamelCaseMotion',
   'tpope/vim-endwise',
   'andymass/vim-matchup',
   'AndrewRadev/splitjoin.vim',
   'tpope/vim-surround',
   'tpope/vim-projectionist',
-  'windwp/nvim-autopairs',
+  { 'windwp/nvim-autopairs', config = function() require('autopairs') end },
   { 'ellisonleao/gruvbox.nvim', priority = 1000 },
   'tpope/vim-dispatch',
   'tpope/vim-eunuch',
@@ -22,8 +30,8 @@ return {
   -- Shared with the shell's fzf install
   { dir = '~/.fzf', name = 'fzf' },
   'junegunn/fzf.vim',
-  'mhinz/vim-grepper',
-  'mbbill/undotree',
+  { 'mhinz/vim-grepper', cmd = 'Grepper' },
+  { 'mbbill/undotree', cmd = { 'UndotreeToggle', 'UndotreeShow', 'UndotreeFocus' } },
   'yssl/QFEnter',
   'ludovicchabant/vim-gutentags',
   'jpalardy/vim-slime',
@@ -39,10 +47,25 @@ return {
 
   { 'nvim-treesitter/nvim-treesitter', branch = 'main', build = ':TSUpdate' },
   { 'nvim-treesitter/nvim-treesitter-textobjects', branch = 'main' },
-  'folke/trouble.nvim',
-  'gaoDean/autolist.nvim',
-  'MeanderingProgrammer/render-markdown.nvim',
-  '3rd/image.nvim',
+  {
+    'folke/trouble.nvim',
+    cmd = 'Trouble',
+    keys = {
+      { '<leader>xx', '<cmd>Trouble diagnostics toggle<cr>' },
+      { '<leader>xd', '<cmd>Trouble diagnostics toggle filter.buf=0<cr>' },
+      { '<leader>xl', '<cmd>Trouble lsp toggle focus=false win.position=right<cr>' },
+      { '<leader>xq', '<cmd>Trouble qflist toggle<cr>' },
+    },
+    opts = {},
+  },
+  { 'gaoDean/autolist.nvim', ft = { 'markdown', 'text' }, opts = {} },
+  {
+    'MeanderingProgrammer/render-markdown.nvim',
+    ft = 'markdown',
+    dependencies = { '3rd/image.nvim' },
+    config = function() require('markdown_conf') end,
+  },
+  { '3rd/image.nvim', lazy = true },
   'yasuhiroki/github-actions-yaml.vim',
   'towolf/vim-helm',
 
@@ -59,15 +82,18 @@ return {
   'tpope/vim-rails',
   'tpope/vim-rake',
   'tpope/vim-bundler',
-  'janko-m/vim-test',
-  'dgsuarez/reruby.vim',
+  {
+    'janko-m/vim-test',
+    cmd = { 'TestNearest', 'TestFile', 'TestClass', 'TestSuite', 'TestLast', 'TestVisit' },
+  },
+  { 'dgsuarez/reruby.vim', cmd = 'Reruby' },
 
   -- Other langs
-  'tpope/vim-dadbod',
+  { 'tpope/vim-dadbod', cmd = 'DB' },
 
   -- Misc
-  'dgsuarez/vim-ticard',
-  'dgsuarez/vim-codeshot',
-  'dgsuarez/vim-mootes',
+  { 'dgsuarez/vim-ticard', cmd = 'Ticard' },
+  { 'dgsuarez/vim-codeshot', cmd = 'Codeshot' },
+  { 'dgsuarez/vim-mootes', cmd = { 'M', 'Mg', 'Ml', 'Mz' } },
   'dgsuarez/vim-checka-wah-wah',
 }
