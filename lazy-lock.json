@@ -23,7 +23,7 @@
   "vim-better-whitespace": { "branch": "master", "commit": "de99b55a6fe8c96a69f9376f16b1d5d627a56e81" },
   "vim-bundler": { "branch": "master", "commit": "64a448589e5e238cce0030d08984368ddc3851ac" },
   "vim-checka-wah-wah": { "branch": "master", "commit": "051b91823e3b82f893a445fd5fba58233b0826c4" },
-  "vim-codeshot": { "branch": "master", "commit": "01b79e76b19c7c767bfce517402e5741c0d2a86a" },
+  "vim-codeshot": { "branch": "master", "commit": "3127ce0bc8013e6bfb0b3e9cd5c3582269318a27" },
   "vim-dadbod": { "branch": "master", "commit": "6d1d41da4873a445c5605f2005ad2c68c99d8770" },
   "vim-dispatch": { "branch": "master", "commit": "a2ff28abdb2d89725192db5b8562977d392a4d3f" },
   "vim-endwise": { "branch": "master", "commit": "4994afb0cdf956d9a665a14b9c834869e602c396" },
