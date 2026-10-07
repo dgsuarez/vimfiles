@@ -90,7 +90,6 @@ return {
   -- Ruby
   'vim-ruby/vim-ruby',
   'tpope/vim-rails',
-  'tpope/vim-rake',
   'tpope/vim-bundler',
   {
     'janko-m/vim-test',
