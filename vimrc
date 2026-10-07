@@ -141,10 +141,10 @@ augroup markdown_autocommands
   autocmd FileType markdown setlocal tabstop=2
   autocmd FileType markdown setlocal softtabstop=2
   autocmd FileType markdown setlocal shiftwidth=2
-  autocmd FileType markdown nnoremap <silent> Q :.call <SID>ReformatMarkdown()<CR>
-  autocmd FileType markdown vnoremap <silent> Q :'<'>call <SID>ReformatMarkdown()<CR>
-  autocmd FileType markdown nnoremap <silent> <leader>cy :silent call <SID>MarkdownCopy('%')<CR>
-  autocmd FileType markdown vnoremap <silent> <leader>cy :<C-U>silent call <SID>MarkdownCopy("'<,'>")<CR>
+  autocmd FileType markdown nnoremap <buffer> <silent> Q :.call <SID>ReformatMarkdown()<CR>
+  autocmd FileType markdown vnoremap <buffer> <silent> Q :'<'>call <SID>ReformatMarkdown()<CR>
+  autocmd FileType markdown nnoremap <buffer> <silent> <leader>cy :silent call <SID>MarkdownCopy('%')<CR>
+  autocmd FileType markdown vnoremap <buffer> <silent> <leader>cy :<C-U>silent call <SID>MarkdownCopy("'<,'>")<CR>
 augroup END
 
 set exrc
