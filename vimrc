@@ -234,7 +234,6 @@ endif
 
 lua require('diagnostic')
 lua require('lsp')
-lua require('cmp_conf')
 lua require('lualine_conf')
 lua require('treesitter')
 

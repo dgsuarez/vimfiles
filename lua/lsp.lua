@@ -1,8 +1,5 @@
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
 vim.lsp.enable('ruby_lsp')
 vim.lsp.config('ruby_lsp', {
-  capabilities = capabilities,
   init_options = {
     formatter = 'rubocop_internal',
     indexing = {
@@ -18,7 +15,6 @@ vim.lsp.config('ruby_lsp', {
 
 vim.lsp.enable('helm_ls')
 vim.lsp.config('helm_ls', {
-  capabilities = capabilities,
   settings = {
     ['helm-ls'] = {
       yamlls = {
@@ -29,13 +25,10 @@ vim.lsp.config('helm_ls', {
 })
 
 vim.lsp.enable('yamlls')
-vim.lsp.config('yamlls', {
-  capabilities = capabilities
-})
+vim.lsp.config('yamlls', {})
 
 vim.lsp.enable('ts_ls')
 vim.lsp.config('ts_ls', {
-  capabilities = capabilities,
   settings = {
     typescript = {
       tsserver = {

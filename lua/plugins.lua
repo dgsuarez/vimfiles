@@ -38,12 +38,7 @@ return {
 
   'neovim/nvim-lspconfig',
 
-  'hrsh7th/cmp-nvim-lsp',
-  'hrsh7th/cmp-buffer',
-  'hrsh7th/cmp-path',
-  'hrsh7th/cmp-cmdline',
-  'hrsh7th/nvim-cmp',
-  'hrsh7th/cmp-omni',
+  { 'saghen/blink.cmp', version = '1.*', config = function() require('completion') end },
 
   { 'nvim-treesitter/nvim-treesitter', branch = 'main', build = ':TSUpdate' },
   { 'nvim-treesitter/nvim-treesitter-textobjects', branch = 'main' },
