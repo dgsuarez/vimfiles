@@ -263,7 +263,24 @@ function! InsertPathSink(arg)
   call feedkeys('a', 'n')
 endfunction
 
+" fzf opens files in the current window, which may be quickfix, nvim-tree, trouble...
+function! s:FocusEditableWindow()
+  if empty(&buftype)
+    return
+  endif
+  for w in [winnr('#')] + range(1, winnr('$'))
+    if w > 0 && empty(getbufvar(winbufnr(w), '&buftype'))
+      execute w . 'wincmd w'
+      return
+    endif
+  endfor
+endfunction
+
 function! UnifiedFzf(mode, ...)
+  " Path insertion (a:1 sink) targets the buffer being typed in, so only move for opening files
+  if a:0 == 0
+    call s:FocusEditableWindow()
+  endif
   let filecmd = $FZF_DEFAULT_COMMAND
   let bufs = getbufinfo({'buflisted': 1})
   let cur = bufnr('%')
