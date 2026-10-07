@@ -1,99 +1,16 @@
-call plug#begin('~/.vim/plugged')
+" Shared by Vim and Neovim. Plain Vim stops at the `finish` below and runs plugin-less.
 
-" Base plugins
-Plug 'tpope/vim-commentary'
-Plug 'nvim-tree/nvim-web-devicons'
-Plug 'nvim-tree/nvim-tree.lua'
-Plug 'bkad/CamelCaseMotion'
-Plug 'tpope/vim-endwise'
-Plug 'andymass/vim-matchup'
-Plug 'AndrewRadev/splitjoin.vim'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-projectionist'
-Plug 'windwp/nvim-autopairs'
-Plug 'ellisonleao/gruvbox.nvim'
-Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-eunuch'
-Plug 'mg979/vim-visual-multi'
-Plug 'tpope/vim-rsi'
-Plug 'tpope/vim-repeat'
-Plug 'dietsche/vim-lastplace'
-Plug 'ntpeters/vim-better-whitespace'
-Plug 'nvim-lualine/lualine.nvim'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
-Plug 'junegunn/fzf.vim'
-Plug 'mhinz/vim-grepper'
-Plug 'mbbill/undotree'
-Plug 'yssl/QFEnter'
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'jpalardy/vim-slime'
-
-if has('nvim')
-  Plug 'neovim/nvim-lspconfig'
-
-  Plug 'hrsh7th/cmp-nvim-lsp'
-  Plug 'hrsh7th/cmp-buffer'
-  Plug 'hrsh7th/cmp-path'
-  Plug 'hrsh7th/cmp-cmdline'
-  Plug 'hrsh7th/nvim-cmp'
-  Plug 'hrsh7th/cmp-omni'
-endif
-
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'nvim-treesitter/nvim-treesitter-textobjects'
-Plug 'folke/trouble.nvim'
-Plug 'gaoDean/autolist.nvim'
-Plug 'MeanderingProgrammer/render-markdown.nvim'
-Plug '3rd/image.nvim'
-Plug 'yasuhiroki/github-actions-yaml.vim'
-Plug 'towolf/vim-helm'
-
-"SCM
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-git'
-Plug 'tpope/vim-rhubarb'
-
-"Js, HTML...
-Plug 'tpope/vim-ragtag'
-
-
-"Ruby
-Plug 'vim-ruby/vim-ruby'
-Plug 'tpope/vim-rails'
-Plug 'tpope/vim-rake'
-Plug 'tpope/vim-bundler'
-Plug 'janko-m/vim-test'
-Plug 'dgsuarez/reruby.vim'
-
-"Other langs
-Plug 'tpope/vim-dadbod'
-
-"Misc
-Plug 'dgsuarez/vim-ticard'
-Plug 'dgsuarez/vim-codeshot'
-Plug 'dgsuarez/vim-mootes'
-Plug 'dgsuarez/vim-checka-wah-wah'
-
-call plug#end()            " required
+let mapleader = "ñ"
 
 set number
 set visualbell t_vb=
-let mapleader = "ñ"
 let $LANG='en_US.UTF-8'
 
 nnoremap <silent> <BS> :nohlsearch<CR>
-set inccommand=split
 
 " Quick local search & replace
 nnoremap R :%s/\V<C-R><C-W>//g<LEFT><LEFT>
 vnoremap R "sy <bar> :%s/\V<C-R>s//g<LEFT><LEFT>
-
-nnoremap <leader>r :call <SID>Refs(expand('<cword>'))<CR>
-vnoremap <leader>r "sy <bar> :Ag -w '<C-R>s'<CR>
-
-function! s:Refs(word)
-  execute 'Ag -w ' . a:word
-endfunction
 
 "indent settings
 set shiftwidth=2
@@ -101,8 +18,6 @@ set softtabstop=2
 set expandtab
 
 "folding settings
-set foldmethod=expr     "fold based on treesitter
-set foldexpr=v:lua.vim.treesitter.foldexpr()
 set foldnestmax=3       "deepest fold is 3 levels
 set nofoldenable        "dont fold by default
 nnoremap zz za
@@ -117,7 +32,6 @@ set sidescrolloff=7
 set sidescroll=1
 
 set background=dark
-colorscheme gruvbox
 
 " Soft wrap in quickfix
 augroup quickfix
@@ -130,23 +44,19 @@ nnoremap <silent> çb :bn<CR>
 nnoremap <silent> ´b :bp<CR>
 nnoremap <silent> çq :cnext<CR>
 nnoremap <silent> ´q :cprev<CR>
-nnoremap <silent> çd <cmd>lua vim.diagnostic.goto_next()<CR>
-nnoremap <silent> ´d <cmd>lua vim.diagnostic.goto_prev()<CR>
-
-nnoremap <silent> <Leader>p :NvimTreeToggle<CR>
-nnoremap <silent> <C-f> :NvimTreeFindFile<CR>
-nnoremap <silent> <Leader>u :UndotreeToggle<CR>
-
-" Comment toggle
-nmap <leader>cc gcc
-xmap <leader>cc gc
 
 "make Y consistent with C and D
 nnoremap Y y$
 
 if has('persistent_undo')
   set undolevels=5000
-  set undodir=$HOME/.vim_undo
+  " Vim and Neovim undo files are incompatible, keep them apart
+  if has('nvim')
+    set undodir=$HOME/.vim_undo
+  else
+    set undodir=$HOME/.vim_undo_vim
+    silent! call mkdir(&undodir, 'p')
+  endif
   set undofile
 endif
 
@@ -155,120 +65,6 @@ set completeopt+=menuone
 set completeopt+=noselect
 set shortmess+=c
 let g:loaded_sql_completion = 1
-
-if has('nvim')
-  " Start a named server socket so nvim-remote-edit can send files here
-  if exists('$TMUX')
-    let s:session = trim(system('tmux display-message -p "#S"'))
-    silent! call serverstart('/tmp/nvim-' . s:session . '.sock')
-  endif
-
-  lua require('diagnostic')
-  lua require('lsp')
-  lua require('cmp_conf')
-  lua require('nvim_tree')
-  lua require('autopairs')
-  lua require('lualine_conf')
-  lua require('treesitter')
-  lua require('trouble_conf')
-  lua require('autolist').setup({})
-  lua require('markdown_conf')
-  autocmd FileType markdown,text inoremap <buffer> <CR> <CR><cmd>AutolistNewBullet<cr>
-  autocmd FileType markdown,text nnoremap <buffer> o o<cmd>AutolistNewBullet<cr>
-  autocmd FileType markdown,text nnoremap <buffer> O O<cmd>AutolistNewBulletBefore<cr>
-endif
-
-let g:matchup_matchparen_deferred = 1
-
-let g:ragtag_global_maps = 1
-
-let g:gutentags_ctags_executable_ruby = 'ripper-tags'
-let g:gutentags_file_list_command = {
-      \ 'markers': {
-      \ '.git': 'bash -c "git ls-files; git ls-files --others --exclude-standard"',
-      \ },
-      \ }
-
-function! InsertPathSink(arg)
-  if empty(a:arg)
-    return
-  endif
-
-  let list = type(a:arg) == type([]) ? a:arg : split(a:arg, "\n")
-  let paths = join(list, ' ')
-
-  if empty(paths)
-    return
-  endif
-
-  let line = line('.')
-  let col = col('.')
-
-  if getline(line)[col-1] == '@'
-    let old_line = getline(line)
-    let new_line = strpart(old_line, 0, col) . paths . strpart(old_line, col)
-    call setline(line, new_line)
-    call cursor(line, col + len(paths) + 1)
-  else
-    if getline('.')[col('.')-1] =~ '\a'
-      normal! e
-    endif
-    execute 'normal! a ' . paths . ' '
-  endif
-  call feedkeys('a', 'n')
-endfunction
-
-command! X w | bd
-
-function! UnifiedFzf(mode, ...)
-  let filecmd = $FZF_DEFAULT_COMMAND
-  let bufs = getbufinfo({'buflisted': 1})
-  let cur = bufnr('%')
-  call filter(bufs, {_, b -> !empty(b.name) && b.bufnr != cur})
-  call sort(bufs, {a, b -> b.lastused - a.lastused})
-  let curbuf = empty(bufname(cur)) ? [] : [shellescape(fnamemodify(bufname(cur), ':~:.'))]
-  let bufcmd = "printf '%s\\n' " . join(map(bufs, {_, b -> shellescape(fnamemodify(b.name, ':~:.'))}) + curbuf, ' ')
-
-  if a:mode ==# 'buffers'
-    let source = bufcmd
-    let prompt = 'Buf> '
-  else
-    let source = filecmd
-    let prompt = 'Files> '
-  endif
-
-  let toggle = 'ctrl-s:transform:if [[ $FZF_PROMPT == "Files> " ]]; then'
-    \ . ' echo "reload(' . bufcmd . ')+change-prompt(Buf> )";'
-    \ . ' else echo "reload(' . filecmd . ')+change-prompt(Files> )"; fi'
-
-  let spec = {
-    \ 'source': source,
-    \ 'options': ['--multi', '--prompt', prompt,
-    \   '--header', 'ctrl-s: toggle files/buffers',
-    \   '--bind', toggle],
-    \ }
-
-  if a:0 > 0
-    let spec.sink = a:1
-  endif
-
-  call fzf#run(fzf#wrap(fzf#vim#with_preview(spec)))
-endfunction
-
-"map for FZF
-map <leader>t :call UnifiedFzf('files')<CR>
-map <leader>b :call UnifiedFzf('buffers')<CR>
-map <leader>z :Mz<CR>
-map <leader>m :call UnifiedFzf('files', function('InsertPathSink'))<CR>
-
-map <leader>d :Mt<CR>
-
-
-function! s:Rename(args)
-  execute 'Reruby rename_const ' . a:args
-endfunction
-
-command! -nargs=* Rnm :call <SID>Rename(expand('<args>'))
 
 augroup ruby_autocommands
   autocmd!
@@ -279,68 +75,8 @@ augroup END
 
 augroup other_autocommands
   autocmd!
-  autocmd BufWritePre * StripWhitespace
   autocmd BufNewFile,BufRead Dockerfile.* set filetype=dockerfile
   autocmd BufNewFile,BufRead */gemini-edit-*/buffer.txt set filetype=markdown
-  autocmd BufNewFile,BufRead */gemini-edit-*/buffer.txt inoremap <buffer> @ @<C-o>:call UnifiedFzf('files', function('InsertPathSink'))<CR>
-  autocmd BufNewFile,BufRead myprompts/*.md inoremap <buffer> @ @<C-o>:call UnifiedFzf('files', function('InsertPathSink'))<CR>
-  autocmd BufNewFile,BufRead claude-prompt-*.md inoremap <buffer> @ @<C-o>:call UnifiedFzf('files', function('InsertPathSink'))<CR>
-augroup END
-
-"vim-test
-let test#strategy = "dispatch"
-let test#ruby#rspec#options = "--no-color"
-
-"Old school Ag
-command! -nargs=+ -complete=file Ag Grepper -noprompt -tool ag -query --hidden --ignore .git <args>
-
-"QFEnter
-let g:qfenter_keymap = {}
-let g:qfenter_keymap.vopen = ['<C-v>']
-let g:qfenter_keymap.hopen = ['<C-CR>', '<C-s>', '<C-x>']
-let g:qfenter_keymap.topen = ['<C-t>']
-
-" slime
-let g:slime_target = "tmux"
-let g:slime_default_config = {"socket_name": "default", "target_pane": "{last}"}
-let g:slime_dont_ask_default = 1
-
-" In fugitive diff buffers, override the default slime mapping (<C-c><C-c>)
-" so visual sends are wrapped with `path` + ```diff fence.
-" Covers :Git diff, :Git diff --cached, and inline-expanded hunks in :G.
-function! s:FugitiveDiffPath(start_line) abort
-  for lnum in range(a:start_line, 1, -1)
-    let line = getline(lnum)
-    " :Git diff -- unified diff header
-    let m = matchlist(line, '^diff --git a/\S\+ b/\(\S\+\)$')
-    if !empty(m)
-      return m[1]
-    endif
-    " :G status -- file marker line: "M f.txt", "D b.txt", "? new.txt", "R old -> new.txt"
-    let m = matchlist(line, '^[MADRCU?!]\{1,2\} \(.*\)$')
-    if !empty(m)
-      let path = m[1]
-      let arrow = stridx(path, ' -> ')
-      return arrow >= 0 ? path[arrow + 4 :] : path
-    endif
-  endfor
-  return ''
-endfunction
-
-function! s:SlimeSendFugitiveDiff() range
-  let lines = getline(a:firstline, a:lastline)
-  let path  = s:FugitiveDiffPath(a:firstline)
-  if empty(path)
-    call slime#send(join(lines, "\n") . "\n")
-    return
-  endif
-  let body = '`' . path . "`\n```diff\n" . join(lines, "\n") . "\n```\n"
-  call slime#send(body)
-endfunction
-
-augroup FugitiveSlimeDiff
-  autocmd!
-  autocmd FileType git,fugitive xnoremap <silent> <buffer> <C-c><C-c> :call <SID>SlimeSendFugitiveDiff()<CR>
 augroup END
 
 set nomodelineexpr
@@ -405,18 +141,231 @@ augroup markdown_autocommands
   autocmd FileType markdown setlocal tabstop=2
   autocmd FileType markdown setlocal softtabstop=2
   autocmd FileType markdown setlocal shiftwidth=2
-  autocmd FileType markdown nnoremap <buffer> <silent> <leader>v <cmd>lua require('markdown_conf').toggle()<CR>
   autocmd FileType markdown nnoremap <silent> Q :.call <SID>ReformatMarkdown()<CR>
   autocmd FileType markdown vnoremap <silent> Q :'<'>call <SID>ReformatMarkdown()<CR>
   autocmd FileType markdown nnoremap <silent> <leader>cy :silent call <SID>MarkdownCopy('%')<CR>
   autocmd FileType markdown vnoremap <silent> <leader>cy :<C-U>silent call <SID>MarkdownCopy("'<,'>")<CR>
 augroup END
 
-command! MdPreview execute 'silent !mdpreview ' . shellescape(expand('%:p')) | redraw!
-
-command! Mt Mg '[-\*] *\[' *\*]'
-
-
 set exrc
 
 set secure
+
+if !has('nvim')
+  filetype plugin indent on
+  syntax enable
+  silent! colorscheme habamax
+  finish
+endif
+
+" Neovim only from here on.
+
+" :X is reserved for encryption in Vim
+command! X w | bd
+
+" Plugin globals, read when the plugins load
+let g:matchup_matchparen_deferred = 1
+
+let g:ragtag_global_maps = 1
+
+let g:gutentags_ctags_executable_ruby = 'ripper-tags'
+let g:gutentags_file_list_command = {
+      \ 'markers': {
+      \ '.git': 'bash -c "git ls-files; git ls-files --others --exclude-standard"',
+      \ },
+      \ }
+
+"vim-test
+let test#strategy = "dispatch"
+let test#ruby#rspec#options = "--no-color"
+
+"QFEnter
+let g:qfenter_keymap = {}
+let g:qfenter_keymap.vopen = ['<C-v>']
+let g:qfenter_keymap.hopen = ['<C-CR>', '<C-s>', '<C-x>']
+let g:qfenter_keymap.topen = ['<C-t>']
+
+" slime
+let g:slime_target = "tmux"
+let g:slime_default_config = {"socket_name": "default", "target_pane": "{last}"}
+let g:slime_dont_ask_default = 1
+
+lua require('config.lazy')
+
+set inccommand=split
+
+set foldmethod=expr     "fold based on treesitter
+set foldexpr=v:lua.vim.treesitter.foldexpr()
+
+colorscheme gruvbox
+
+nnoremap <leader>r :call <SID>Refs(expand('<cword>'))<CR>
+vnoremap <leader>r "sy <bar> :Ag -w '<C-R>s'<CR>
+
+function! s:Refs(word)
+  execute 'Ag -w ' . a:word
+endfunction
+
+nnoremap <silent> çd <cmd>lua vim.diagnostic.goto_next()<CR>
+nnoremap <silent> ´d <cmd>lua vim.diagnostic.goto_prev()<CR>
+
+nnoremap <silent> <Leader>p :NvimTreeToggle<CR>
+nnoremap <silent> <C-f> :NvimTreeFindFile<CR>
+nnoremap <silent> <Leader>u :UndotreeToggle<CR>
+
+" Comment toggle
+nmap <leader>cc gcc
+xmap <leader>cc gc
+
+" Start a named server socket so nvim-remote-edit can send files here
+if exists('$TMUX')
+  let s:session = trim(system('tmux display-message -p "#S"'))
+  silent! call serverstart('/tmp/nvim-' . s:session . '.sock')
+endif
+
+lua require('diagnostic')
+lua require('lsp')
+lua require('cmp_conf')
+lua require('nvim_tree')
+lua require('autopairs')
+lua require('lualine_conf')
+lua require('treesitter')
+lua require('trouble_conf')
+lua require('autolist').setup({})
+lua require('markdown_conf')
+
+function! InsertPathSink(arg)
+  if empty(a:arg)
+    return
+  endif
+
+  let list = type(a:arg) == type([]) ? a:arg : split(a:arg, "\n")
+  let paths = join(list, ' ')
+
+  if empty(paths)
+    return
+  endif
+
+  let line = line('.')
+  let col = col('.')
+
+  if getline(line)[col-1] == '@'
+    let old_line = getline(line)
+    let new_line = strpart(old_line, 0, col) . paths . strpart(old_line, col)
+    call setline(line, new_line)
+    call cursor(line, col + len(paths) + 1)
+  else
+    if getline('.')[col('.')-1] =~ '\a'
+      normal! e
+    endif
+    execute 'normal! a ' . paths . ' '
+  endif
+  call feedkeys('a', 'n')
+endfunction
+
+function! UnifiedFzf(mode, ...)
+  let filecmd = $FZF_DEFAULT_COMMAND
+  let bufs = getbufinfo({'buflisted': 1})
+  let cur = bufnr('%')
+  call filter(bufs, {_, b -> !empty(b.name) && b.bufnr != cur})
+  call sort(bufs, {a, b -> b.lastused - a.lastused})
+  let curbuf = empty(bufname(cur)) ? [] : [shellescape(fnamemodify(bufname(cur), ':~:.'))]
+  let bufcmd = "printf '%s\\n' " . join(map(bufs, {_, b -> shellescape(fnamemodify(b.name, ':~:.'))}) + curbuf, ' ')
+
+  if a:mode ==# 'buffers'
+    let source = bufcmd
+    let prompt = 'Buf> '
+  else
+    let source = filecmd
+    let prompt = 'Files> '
+  endif
+
+  let toggle = 'ctrl-s:transform:if [[ $FZF_PROMPT == "Files> " ]]; then'
+    \ . ' echo "reload(' . bufcmd . ')+change-prompt(Buf> )";'
+    \ . ' else echo "reload(' . filecmd . ')+change-prompt(Files> )"; fi'
+
+  let spec = {
+    \ 'source': source,
+    \ 'options': ['--multi', '--prompt', prompt,
+    \   '--header', 'ctrl-s: toggle files/buffers',
+    \   '--bind', toggle],
+    \ }
+
+  if a:0 > 0
+    let spec.sink = a:1
+  endif
+
+  call fzf#run(fzf#wrap(fzf#vim#with_preview(spec)))
+endfunction
+
+"map for FZF
+map <leader>t :call UnifiedFzf('files')<CR>
+map <leader>b :call UnifiedFzf('buffers')<CR>
+map <leader>z :Mz<CR>
+map <leader>m :call UnifiedFzf('files', function('InsertPathSink'))<CR>
+
+map <leader>d :Mt<CR>
+
+
+function! s:Rename(args)
+  execute 'Reruby rename_const ' . a:args
+endfunction
+
+command! -nargs=* Rnm :call <SID>Rename(expand('<args>'))
+
+augroup nvim_autocommands
+  autocmd!
+  autocmd BufWritePre * StripWhitespace
+  autocmd BufNewFile,BufRead */gemini-edit-*/buffer.txt inoremap <buffer> @ @<C-o>:call UnifiedFzf('files', function('InsertPathSink'))<CR>
+  autocmd BufNewFile,BufRead myprompts/*.md inoremap <buffer> @ @<C-o>:call UnifiedFzf('files', function('InsertPathSink'))<CR>
+  autocmd BufNewFile,BufRead claude-prompt-*.md inoremap <buffer> @ @<C-o>:call UnifiedFzf('files', function('InsertPathSink'))<CR>
+  autocmd FileType markdown,text inoremap <buffer> <CR> <CR><cmd>AutolistNewBullet<cr>
+  autocmd FileType markdown,text nnoremap <buffer> o o<cmd>AutolistNewBullet<cr>
+  autocmd FileType markdown,text nnoremap <buffer> O O<cmd>AutolistNewBulletBefore<cr>
+  autocmd FileType markdown nnoremap <buffer> <silent> <leader>v <cmd>lua require('markdown_conf').toggle()<CR>
+augroup END
+
+"Old school Ag
+command! -nargs=+ -complete=file Ag Grepper -noprompt -tool ag -query --hidden --ignore .git <args>
+
+" In fugitive diff buffers, override the default slime mapping (<C-c><C-c>)
+" so visual sends are wrapped with `path` + ```diff fence.
+" Covers :Git diff, :Git diff --cached, and inline-expanded hunks in :G.
+function! s:FugitiveDiffPath(start_line) abort
+  for lnum in range(a:start_line, 1, -1)
+    let line = getline(lnum)
+    " :Git diff -- unified diff header
+    let m = matchlist(line, '^diff --git a/\S\+ b/\(\S\+\)$')
+    if !empty(m)
+      return m[1]
+    endif
+    " :G status -- file marker line: "M f.txt", "D b.txt", "? new.txt", "R old -> new.txt"
+    let m = matchlist(line, '^[MADRCU?!]\{1,2\} \(.*\)$')
+    if !empty(m)
+      let path = m[1]
+      let arrow = stridx(path, ' -> ')
+      return arrow >= 0 ? path[arrow + 4 :] : path
+    endif
+  endfor
+  return ''
+endfunction
+
+function! s:SlimeSendFugitiveDiff() range
+  let lines = getline(a:firstline, a:lastline)
+  let path  = s:FugitiveDiffPath(a:firstline)
+  if empty(path)
+    call slime#send(join(lines, "\n") . "\n")
+    return
+  endif
+  let body = '`' . path . "`\n```diff\n" . join(lines, "\n") . "\n```\n"
+  call slime#send(body)
+endfunction
+
+augroup FugitiveSlimeDiff
+  autocmd!
+  autocmd FileType git,fugitive xnoremap <silent> <buffer> <C-c><C-c> :call <SID>SlimeSendFugitiveDiff()<CR>
+augroup END
+
+command! MdPreview execute 'silent !mdpreview ' . shellescape(expand('%:p')) | redraw!
+
+command! Mt Mg '[-\*] *\[' *\*]'

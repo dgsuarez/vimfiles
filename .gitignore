@@ -4,5 +4,4 @@ tags
 *.sw*
 .VimballRecord
 .netrwhist
-plugged/
 spell/
