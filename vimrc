@@ -323,13 +323,6 @@ nnoremap <leader>m :call UnifiedFzf('files', function('InsertPathSink'))<CR>
 
 nnoremap <leader>d :Mt<CR>
 
-
-function! s:Rename(args)
-  execute 'Reruby rename_const ' . a:args
-endfunction
-
-command! -nargs=* Rnm :call <SID>Rename(expand('<args>'))
-
 augroup nvim_autocommands
   autocmd!
   autocmd BufWritePre * StripWhitespace

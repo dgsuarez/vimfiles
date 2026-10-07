@@ -17,7 +17,6 @@
   "nvim-treesitter-textobjects": { "branch": "main", "commit": "5c7b0263797dfd1bd6202f2b219f3b53a80b2187" },
   "nvim-web-devicons": { "branch": "master", "commit": "58447c1fca354bbf184425e4a8d01deecbd6f3c4" },
   "render-markdown.nvim": { "branch": "main", "commit": "245956d67572c137df375dbf256e96bdb07e0937" },
-  "reruby.vim": { "branch": "master", "commit": "2c95e5dfbc2c7d9230f528fbaa92ce3a57940ea3" },
   "splitjoin.vim": { "branch": "main", "commit": "659635fd768d8061b0db89a1ecb4611718a41277" },
   "trouble.nvim": { "branch": "main", "commit": "bd67efe408d4816e25e8491cc5ad4088e708a69a" },
   "undotree": { "branch": "master", "commit": "6fa6b57cda8459e1e4b2ca34df702f55242f4e4d" },
@@ -47,6 +46,5 @@
   "vim-slime": { "branch": "main", "commit": "305b4d81ff4630af5137fdeffb54aa0fef14761b" },
   "vim-surround": { "branch": "master", "commit": "3d188ed2113431cf8dac77be61b842acb64433d9" },
   "vim-test": { "branch": "master", "commit": "3afb1cf5cd3013e8822e6eecf612fc36c974a98f" },
-  "vim-ticard": { "branch": "master", "commit": "4d9b318a3391cb2d29ae7c50ecca0a2455877e17" },
   "vim-visual-multi": { "branch": "master", "commit": "a6975e7c1ee157615bbc80fc25e4392f71c344d4" }
 }

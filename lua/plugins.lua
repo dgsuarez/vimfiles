@@ -96,13 +96,11 @@ return {
     'janko-m/vim-test',
     cmd = { 'TestNearest', 'TestFile', 'TestClass', 'TestSuite', 'TestLast', 'TestVisit' },
   },
-  { 'dgsuarez/reruby.vim', cmd = 'Reruby' },
 
   -- Other langs
   { 'tpope/vim-dadbod', cmd = 'DB' },
 
   -- Misc
-  { 'dgsuarez/vim-ticard', cmd = 'Ticard' },
   { 'dgsuarez/vim-codeshot', cmd = 'Codeshot' },
   { 'dgsuarez/vim-mootes', cmd = { 'M', 'Mg', 'Ml', 'Mz' } },
   'dgsuarez/vim-checka-wah-wah',
