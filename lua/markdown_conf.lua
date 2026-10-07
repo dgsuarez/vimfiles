@@ -28,6 +28,9 @@ function M.toggle()
   render_markdown.toggle()
   if render_markdown.get() then
     require('image').enable()
+    -- enable() only redraws images that already exist; while disabled the markdown
+    -- integration never created any, so re-run its buffer render
+    vim.api.nvim_exec_autocmds('BufEnter', { group = 'image.nvim:markdown', buffer = 0 })
   else
     require('image').disable()
   end
