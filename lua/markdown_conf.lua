@@ -19,17 +19,17 @@ require('image').setup({
   max_height = 20,
 })
 
--- Toggle both the text rendering and inline images together so <leader>v gives a
--- clean "pretty review" <-> "raw markdown" flip.
-local on = false
+-- image.nvim has no "start disabled" option, and markdown should open raw
+require('image').disable()
+
+-- Images follow render-markdown so <leader>v flips "pretty review" <-> "raw markdown" as one
 function M.toggle()
-  on = not on
-  require('render-markdown').toggle()
-  -- image.enable()/disable() exist in recent image.nvim builds. If the installed
-  -- version predates them, the pcall guard keeps text rendering working anyway.
-  local ok, image = pcall(require, 'image')
-  if ok and image.enable and image.disable then
-    if on then image.enable() else image.disable() end
+  local render_markdown = require('render-markdown')
+  render_markdown.toggle()
+  if render_markdown.get() then
+    require('image').enable()
+  else
+    require('image').disable()
   end
 end
 
