@@ -10,7 +10,7 @@ nnoremap <silent> <BS> :nohlsearch<CR>
 
 " Quick local search & replace
 nnoremap R :%s/\V<C-R><C-W>//g<LEFT><LEFT>
-vnoremap R "sy <bar> :%s/\V<C-R>s//g<LEFT><LEFT>
+xnoremap R "sy <bar> :%s/\V<C-R>s//g<LEFT><LEFT>
 
 "indent settings
 set shiftwidth=2
@@ -68,7 +68,7 @@ let g:loaded_sql_completion = 1
 
 augroup ruby_autocommands
   autocmd!
-  " For big files syntax folding is slow, disable it for known problematic ones
+  " Computing folds on these huge files is slow
   autocmd BufRead,BufNewFile */config/routes.rb setlocal foldmethod=manual
   autocmd BufRead,BufNewFile */schema.rb setlocal foldmethod=manual
 augroup END
@@ -82,7 +82,7 @@ augroup END
 set nomodelineexpr
 
 nnoremap <silent> Q gqip
-vnoremap <silent> Q gq
+xnoremap <silent> Q gq
 
 function! s:MarkdownCopy(operateOn)
   let winSave = winsaveview()
@@ -142,9 +142,9 @@ augroup markdown_autocommands
   autocmd FileType markdown setlocal softtabstop=2
   autocmd FileType markdown setlocal shiftwidth=2
   autocmd FileType markdown nnoremap <buffer> <silent> Q :.call <SID>ReformatMarkdown()<CR>
-  autocmd FileType markdown vnoremap <buffer> <silent> Q :'<'>call <SID>ReformatMarkdown()<CR>
+  autocmd FileType markdown xnoremap <buffer> <silent> Q :'<'>call <SID>ReformatMarkdown()<CR>
   autocmd FileType markdown nnoremap <buffer> <silent> <leader>cy :silent call <SID>MarkdownCopy('%')<CR>
-  autocmd FileType markdown vnoremap <buffer> <silent> <leader>cy :<C-U>silent call <SID>MarkdownCopy("'<,'>")<CR>
+  autocmd FileType markdown xnoremap <buffer> <silent> <leader>cy :<C-U>silent call <SID>MarkdownCopy("'<,'>")<CR>
 augroup END
 
 set exrc
@@ -209,7 +209,7 @@ set foldexpr=v:lua.vim.treesitter.foldexpr()
 colorscheme gruvbox
 
 nnoremap <leader>r :call <SID>Refs(expand('<cword>'))<CR>
-vnoremap <leader>r "sy <bar> :Ag -w '<C-R>s'<CR>
+xnoremap <leader>r "sy <bar> :Ag -w '<C-R>s'<CR>
 
 function! s:Refs(word)
   execute 'Ag -w ' . a:word
@@ -299,12 +299,12 @@ function! UnifiedFzf(mode, ...)
 endfunction
 
 "map for FZF
-map <leader>t :call UnifiedFzf('files')<CR>
-map <leader>b :call UnifiedFzf('buffers')<CR>
-map <leader>z :Mz<CR>
-map <leader>m :call UnifiedFzf('files', function('InsertPathSink'))<CR>
+nnoremap <leader>t :call UnifiedFzf('files')<CR>
+nnoremap <leader>b :call UnifiedFzf('buffers')<CR>
+nnoremap <leader>z :Mz<CR>
+nnoremap <leader>m :call UnifiedFzf('files', function('InsertPathSink'))<CR>
 
-map <leader>d :Mt<CR>
+nnoremap <leader>d :Mt<CR>
 
 
 function! s:Rename(args)

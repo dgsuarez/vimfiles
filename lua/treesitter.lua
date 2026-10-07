@@ -66,7 +66,7 @@ local scope_nodes = {
   func_literal = true, method_declaration = true,
   select_statement = true,
   -- Elixir
-  call = true, anonymous_function = true, do_block = true,
+  call = true, anonymous_function = true,
   -- Exclude overly broad nodes
   function_call = false,
 }

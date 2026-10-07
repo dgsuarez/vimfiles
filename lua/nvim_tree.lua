@@ -9,11 +9,10 @@ local function on_attach(bufnr)
   local WIDTH = 30
 
   vim.keymap.set('n', 'A', function()
-    local view = require("nvim-tree.view")
-    if view.View.width == WIDTH then
-      view.resize(vim.o.columns)
+    if vim.api.nvim_win_get_width(api.tree.winid()) == WIDTH then
+      api.tree.resize({ absolute = vim.o.columns })
     else
-      view.resize(WIDTH)
+      api.tree.resize({ absolute = WIDTH })
     end
   end, opts('Toggle Zoom'))
 end
