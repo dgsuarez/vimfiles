@@ -64,6 +64,24 @@ return {
 
   -- SCM
   'tpope/vim-fugitive',
+  {
+    'lewis6991/gitsigns.nvim',
+    event = { 'BufReadPre', 'BufNewFile' },
+    opts = {
+      on_attach = function(bufnr)
+        local gitsigns = require('gitsigns')
+        local function map(mode, lhs, rhs) vim.keymap.set(mode, lhs, rhs, { buffer = bufnr }) end
+
+        -- ç = next, ´ = previous, like the other navigation maps
+        map('n', 'çh', function() gitsigns.nav_hunk('next') end)
+        map('n', '´h', function() gitsigns.nav_hunk('prev') end)
+        map('n', '<leader>hp', gitsigns.preview_hunk)
+        map('n', '<leader>hs', gitsigns.stage_hunk)
+        map('n', '<leader>hr', gitsigns.reset_hunk)
+        map({ 'o', 'x' }, 'ih', gitsigns.select_hunk)
+      end,
+    },
+  },
   'tpope/vim-rhubarb',
 
   -- Js, HTML...
