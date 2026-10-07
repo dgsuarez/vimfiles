@@ -1,13 +1,19 @@
 local languages = {
   'bash', 'css', 'dockerfile', 'elixir', 'go', 'html', 'javascript',
   'json', 'lua', 'markdown', 'markdown_inline', 'python', 'ruby',
-  'sql', 'typescript', 'vim', 'vimdoc', 'yaml',
+  'sql', 'tsx', 'typescript', 'vim', 'vimdoc', 'yaml',
 }
 
 require('nvim-treesitter').install(languages)
 
+-- Parser names aren't filetypes (bash parses sh, tsx parses typescriptreact)
+local filetypes = {}
+for _, lang in ipairs(languages) do
+  vim.list_extend(filetypes, vim.treesitter.language.get_filetypes(lang))
+end
+
 vim.api.nvim_create_autocmd('FileType', {
-  pattern = languages,
+  pattern = filetypes,
   callback = function() vim.treesitter.start() end,
 })
 
