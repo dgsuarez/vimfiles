@@ -215,9 +215,6 @@ function! s:Refs(word)
   execute 'Ag -w ' . a:word
 endfunction
 
-nnoremap <silent> çd <cmd>lua vim.diagnostic.goto_next()<CR>
-nnoremap <silent> ´d <cmd>lua vim.diagnostic.goto_prev()<CR>
-
 nnoremap <silent> <Leader>p :NvimTreeToggle<CR>
 nnoremap <silent> <C-f> :NvimTreeFindFile<CR>
 nnoremap <silent> <Leader>u :UndotreeToggle<CR>

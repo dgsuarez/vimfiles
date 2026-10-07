@@ -1,6 +1,6 @@
 vim.diagnostic.config({
   float = {
-    source = "always", -- Or "if_many"
+    source = true,
     border = "rounded",
   },
   signs = true,
