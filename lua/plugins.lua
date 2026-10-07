@@ -61,7 +61,6 @@ return {
     config = function() require('markdown_conf') end,
   },
   { '3rd/image.nvim', lazy = true },
-  'yasuhiroki/github-actions-yaml.vim',
   'towolf/vim-helm',
 
   -- SCM
