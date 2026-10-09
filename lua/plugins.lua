@@ -56,10 +56,11 @@ return {
   {
     'MeanderingProgrammer/render-markdown.nvim',
     ft = 'markdown',
-    dependencies = { '3rd/image.nvim' },
+    dependencies = { '3rd/image.nvim', '3rd/diagram.nvim' },
     config = function() require('markdown_conf') end,
   },
   { '3rd/image.nvim', lazy = true },
+  { '3rd/diagram.nvim', lazy = true },
   'towolf/vim-helm',
 
   -- SCM

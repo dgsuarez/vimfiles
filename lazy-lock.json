@@ -3,6 +3,7 @@
   "QFEnter": { "branch": "master", "commit": "1e4bf00b264e0f1541401c28c4b63ace5bb3d2be" },
   "autolist.nvim": { "branch": "main", "commit": "339499695d3be8c44aefef1d2516464758957004" },
   "blink.cmp": { "branch": "main", "commit": "78336bc89ee5365633bcf754d93df01678b5c08f" },
+  "diagram.nvim": { "branch": "master", "commit": "54d71d6ae72afa236eedb2a918a35d7414ba39f6" },
   "fzf.vim": { "branch": "master", "commit": "023de3c0e158ff9c2b0992175af10be97c2f2158" },
   "gitsigns.nvim": { "branch": "main", "commit": "851a051e2bd2caba97e23314c68d69f1b1cf5d19" },
   "gruvbox.nvim": { "branch": "main", "commit": "154eb5ff5b96d0641307113fa385eaf0d36d9796" },

@@ -19,6 +19,14 @@ require('image').setup({
   max_height = 20,
 })
 
+require('diagram').setup({
+  integrations = {
+    vim.tbl_extend('force', require('diagram.integrations.markdown'), { renderers = { require('mmdr_renderer') } }),
+  },
+  -- Rendering is driven by M.toggle() so diagrams follow the raw/pretty switch
+  events = { render_buffer = {}, clear_buffer = {} },
+})
+
 -- image.nvim has no "start disabled" option, and markdown should open raw
 require('image').disable()
 
@@ -31,7 +39,9 @@ function M.toggle()
     -- enable() only redraws images that already exist; while disabled the markdown
     -- integration never created any, so re-run its buffer render
     vim.api.nvim_exec_autocmds('BufEnter', { group = 'image.nvim:markdown', buffer = 0 })
+    require('diagram').render()
   else
+    require('diagram').clear()
     require('image').disable()
   end
 end
