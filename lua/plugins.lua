@@ -34,6 +34,16 @@ return {
   'yssl/QFEnter',
   'ludovicchabant/vim-gutentags',
   'jpalardy/vim-slime',
+  -- Claude runs in its own tmux pane; this only provides the IDE server it connects to
+  {
+    'coder/claudecode.nvim',
+    lazy = false,
+    opts = { terminal = { provider = 'none' } },
+    keys = {
+      { '<leader>as', '<cmd>ClaudeCodeSend<cr>', mode = 'v' },
+      { '<leader>as', '<cmd>ClaudeCodeTreeAdd<cr>', ft = 'NvimTree' },
+    },
+  },
 
   'neovim/nvim-lspconfig',
 
